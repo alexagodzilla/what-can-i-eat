@@ -10,16 +10,18 @@ require "faker"
 
 
 puts "Cleaning database..."
+puts "destroying all user ingredients"
+UserIngredient.destroy_all
 puts "destroying all recipe ingredients"
 RecipeIngredient.destroy_all
 puts "destroying all ingredients"
 Ingredient.destroy_all
-puts "destroying all recipes"
-Recipe.destroy_all
 puts "destroying all bookmarks"
 Bookmark.destroy_all
 puts "destroying all reviews"
 Review.destroy_all
+puts "destroying all recipes"
+Recipe.destroy_all
 puts "destroying all users"
 User.destroy_all
 
@@ -35,8 +37,9 @@ recipes.each do |recipe|
 new_recipe = Recipe.create!(
     title: recipe[:title],
     instructions: recipe[:instructions],
-    prep_time: recipe[:preparationMinutes],
-    cooking_time: recipe[:cookingMinutes],
+    # prep_time: recipe[:preparationMinutes],
+    # cooking_time: recipe[:cookingMinutes],
+    ready_in_minutes: recipe[:readyInMinutes],
     serving_size: recipe[:servings],
     image_url: recipe[:image],
     vegetarian: recipe[:vegetarian],
@@ -75,6 +78,21 @@ puts "creating users"
 puts "created user #{User.last.username}"
 end
 
+puts "creating user_ingredients"
+
+5.times do
+  user = User.all.sample
+  ingredient_ids = Ingredient.all.pluck(:id).sample(5)
+  ingredient_ids.each do |ingredient_id|
+    UserIngredient.create!(
+      user_id: user.id,
+      ingredient_id: ingredient_id
+    )
+    puts "created user_ingredient #{UserIngredient.last.id} for user #{user.username} with ingredient_id #{ingredient_id}"
+  end
+end
+
+
 puts "creating bookmarks"
 
 75.times do
@@ -82,6 +100,7 @@ puts "creating bookmarks"
     user_id: User.all.sample.id,
     recipe_id: Recipe.all.sample.id
   )
+  puts "created bookmark #{Bookmark.last.id}"
 end
 
 puts "creating reviews"
@@ -93,4 +112,5 @@ puts "creating reviews"
     content: Faker::TvShows::GameOfThrones.quote,
     rating: rand(1..5)
   )
+  puts "created review #{Review.last.id}"
 end
