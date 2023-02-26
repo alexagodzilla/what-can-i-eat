@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 require "json"
+require "faker"
+
 
 puts "Cleaning database..."
 puts "destroying all recipe ingredients"
@@ -14,6 +16,12 @@ puts "destroying all ingredients"
 Ingredient.destroy_all
 puts "destroying all recipes"
 Recipe.destroy_all
+puts "destroying all bookmarks"
+Bookmark.destroy_all
+puts "destroying all reviews"
+Review.destroy_all
+puts "destroying all users"
+User.destroy_all
 
 
 puts "reading json file"
@@ -21,8 +29,9 @@ puts "reading json file"
 
 file = File.read("#{Rails.root}/public/recipe_api_data.json")
 recipes = JSON.parse(file, symbolize_names: true)[:recipes]
-puts recipes[0][:title]
+puts "creating recipes"
 recipes.each do |recipe|
+  puts "creating recipe #{recipe[:title]}"
 new_recipe = Recipe.create!(
     title: recipe[:title],
     instructions: recipe[:instructions],
@@ -51,4 +60,37 @@ new_recipe = Recipe.create!(
         ingredient_id: db_ingredient.id
       )
   end
+end
+
+puts "creating users"
+
+15.times do
+  User.create!(
+  first_name: Faker::Name.unique.first_name,
+  last_name: Faker::Name.unique.last_name,
+  username: Faker::Internet.unique.username,
+  email: Faker::Internet.unique.email,
+  password: Faker::Alphanumeric.alpha(number: 10)
+)
+puts "created user #{User.last.username}"
+end
+
+puts "creating bookmarks"
+
+75.times do
+  Bookmark.create!(
+    user_id: User.all.sample.id,
+    recipe_id: Recipe.all.sample.id
+  )
+end
+
+puts "creating reviews"
+
+75.times do
+  Review.create!(
+    user_id: User.all.sample.id,
+    recipe_id: Recipe.all.sample.id,
+    content: Faker::TvShows::GameOfThrones.quote,
+    rating: rand(1..5)
+  )
 end
