@@ -37,9 +37,9 @@ recipes.each do |recipe|
 new_recipe = Recipe.create!(
     title: recipe[:title],
     instructions: recipe[:instructions],
-    # prep_time: recipe[:preparationMinutes],
-    # cooking_time: recipe[:cookingMinutes],
-    ready_in_minutes: recipe[:readyInMinutes],
+    prep_time: recipe[:preparationMinutes],
+    cooking_time: recipe[:cookingMinutes],
+    # ready_in_minutes: recipe[:readyInMinutes],
     serving_size: recipe[:servings],
     image_url: recipe[:image],
     vegetarian: recipe[:vegetarian],
@@ -54,7 +54,7 @@ new_recipe = Recipe.create!(
         db_ingredient = Ingredient.create!(
         name: api_ingredient[:name],
         # amount: ingredient['amount'],
-        quantity_unit: api_ingredient[:unit]
+        quantity_unit: api_ingredient[:measures][:metric][:unitShort]
       )
     end
         RecipeIngredient.create!(
