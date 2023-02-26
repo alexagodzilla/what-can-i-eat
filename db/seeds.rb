@@ -7,32 +7,46 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require "json"
 
+puts "Cleaning database..."
+puts "destroying all recipe ingredients"
+RecipeIngredient.destroy_all
+puts "destroying all ingredients"
+Ingredient.destroy_all
+puts "destroying all recipes"
+Recipe.destroy_all
+
+
+puts "reading json file"
+
+
 file = File.read("#{Rails.root}/public/recipe_api_data.json")
+recipes = JSON.parse(file, symbolize_names: true)[:recipes]
+puts recipes[0][:title]
 recipes.each do |recipe|
 new_recipe = Recipe.create!(
-    title: recipe["title"],
-    instructions: recipe["instructions"],
-    prep_time: recipe["preparationMinutes"],
-    cooking_time: recipe["cookingMinutes"],
-    serving_size: recipe["servings"],
-    image_url: recipe["image"],
-    vegetarian: recipe["vegetarian"],
-    vegan: recipe["vegan"],
-    dairy_free: recipe["dairyFree"],
-    gluten_free: recipe["glutenFree"],
+    title: recipe[:title],
+    instructions: recipe[:instructions],
+    prep_time: recipe[:preparationMinutes],
+    cooking_time: recipe[:cookingMinutes],
+    serving_size: recipe[:servings],
+    image_url: recipe[:image],
+    vegetarian: recipe[:vegetarian],
+    vegan: recipe[:vegan],
+    dairy_free: recipe[:dairyFree],
+    gluten_free: recipe[:glutenFree],
 
   )
-  recipe['ingredients'].each do |api_ingredient|
+  recipe[:extendedIngredients].each do |api_ingredient|
     db_ingredient = Ingredient.find_by(name: api_ingredient['name'])
       if db_ingredient.nil?
         db_ingredient = Ingredient.create!(
-        name: api_ingredient['name'],
+        name: api_ingredient[:name],
         # amount: ingredient['amount'],
-        unit: api_ingredient['unit']
+        quantity_unit: api_ingredient[:unit]
       )
     end
         RecipeIngredient.create!(
-        quantity: api_ingredient['amount'],
+        quantity: api_ingredient[:amount],
         recipe_id: new_recipe.id,
         ingredient_id: db_ingredient.id
       )
