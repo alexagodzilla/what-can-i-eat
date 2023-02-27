@@ -34,12 +34,15 @@ recipes = JSON.parse(file, symbolize_names: true)[:recipes]
 puts "creating recipes"
 recipes.each do |recipe|
   puts "creating recipe #{recipe[:title]}"
+  if recipe[:image].nil?
+    recipe[:image] = "https://unsplash.com/photos/ZrhtQyGFG6s"
+  end
 new_recipe = Recipe.create!(
     title: recipe[:title],
     instructions: recipe[:instructions],
-    prep_time: recipe[:preparationMinutes],
-    cooking_time: recipe[:cookingMinutes],
-    # ready_in_minutes: recipe[:readyInMinutes],
+    # prep_time: recipe[:preparationMinutes],
+    # cooking_time: recipe[:cookingMinutes],
+    total_time: recipe[:readyInMinutes],
     serving_size: recipe[:servings],
     image_url: recipe[:image],
     vegetarian: recipe[:vegetarian],
