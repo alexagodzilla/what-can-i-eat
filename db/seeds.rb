@@ -76,7 +76,8 @@ puts "creating users"
   last_name: Faker::Name.unique.last_name,
   username: Faker::Internet.unique.username,
   email: Faker::Internet.unique.email,
-  password: Faker::Alphanumeric.alpha(number: 10)
+  password: "password123456"
+  # password: Faker::Alphanumeric.alpha(number: 10)
 )
 puts "created user #{User.last.username}"
 end
