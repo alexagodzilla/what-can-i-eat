@@ -1,2 +1,24 @@
-<h1>Recipes#show</h1>
-<p>Find me in app/views/recipes/show.html.erb</p>
+<div class="container my-3">
+  <h2><%= @recipe.title %></h2>
+  <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
+  <p><%= "Vegetarian" if @recipe.vegetarian? %>
+    <%= "Vegan" if @recipe.vegan? %>
+    <%= "Gluten-free" if @recipe.gluten_free? %>
+    <%= "Dairy-free" if @recipe.dairy_free? %>
+  </p>
+  <p><i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %></p>
+  <p><i class="fa-solid fa-clock me-3"></i><%= @recipe.total_time %>m</p>
+  <h3>Ingredients</h3>
+  <ul>
+    <% @recipe.recipe_ingredients.each do |ingredient| %>
+    <% recipe_ingredient = Ingredient.find(ingredient.id) %>
+      <li>
+        <strong><%= truncate_zero(ingredient.quantity) %>
+        <%= recipe_ingredient.quantity_unit.downcase %></strong>
+        <%= recipe_ingredient.name.capitalize %>
+      </li>
+    <% end %>
+  </ul>
+  <h3>Method</h3>
+  <p><%= @recipe.instructions %></p>
+</div>

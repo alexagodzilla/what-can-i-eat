@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'recipes/index'
-  get 'recipes/show'
   devise_for :users
   root to: "recipes#index"
   get "profile", to: "pages#profile", as: :profile
