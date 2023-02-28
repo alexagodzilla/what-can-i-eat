@@ -1,4 +1,8 @@
 <div class="container my-3">
+<%= form_for([@recipe, @bookmark], url: recipe_bookmarks_path(@recipe)) do |f| %>
+  <%= f.submit "Create Bookmark" %>
+<% end %>
+
   <h2><%= @recipe.title %></h2>
   <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
   <p><%= "Vegetarian" if @recipe.vegetarian? %>

@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Your bookmarks</h1>
+  <% if @current_user_bookmarks.empty? %>
+    <h3>No bookmarks</h3>
+  <% else %>
+      <% @current_user_bookmarks.each do |bookmark| %>
+        <li>
+          <%= bookmark.recipe.title %> <%= link_to "Unsave bookmark",
+  bookmark_path(bookmark),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+        </li>
+    <% end %>
+  <% end %>
+</div>
