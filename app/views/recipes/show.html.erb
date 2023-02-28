@@ -53,6 +53,10 @@
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
       <p><%= review.content if review.content.present? %></p>
+      <% if review.user == current_user %>
+        <%= link_to "Delete comment", review_path(review), data: { turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to delete your comment?" } %>
+      <% end %>
       <hr>
     <% end %>
   <% end %>
