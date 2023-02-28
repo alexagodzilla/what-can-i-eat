@@ -1,16 +1,17 @@
 class IngredientsController < ApplicationController
-  def index
-  end
-
   def create
+    @ingredient = Ingredient.new(ingredient_params)
+    if @ingredient.save
+      redirect_to profile_path, notice: 'Ingredient was successfully created.'
+    else
+      redirect_to profile_path, status: :unprocessable_entity
+    end
+    # will update that later
   end
 
-  def edit
-  end
+  private
 
-  def update
-  end
-
-  def destroy
+  def ingredient_params
+    params.require(:ingredient).permit(:name, :quantity_unit)
   end
 end
