@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @review.user = current_user
     @review.recipe = @recipe
     if @review.save!
-      redirect_to recipe_path(@recipe), notice: "Comment successfully added"
+      redirect_to recipe_path(@recipe), notice: "Comment added"
     else
       render "recipes/show", status: :unprocessable_entity
     end
@@ -20,6 +20,10 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @review = Review.find(params[:id])
+    @recipe = @review.recipe
+    @review.destroy
+    redirect_to recipe_path(@recipe), notice: "Comment deleted"
   end
 
   private
