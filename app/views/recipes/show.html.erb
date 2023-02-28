@@ -1,7 +1,8 @@
 <div class="container my-3">
-<%= form_for([@recipe, @bookmark], url: recipe_bookmarks_path(@recipe)) do |f| %>
-  <%= f.submit "Create Bookmark" %>
-<% end %>
+
+  <%= form_for([@recipe, @bookmark], url: recipe_bookmarks_path(@recipe)) do |f| %>
+    <%= f.submit "Create bookmark" %>
+  <% end %>
 
   <h2><%= @recipe.title %></h2>
   <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
@@ -12,6 +13,7 @@
   </p>
   <p><i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %></p>
   <p><i class="fa-solid fa-clock me-3"></i><%= @recipe.total_time %>m</p>
+
   <h3>Ingredients</h3>
   <ul>
     <% @recipe.ingredients.each do |ingredient| %>
@@ -23,6 +25,26 @@
       </li>
     <% end %>
   </ul>
+
   <h3>Method</h3>
   <p><%= @recipe.instructions %></p>
+
+  <h3>Leave a comment:</h3>
+  <%= form_with(model: [@recipe, @review]) do |f| %>
+    <%= f.label :rating, "Rating out of 5" %>
+    <%= f.text_field :rating %>
+    <%= f.label :content, "Comment" %>
+    <%= f.text_field :content %>
+  <%= f.submit "Add comment" %>
+  <% end %>
+  <br>
+  <% if @recipe.reviews.empty? %>
+    <p><%= "There are no currently no comments.. Leave one now!" %></p>
+  <% else %>
+    <% @recipe.reviews.each do |review| %>
+      <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
+      <p><%= review.content if review.content.present? %></p>
+      <hr>
+    <% end %>
+  <% end %>
 </div>
