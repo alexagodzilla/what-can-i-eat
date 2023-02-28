@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:update, :destroy]
+  
   def create
     @recipe = Recipe.find(params[:recipe_id])
     @review = Review.new(review_params)
@@ -20,7 +21,6 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:id])
     @recipe = @review.recipe
     @review.destroy
     redirect_to recipe_path(@recipe), notice: "Comment deleted"
