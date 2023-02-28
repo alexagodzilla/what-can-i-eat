@@ -49,7 +49,7 @@ recipes.each do |recipe|
       db_ingredient = Ingredient.create!(
         name: api_ingredient[:name].capitalize,
         # amount: ingredient['amount'],
-        quantity_unit: unit.downcase
+        quantity_unit: unit
       )
     end
     RecipeIngredient.create!(
