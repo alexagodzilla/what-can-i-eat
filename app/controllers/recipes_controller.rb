@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
     @bookmark = Bookmark.new
     @review = Review.new
     @recipe = Recipe.find(params[:id])
+    # @update_review = Review.find(params[:id])
     @recipe_bookmark = Bookmark.where(recipe_id: @recipe)
     @current_user_bookmarks = Bookmark.where(user: current_user)
   end

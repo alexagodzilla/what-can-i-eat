@@ -39,6 +39,8 @@
   <p><%= @recipe.instructions %></p>
 
   <h3>Leave a comment:</h3>
+  <%= render 'recipes/form', recipe: @recipe, review: @review %>
+  <!--
   <%= form_with(model: [@recipe, @review]) do |f| %>
     <%= f.label :rating, "Rating out of 5" %>
     <%= f.text_field :rating %>
@@ -46,6 +48,8 @@
     <%= f.text_field :content %>
   <%= f.submit "Add comment" %>
   <% end %>
+  -->
+
   <br>
   <% if @recipe.reviews.empty? %>
     <p><%= "There are no currently no comments.. Leave one now!" %></p>
@@ -53,6 +57,10 @@
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
       <p><%= review.content if review.content.present? %></p>
+      <% if current_user.id == review.user_id %>
+       <!-- <%= link_to "edit your review", recipe_path() %> -->
+       <%= render 'recipes/form', recipe: @recipe, review: review %>
+      <% end %>
       <hr>
     <% end %>
   <% end %>
