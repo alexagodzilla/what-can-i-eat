@@ -14,7 +14,7 @@
     <% recipe_ingredient = Ingredient.find(ingredient.id) %>
       <li>
         <strong><%= truncate_zero(ingredient.quantity) %>
-        <%= recipe_ingredient.quantity_unit.downcase if recipe_ingredient.quantity_unit.present? %></strong>
+        <%= recipe_ingredient.quantity_unit.downcase %></strong>
         <%= recipe_ingredient.name.capitalize %>
       </li>
     <% end %>
