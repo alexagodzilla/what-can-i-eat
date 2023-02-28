@@ -41,10 +41,15 @@ recipes.each do |recipe|
   recipe[:extendedIngredients].each do |api_ingredient|
     db_ingredient = Ingredient.find_by(name: api_ingredient['name'])
     if db_ingredient.nil?
+      if api_ingredient[:unit] == "cup" || api_ingredient[:unit] == "cups"
+        unit = api_ingredient[:unit].downcase.pluralize
+      else
+        unit = api_ingredient[:measures][:metric][:unitShort].downcase
+      end
       db_ingredient = Ingredient.create!(
         name: api_ingredient[:name].capitalize,
         # amount: ingredient['amount'],
-        quantity_unit: api_ingredient[:measures][:metric][:unitShort].downcase
+        quantity_unit: unit
       )
     end
     RecipeIngredient.create!(

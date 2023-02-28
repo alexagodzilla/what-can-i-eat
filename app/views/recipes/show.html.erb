@@ -12,12 +12,12 @@
   <p><i class="fa-solid fa-clock me-3"></i><%= @recipe.total_time %>m</p>
   <h3>Ingredients</h3>
   <ul>
-    <% @recipe.recipe_ingredients.each do |ingredient| %>
-    <% recipe_ingredient = Ingredient.find(ingredient.id) %>
+    <% @recipe.ingredients.each do |ingredient| %>
+    <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
       <li>
-        <strong><%= truncate_zero(ingredient.quantity) %>
-        <%= recipe_ingredient.quantity_unit.downcase %></strong>
-        <%= recipe_ingredient.name.capitalize %>
+        <strong><%= truncate_zero(recipe_ingredient.quantity) %>
+        <%= ingredient.quantity_unit %></strong>
+        <%= ingredient.name %>
       </li>
     <% end %>
   </ul>
