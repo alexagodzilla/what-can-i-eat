@@ -6,5 +6,6 @@ class PagesController < ApplicationController
 
   def profile
     @current_user_bookmarks = Bookmark.where(user: current_user)
+    @user_ingredients = UserIngredient.where(user: current_user)
   end
 end
