@@ -1,0 +1,12 @@
+
+<ul id="recipes">
+
+  <% @recipes.each do |recipe| %>
+    <li>
+      <%= link_to recipe.title, recipe_path(recipe) %>
+      <% if recipe.total_time.present? %>
+        <span class="total-time"><%= recipe.total_time %> min</span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

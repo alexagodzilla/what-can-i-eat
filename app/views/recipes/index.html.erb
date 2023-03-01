@@ -1,19 +1,32 @@
 <h1>Recipes#index</h1>
 
-<% @recipes.each do |recipe| %>
-<div class="container">
+<%= form_tag('/recipes/search_by_ingredients', method: :post, remote: true) do %>
+  <%= label_tag(:ingredients, 'Ingredients (comma-separated):') %>
+  <%= text_field_tag(:ingredients) %>
+  <%= submit_tag('Search') %>
 
-  <p><%= image_tag(recipe.image_url) %></p>
-  <h3><%= link_to recipe.title, recipe_path(recipe.id) %></h3>
-  <% ratings = recipe.reviews.map { |review| review.rating } %>
-    <% if ratings.empty? %>
-      <p>No reviews yet.</p>
-    <% else %>
-      <span><%= (ratings.sum.to_f / ratings.length).round(1) %> ⭐</span>
-    <% end %>
-  <span>Prep time: <%= recipe.total_time %> mins</span>
-  <span>serves <%= recipe.serving_size %></span>
-  <br>
-  --------------------------------------------------------
-</div>
+  <%= label_tag :vegetarian, 'Vegetarian:' %>
+  <%= check_box_tag :vegetarian, '1', params[:vegetarian] %>
+
+  <%= label_tag :vegan, 'Vegan:' %>
+  <%= check_box_tag :vegan, '1', params[:vegan] %>
+
+  <%= label_tag :gluten_free, 'Gluten-free:' %>
+  <%= check_box_tag :gluten_free, '1', params[:gluten_free] %>
+
+  <%= label_tag :dairy_free, 'Dairy-free:' %>
+  <%= check_box_tag :dairy_free, '1', params[:dairy_free] %>
+
+  <%= label_tag :total_time, 'Total Time:' %>
+  <%= select_tag :total_time, options_for_select([['30 minutes or less', '30'], ['60 minutes or less', '60'], ['90 minutes or less', '90']], params[:total_time]), include_blank: true %>
+
+  <%= label_tag :sort, 'Sort by:' %>
+  <%= select_tag :sort, options_for_select([['Title (A-Z)', 'title_asc'], ['Title (Z-A)', 'title_desc'], ['Total Time (shortest first)', 'total_time_asc'], ['Total Time (longest first)', 'total_time_desc']]), include_blank: true %>
+
+  <%= submit_tag 'Filter' %>
 <% end %>
+
+<div id="recipes-list">
+  <%= render partial: 'recipes/list', locals: { recipes: @recipes } %>
+  <% puts "hello" %>
+</div>

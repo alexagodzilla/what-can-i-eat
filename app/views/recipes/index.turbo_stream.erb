@@ -1,0 +1,5 @@
+<%= turbo_stream.replace(
+  'recipes-list',
+  partial: 'recipes/list',
+  locals: { recipes: @recipes }
+) %>

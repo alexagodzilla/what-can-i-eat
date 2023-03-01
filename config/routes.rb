@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :reviews, only: %i[destroy]
   resources :bookmarks, only: %i[destroy]
   resources :ingredients, only: %i[destroy]
+  post 'recipes/search_by_ingredients', to: 'recipes#search_by_ingredients'
+
 end
