@@ -50,36 +50,29 @@ class RecipesController < ApplicationController
       recipe_ids = Ingredient.where("name ILIKE ?", "%#{ingredient_names.first}%").joins(:recipes).pluck(:recipe_id)
 
       # loop through remaining ingredients and refine recipe list based on partial match
-      ingredient_names[1..].each do |ingredient|
-        recipe_ids &= Ingredient.where("name ILIKE ?", "%#{ingredient}%").joins(:recipes).pluck(:recipe_id)
-      end
-      @recipes = Recipe.where(id: recipe_ids).includes(:ingredients).distinct
-
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            'recipes-list',
-            partial: 'recipes/list',
-            locals: { recipes: @recipes }
-          )
+      if ingredient_names.size > 1
+        ingredient_names[1..].each do |ingredient|
+          recipe_ids &= Ingredient.where("name ILIKE ?", "%#{ingredient}%").joins(:recipes).pluck(:recipe_id)
         end
-        format.html { render :index }
       end
+
+      @recipes = Recipe.where(id: recipe_ids).includes(:ingredients).distinct
     else
       @recipes = Recipe.all
+    end
 
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            'recipes-list',
-            partial: 'recipes/list',
-            locals: { recipes: @recipes }
-          )
-        end
-        format.html { render :index }
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          'recipes-list',
+          partial: 'recipes/list',
+          locals: { recipes: @recipes }
+        )
       end
+      format.html { render :index }
     end
   end
+
 
 
 

@@ -4,7 +4,8 @@
   <%= label_tag(:ingredients, 'Ingredients (comma-separated):') %>
   <%= text_field_tag(:ingredients) %>
   <%= submit_tag('Search') %>
-
+<% end %>
+<%= form_tag('recipes', method: :get, remote: true) do %>
   <%= label_tag :vegetarian, 'Vegetarian:' %>
   <%= check_box_tag :vegetarian, '1', params[:vegetarian] %>
 
