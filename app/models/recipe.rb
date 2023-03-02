@@ -12,8 +12,8 @@ class Recipe < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by_title_and_instructions,
                   against: [:title, :instructions],
-                  using: {
-                    tsearch: { prefix: true }}
+                  using: { tsearch: { prefix: true } }
+  
   # scope :vegetarian, -> { where(vegetarian: true) }
   # scope :vegan, -> { where(vegan: true) }
   # scope :gluten_free, -> { where(gluten_free: true) }
