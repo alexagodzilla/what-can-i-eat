@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get "profile", to: "pages#profile", as: :profile
   resources :ingredients, only: %i[create]
   resources :user_ingredients, only: %i[create edit update]
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
   resources :recipes, only: %i[index show] do
     resources :bookmarks, only: %i[create]
     resources :reviews, only: %i[create update]
