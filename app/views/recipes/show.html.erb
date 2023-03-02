@@ -1,17 +1,15 @@
 <div class="container my-3">
-  <%= form_for([@recipe, @bookmark], url: recipe_bookmarks_path(@recipe)) do |f| %>
+  <%= form_with(model: [@recipe, @bookmark]) do |f| %>
     <%= f.submit "Create bookmark" %>
   <% end %>
 
   <% @current_user_bookmarks.each do |bookmark| %>
     <% if bookmark.recipe_id == @recipe.id %>
-        <%= link_to "Remove bookmark",
-        bookmark_path(bookmark.id),
+        <%= link_to "Remove bookmark", bookmark_path(bookmark.id),
         data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
         %>
       <% end %>
     <% end %>
-
 
   <h2><%= @recipe.title %></h2>
   <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
@@ -53,7 +51,7 @@
       <% if review.user == current_user %>
         <%= link_to "Delete comment", review_path(review), data: { turbo_method: :delete,
         turbo_confirm: "Are you sure you want to delete your comment?" } %>
-    <% end %>
+      <% end %>
       <hr>
     <% end %>
   <% end %>
