@@ -11,7 +11,12 @@
       </li>
     <% end %>
   <% end %>
-
+  <h2>Add new ingredient</h2>
+  <%= simple_form_for [@user_ingredient] do |f| %>
+    <%= f.input :ingredient_id, collection: Ingredient.order('name')%>
+    <%= f.input :quantity%>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
   <h2>Ingredients</h2>
   <% if @user_ingredients.empty? %>
     <p>No ingredients yet..</p>
