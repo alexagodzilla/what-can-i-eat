@@ -20,15 +20,18 @@ Recipe.destroy_all
 puts "destroying all users"
 User.destroy_all
 
-puts "reading json file"
-
-file = File.read("#{Rails.root}/public/recipe_api_data.json")
+puts "reading json files"
+json_names = %w(vegetarian_recipes vegan_recipes gluten_free_recipes dairy_free_recipes recipe_api_data)
+json_names.each do |file_name|
+file = File.read("#{Rails.root}/public/#{file_name}.json")
 recipes = JSON.parse(file, symbolize_names: true)[:recipes]
 puts "creating recipes"
 recipes.each do |recipe|
+  db_recipe = Recipe.find_by(title: recipe[:title])
+    if db_recipe.nil?
   puts "creating recipe #{recipe[:title]}"
   recipe[:image] = "https://unsplash.com/photos/ZrhtQyGFG6s" if recipe[:image].nil?
-  new_recipe = Recipe.create!(
+  db_recipe = Recipe.create!(
     title: recipe[:title],
     instructions: strip_tags(recipe[:instructions]),
     # prep_time: recipe[:preparationMinutes],
@@ -57,12 +60,13 @@ recipes.each do |recipe|
     end
     RecipeIngredient.create!(
       quantity: api_ingredient[:amount],
-      recipe_id: new_recipe.id,
+      recipe_id: db_recipe.id,
       ingredient_id: db_ingredient.id
     )
   end
 end
-
+end
+end
 puts "creating users"
 
 15.times do
