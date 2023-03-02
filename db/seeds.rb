@@ -1,5 +1,8 @@
 require "json"
 require "faker"
+require 'action_view'
+
+include ActionView::Helpers::SanitizeHelper
 
 puts "Cleaning database..."
 puts "destroying all user ingredients"
@@ -27,7 +30,7 @@ recipes.each do |recipe|
   recipe[:image] = "https://unsplash.com/photos/ZrhtQyGFG6s" if recipe[:image].nil?
   new_recipe = Recipe.create!(
     title: recipe[:title],
-    instructions: recipe[:instructions],
+    instructions: strip_tags(recipe[:instructions]),
     # prep_time: recipe[:preparationMinutes],
     # cooking_time: recipe[:cookingMinutes],
     total_time: recipe[:readyInMinutes],
@@ -91,11 +94,14 @@ end
 puts "creating bookmarks"
 
 75.times do
+  recipe_id = Recipe.all.sample.id
+  if Bookmark.where(recipe_id: recipe_id).empty?
   Bookmark.create!(
     user_id: User.all.sample.id,
-    recipe_id: Recipe.all.sample.id
+    recipe_id: recipe_id
   )
   puts "created bookmark #{Bookmark.last.id}"
+end
 end
 
 puts "creating reviews"
