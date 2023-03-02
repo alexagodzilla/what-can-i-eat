@@ -1,19 +1,25 @@
 <h1>Recipes#index</h1>
 
-<% @recipes.each do |recipe| %>
-<div class="container">
+<div data-controller="search-form">
+  <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
+    <div class="form-group">
+      <%= f.label :query, "Ingredients" %>
+      <%= f.text_field :query, class: "form-control", data: { target: "search-form.query" } %>
+    </div>
 
-  <p><%= image_tag(recipe.image_url) %></p>
-  <h3><%= link_to recipe.title, recipe_path(recipe.id) %></h3>
-  <% ratings = recipe.reviews.map { |review| review.rating } %>
-    <% if ratings.empty? %>
-      <p>No reviews yet.</p>
-    <% else %>
-      <span><%= (ratings.sum.to_f / ratings.length).round(1) %> ⭐</span>
-    <% end %>
-  <span>Prep time: <%= recipe.total_time %> mins</span>
-  <span>serves <%= recipe.serving_size %></span>
-  <br>
-  --------------------------------------------------------
+
+
+    <button type="submit" class="btn btn-primary">Search</button>
+  <% end %>
 </div>
-<% end %>
+
+<div data-controller="search-results">
+  <h2>Search Results</h2>
+  <ul data-target="search-results.list">
+    <% @recipes.each do |recipe| %>
+      <li>
+        <%= link_to recipe.title, recipe %>
+      </li>
+    <% end %>
+  </ul>
+</div>
