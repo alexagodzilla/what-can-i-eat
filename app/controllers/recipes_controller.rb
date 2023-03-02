@@ -1,6 +1,11 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
+    if params[:query].present?
+      @recipes = Recipe.search_by_title_and_instructions(params[:query])
+      # @recipes = @recipes.with_ingredients(params[:ingredients].split(',')) if params[:ingredients].present?
+    else
+      @recipes = Recipe.all
+    end
   end
 
   def show
