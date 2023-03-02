@@ -8,10 +8,8 @@ class UserIngredientsController < ApplicationController
   end
 
   def create
-    # @ingredient = Ingredient.find(params[:ingredient_id])
     @user_ingredient = UserIngredient.new(user_ingredient_params)
     @user_ingredient.user = current_user
-    # @user_ingredient.ingredient = @ingredient
     if @user_ingredient.save!
       redirect_to profile_path
       # update later
