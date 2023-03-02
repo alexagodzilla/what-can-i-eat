@@ -8,11 +8,11 @@ class UserIngredientsController < ApplicationController
   end
 
   def create
-    @ingredient = Ingredient.find(params[:ingredient_id])
+    # @ingredient = Ingredient.find(params[:ingredient_id])
     @user_ingredient = UserIngredient.new(user_ingredient_params)
     @user_ingredient.user = current_user
-    @user_ingredient.ingredient = @ingredient
-    if @user_ingredient.save
+    # @user_ingredient.ingredient = @ingredient
+    if @user_ingredient.save!
       redirect_to profile_path
       # update later
     else
@@ -31,6 +31,6 @@ class UserIngredientsController < ApplicationController
   private
 
   def user_ingredient_params
-    params.require(:user_ingredient).permit(:quantity)
+    params.require(:user_ingredient).permit(:quantity, :ingredient_id)
   end
 end
