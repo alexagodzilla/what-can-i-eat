@@ -17,7 +17,7 @@
   <%= form_with(model: @user_ingredient) do |f| %>
     <%= f.label :ingredient_id, "ADD INGREDIENT " %>
     <%= f.collection_select :ingredient_id, Ingredient.order(:name), :id, :name %>
-    <%= f.text_field :quantity %>
+    <%= f.number_field :quantity %>
     <%= f.submit "Submit" %>
   <% end %>
   <% if @user_ingredients.empty? %>
