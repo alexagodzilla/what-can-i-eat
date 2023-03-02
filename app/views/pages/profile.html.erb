@@ -3,21 +3,23 @@
   <% if @current_user_bookmarks.empty? %>
     <h3>No bookmarks</h3>
   <% else %>
+  <ul>
     <% @current_user_bookmarks.each do |bookmark| %>
       <li>
-        <%= bookmark.recipe.title %> <%= link_to "Unsave bookmark",
-        bookmark_path(bookmark),
+        <%= bookmark.recipe.title %> <%= link_to "Unsave bookmark", bookmark_path(bookmark),
         data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this bookmark?" } %>
       </li>
     <% end %>
+  </ul>
   <% end %>
-  <h2>Add new ingredient</h2>
-  <%= simple_form_for [@user_ingredient] do |f| %>
-    <%= f.input :ingredient_id, collection: Ingredient.order('name')%>
-    <%= f.input :quantity%>
-    <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
+
   <h2>Ingredients</h2>
+  <%= form_with(model: @user_ingredient) do |f| %>
+    <%= f.label :ingredient_id, "ADD INGREDIENT " %>
+    <%= f.collection_select :ingredient_id, Ingredient.order(:name), :id, :name %>
+    <%= f.number_field :quantity %>
+    <%= f.submit "Submit" %>
+  <% end %>
   <% if @user_ingredients.empty? %>
     <p>No ingredients yet..</p>
   <% else %>

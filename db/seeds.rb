@@ -36,7 +36,7 @@ recipes.each do |recipe|
     vegetarian: recipe[:vegetarian],
     vegan: recipe[:vegan],
     dairy_free: recipe[:dairyFree],
-    gluten_free: recipe[:glutenFree],
+    gluten_free: recipe[:glutenFree]
   )
   recipe[:extendedIngredients].each do |api_ingredient|
     db_ingredient = Ingredient.find_by(name: api_ingredient['name'])
@@ -68,7 +68,7 @@ puts "creating users"
     last_name: Faker::Name.unique.last_name,
     username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
-    password: "password123456"
+    password: "123456"
     # password: Faker::Alphanumeric.alpha(number: 10)
   )
   puts "created user #{User.last.username}"
@@ -82,7 +82,7 @@ puts "creating user_ingredients"
   ingredient_ids.each do |ingredient_id|
     UserIngredient.create!(
       user_id: user.id,
-      ingredient_id: ingredient_id
+      ingredient_id:
     )
     puts "created user_ingredient #{UserIngredient.last.id} for user #{user.username} with ingredient_id #{ingredient_id}"
   end
