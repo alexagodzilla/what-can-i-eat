@@ -45,15 +45,17 @@ recipes.each do |recipe|
     gluten_free: recipe[:glutenFree]
   )
   recipe[:extendedIngredients].each do |api_ingredient|
-    db_ingredient = Ingredient.find_by(name: api_ingredient['name'])
+    db_ingredient = Ingredient.find_by(name: api_ingredient[:name])
     if db_ingredient.nil?
+
+      # puts "ingredient #{api_ingredient[:name]} does not exist in db"
       if api_ingredient[:unit] == "cup" || api_ingredient[:unit] == "cups"
-        unit = api_ingredient[:unit].downcase.pluralize
+        unit = api_ingredient[:unit].downcase
       else
         unit = api_ingredient[:measures][:metric][:unitShort].downcase
       end
       db_ingredient = Ingredient.create!(
-        name: api_ingredient[:name].capitalize,
+        name: api_ingredient[:name],
         # amount: ingredient['amount'],
         quantity_unit: unit
       )
