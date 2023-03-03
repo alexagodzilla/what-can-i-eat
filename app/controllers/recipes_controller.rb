@@ -1,8 +1,12 @@
 class RecipesController < ApplicationController
   def index
     if params[:query].present?
-      @recipes = Recipe.search_by_title_and_instructions(params[:query])
-      # @recipes = @recipes.with_ingredients(params[:ingredients].split(',')) if params[:ingredients].present?
+      if params.values.include?("1")
+        checked = params.select { |_key, value| value == "1" }.keys
+        @recipes = Recipe.search_recipes(params[:query]).where(checked.to_h { |value| [value, true] })
+      else
+        @recipes = Recipe.search_recipes(params[:query])
+      end
     else
       @recipes = Recipe.all
     end

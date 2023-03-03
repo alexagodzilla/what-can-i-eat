@@ -1,22 +1,30 @@
-<h1>Recipes#index</h1>
-
-<div data-controller="search-form">
-  <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
-    <div class="form-group">
-      <%= f.label :query, "Ingredients" %>
-      <%= f.text_field :query, class: "form-control", data: { target: "search-form.query" } %>
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-  <% end %>
-</div>
-
-<div data-controller="search-results">
-  <h2>Search Results</h2>
-  <ul data-target="search-results.list">
-    <% @recipes.each do |recipe| %>
-      <li>
-        <%= link_to recipe.title, recipe %>
-      </li>
+<div class="container">
+  <h1>Recipes#index</h1>
+  <div data-controller="search-form">
+    <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
+      <div class="form-group">
+        <%= f.label :query, "Ingredients " %>
+        <%= f.text_field :query, class: "form-control", data: { target: "search-form.query" } %>
+        <%= f.label :vegetarian, "Vegetarian" %>
+        <%= f.check_box :vegetarian, include_hidden: false %>
+        <%= f.label :vegan, "Vegan" %>
+        <%= f.check_box :vegan, include_hidden: false %>
+        <%= f.label :dairy_free, "Dairy free" %>
+        <%= f.check_box :dairy_free, include_hidden: false %>
+        <%= f.label :gluten_free, "Gluten free" %>
+        <%= f.check_box :gluten_free, include_hidden: false %>
+      </div>
+      <button type="submit" class="btn btn-primary my-2">Search</button>
     <% end %>
-  </ul>
+  </div>
+  <div data-controller="search-results">
+    <h2>Search results</h2>
+    <ul data-target="search-results.list">
+      <% @recipes.each do |recipe| %>
+        <li>
+          <%= link_to recipe.title, recipe %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
