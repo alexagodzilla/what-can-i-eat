@@ -2,8 +2,8 @@ class RecipesController < ApplicationController
   def index
     if params[:query].present?
       if params.values.include?("1")
-        checked = params.select { |_key, value| value == "1" }.keys.map { |key| "#{key} = true" }.join(", ")
-        @recipes = Recipe.search_recipes(params[:query]).where(checked)
+        checked = params.select { |_key, value| value == "1" }.keys
+        @recipes = Recipe.search_recipes(params[:query]).where(checked.to_h { |value| [value, true] })
       else
         @recipes = Recipe.search_recipes(params[:query])
       end
@@ -11,7 +11,6 @@ class RecipesController < ApplicationController
       @recipes = Recipe.all
     end
   end
-  # need to implement logic for when no recipes appear - as per ilaria's advice, switch statement
 
   def show
     @bookmark = Bookmark.new
@@ -20,5 +19,3 @@ class RecipesController < ApplicationController
     @current_user_bookmarks = Bookmark.where(user: current_user)
   end
 end
-
-# @recipes.with_ingredients(params[:ingredients].split(',')) if params[:ingredients].present?

@@ -20,6 +20,7 @@ class Recipe < ApplicationRecord
   # scope :with_ingredients, ->(ingredients) {
   #   joins(:ingredients).where("ingredients.name IN (?)", ingredients) unless ingredients.blank?
   # }
+  # from recipes controller: @recipes.with_ingredients(params[:ingredients].split(',')) if params[:ingredients].present?
 
   # def self.search(query)
   #   if query.present?
