@@ -52,7 +52,7 @@ recipes.each do |recipe|
     gluten_free: recipe[:glutenFree]
   )
   recipe[:extendedIngredients].each do |api_ingredient|
-    db_ingredient = Ingredient.find_by(name: remove_integer(api_ingredient[:name]))
+    db_ingredient = Ingredient.find_by(name: remove_integer(api_ingredient[:name]).capitalize)
 
     if db_ingredient.nil?
 
@@ -63,7 +63,7 @@ recipes.each do |recipe|
         unit = api_ingredient[:measures][:metric][:unitShort].downcase
       end
       db_ingredient = Ingredient.create!(
-        name: api_ingredient[:name],
+        name: api_ingredient[:name].capitalize,
         # amount: ingredient['amount'],
         quantity_unit: unit
       )
