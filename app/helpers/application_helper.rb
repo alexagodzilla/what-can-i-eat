@@ -6,8 +6,4 @@ module ApplicationHelper
       ingredient_quantity.round(2)
     end
   end
-
-  def remove_integer(ingredient_name)
-    ingredient_name.gsub(/\d+/, '').strip
-  end
 end
