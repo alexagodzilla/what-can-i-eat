@@ -4,6 +4,10 @@ require 'action_view'
 
 include ActionView::Helpers::SanitizeHelper
 
+def remove_integer(ingredient_name)
+  ingredient_name.gsub(/\d+/, '').strip
+end
+
 puts "Cleaning database..."
 puts "destroying all user ingredients"
 UserIngredient.destroy_all
@@ -33,7 +37,10 @@ recipes.each do |recipe|
   recipe[:image] = "https://unsplash.com/photos/ZrhtQyGFG6s" if recipe[:image].nil?
   db_recipe = Recipe.create!(
     title: recipe[:title],
-    instructions: strip_tags(recipe[:instructions]),
+    # The following line is to fix the issue of the API not adding a space after a period and to remove the HTML tags
+    # note the capture group in the regex. The first capture group is the word before the period and the second capture group is the word after the period
+    # the \1 is the first capture group and the \2 is the second capture group.
+    instructions: strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2'),
     # prep_time: recipe[:preparationMinutes],
     # cooking_time: recipe[:cookingMinutes],
     total_time: recipe[:readyInMinutes],
@@ -45,7 +52,8 @@ recipes.each do |recipe|
     gluten_free: recipe[:glutenFree]
   )
   recipe[:extendedIngredients].each do |api_ingredient|
-    db_ingredient = Ingredient.find_by(name: api_ingredient[:name])
+    db_ingredient = Ingredient.find_by(name: remove_integer(api_ingredient[:name]))
+
     if db_ingredient.nil?
 
       # puts "ingredient #{api_ingredient[:name]} does not exist in db"

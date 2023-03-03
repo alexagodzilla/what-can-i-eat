@@ -28,7 +28,7 @@
       <li>
         <strong><%= truncate_zero(recipe_ingredient.quantity) %>
         <%= ingredient.quantity_unit %></strong>
-        <%= remove_integer(ingredient.name).capitalize %>
+        <%= ingredient.name.capitalize %>
       </li>
     <% end %>
   </ul>
