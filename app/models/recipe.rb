@@ -7,13 +7,13 @@ class Recipe < ApplicationRecord
 
   validates :title, uniqueness: true, presence: true
   validates :instructions, :total_time, :serving_size, :image_url, presence: true
-  validates :prep_time, :cooking_time, presence: true
+  # validates :prep_time, :cooking_time, presence: true
 
   include PgSearch::Model
   pg_search_scope :search_by_title_and_instructions,
                   against: [:title, :instructions],
                   using: { tsearch: { prefix: true } }
-  
+
   # scope :vegetarian, -> { where(vegetarian: true) }
   # scope :vegan, -> { where(vegan: true) }
   # scope :gluten_free, -> { where(gluten_free: true) }
