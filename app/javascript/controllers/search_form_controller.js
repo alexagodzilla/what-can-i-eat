@@ -1,8 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
 
-// search_form_controller.js
-import { Controller } from "stimulus";
-
 export default class extends Controller {
 	static targets = ["query", "ingredients"];
 
