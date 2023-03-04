@@ -1,9 +1,9 @@
 <div class="container">
-  <h1>Recipes#index</h1>
-  <div data-controller="search-form">
+  <h1>What can I eat!?</h1>
+  <%# <div data-controller="search-form"> %>
     <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
       <div class="form-group">
-        <%= f.label :query, "Ingredients " %>
+        <%= f.label :query, "What's in your fridge?" %>
         <%= f.text_field :query, class: "form-control", data: { target: "search-form.query" } %>
         <%= f.label :vegetarian, "Vegetarian" %>
         <%= f.check_box :vegetarian, include_hidden: false %>
@@ -14,17 +14,32 @@
         <%= f.label :gluten_free, "Gluten free" %>
         <%= f.check_box :gluten_free, include_hidden: false %>
       </div>
-      <button type="submit" class="btn btn-primary my-2">Search</button>
+      <button type="submit" class="btn btn-primary mt-4 mb-4">Search</button>
     <% end %>
-  </div>
-  <div data-controller="search-results">
-    <h2>Search results</h2>
-    <ul data-target="search-results.list">
+  <%# </div> %>
+
+  <%# <div data-controller="search-results"> %>
+    <h3>Try these recipes with your ingredients</h3>
+    <br>
+    <%# <div data-target="search-results.list"> %>
+      <div class="cards">
+
       <% @recipes.each do |recipe| %>
-        <li>
-          <%= link_to recipe.title, recipe %>
-        </li>
+
+      <div class="card-trip">
+        <div>
+            <%= image_tag recipe.image_url, alt: "Image of recipe" %>
+        </div>
+            <div class="card-trip-infos">
+            <p><%= link_to recipe.title, recipe %></h3></p>
+            </div>
+<div>
+        <%# </div> %>
+
+      </div>
+      </div>
       <% end %>
-    </ul>
+    </div>
   </div>
+</div>
 </div>
