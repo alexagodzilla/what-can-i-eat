@@ -6,12 +6,3 @@ import { application } from "./application"
 
 import ChatroomSubscriptionController from "./chatroom_subscription_controller"
 application.register("chatroom-subscription", ChatroomSubscriptionController)
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
-import SearchFormController from "./search_form_controller"
-application.register("search-form", SearchFormController)
-
-import SearchResultsController from "./search_results_controller"
-application.register("search-results", SearchResultsController)
