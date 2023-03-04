@@ -1,9 +1,22 @@
 <div class="container">
   <h1>Recipes#index</h1>
-  <div data-controller="search-form">
+  <div>
+  <%#  form_with is a Rails helper that generates a form tag. %>
+  <%#  The url: option specifies the URL to which the form will be submitted. %>
+  <%# in this case, the URL is the recipes_path, which is the URL for the recipes index action. %>
+  <%#  The method: option specifies the HTTP method to use when submitting the form. %>
+  <%# in this case, the method is GET, because we are submitting a search query. %>
+  <%#  The data: option specifies the Turbo Streams action to perform when the form is submitted. %>
+  <%# in this case, the action is to submit the form and then call the search method on the search-form controller. %>
+  <%#  The search method in the controller is called search_recipes, but we can omit the _recipes part %>
     <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
       <div class="form-group">
         <%= f.label :query, "Ingredients " %>
+        <%# the data-target attribute specifies the target element for the form. %>
+        <%# in this case, the target element is the search-form controller. %>
+        <%#  The query attribute specifies the name of the form field. %>
+        <%#  The value of the query attribute is the value of the query parameter. %>
+        <%#  This works because the form_with helper automatically generates a hidden input field %>
         <%= f.text_field :query, class: "form-control", data: { target: "search-form.query" } %>
         <%= f.label :vegetarian, "Vegetarian" %>
         <%= f.check_box :vegetarian, include_hidden: false %>
@@ -17,9 +30,9 @@
       <button type="submit" class="btn btn-primary my-2">Search</button>
     <% end %>
   </div>
-  <div data-controller="search-results">
+  <div>
     <h2>Search results</h2>
-    <ul data-target="search-results.list">
+    <ul>
       <% @recipes.each do |recipe| %>
         <li>
           <%= link_to recipe.title, recipe %>
