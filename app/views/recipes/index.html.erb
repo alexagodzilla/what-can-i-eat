@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Recipes#index</h1>
-  <div data-controller="search-form">
+  <div>
     <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
       <div class="form-group">
         <%= f.label :query, "Ingredients " %>
@@ -17,9 +17,9 @@
       <button type="submit" class="btn btn-primary my-2">Search</button>
     <% end %>
   </div>
-  <div data-controller="search-results">
+  <div>
     <h2>Search results</h2>
-    <ul data-target="search-results.list">
+    <ul>
       <% @recipes.each do |recipe| %>
         <li>
           <%= link_to recipe.title, recipe %>

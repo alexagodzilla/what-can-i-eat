@@ -63,7 +63,7 @@ recipes.each do |recipe|
         unit = api_ingredient[:measures][:metric][:unitShort].downcase
       end
       db_ingredient = Ingredient.create!(
-        name: api_ingredient[:name].capitalize,
+        name: remove_integer(api_ingredient[:name]).capitalize,
         # amount: ingredient['amount'],
         quantity_unit: unit
       )
