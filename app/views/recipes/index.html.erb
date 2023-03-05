@@ -1,8 +1,7 @@
 <div class="container">
   <h2 class="my-3">Search with your ingredients</h2>
     <%= form_with url: recipes_path, method: :get do |f| %>
-      <div class="form-group">
-        <%= f.text_field :query, class: "form-control" %>
+        <%= f.text_field :query, class: "w-50" %> <br>
         <%= f.check_box :vegetarian, include_hidden: false %>
         <%= f.label :vegetarian, "Vegetarian" %>
         <%= f.check_box :vegan, include_hidden: false %>
@@ -11,10 +10,23 @@
         <%= f.label :dairy_free, "Dairy free" %>
         <%= f.check_box :gluten_free, include_hidden: false %>
         <%= f.label :gluten_free, "Gluten free" %> <br>
-        <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
+        <% if current_user.ingredients.present? %>
+        <div class="accordion w-50 my-3" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Add ingredients from your fridge?
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
+              </div>
+            </div>
+          </div>
       </div>
-      <a href="#">Add ingredients from your fridge?</a><br>
-      <button type="submit" class="btn btn-primary my-2">Search</button>
+      <% end %>
+      <%= f.submit "Search" %>
     <% end %>
     <h2 class="my-3">Hot new recipes</h2>
     <ul>
