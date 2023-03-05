@@ -3,14 +3,12 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new
     @bookmark.user = current_user
     @bookmark.recipe = Recipe.find(params[:recipe_id])
-    if @bookmark.save!
-      redirect_to @bookmark.recipe
-    end
+    redirect_to @bookmark.recipe if @bookmark.save!
   end
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_back fallback_location: root_path
+    redirect_to recipe_path(@bookmark.recipe)
   end
 end
