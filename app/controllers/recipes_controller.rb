@@ -1,14 +1,11 @@
 class RecipesController < ApplicationController
   def index
     if params[:query].present?
-      if params[:ingredient_id].present?
-        user_ingredients(params[:ingredient_id])
-      else
-        inserted_ingredients
-      end
+      params[:ingredient_id].present? ? search(params[:query], params[:ingredient_id]) : search(params[:query])
+    elsif params[:ingredient_id].present?
+      search("", params[:ingredient_id])
     elsif params.values.include?("1") && params[:query].empty?
-      checked = params.select { |_key, value| value == "1" }.keys
-      @recipes = Recipe.where(checked.to_h { |value| [value, true] })
+      empty_query
     else
       @recipes = Recipe.last(5)
     end
@@ -23,22 +20,18 @@ class RecipesController < ApplicationController
 
   private
 
-  def user_ingredients(array)
-    array.map! { |ingredient_id| Ingredient.find(ingredient_id).name }.join(" ")
+  def search(params_query, user_ingredient = "")
+    user_ingredient.map! { |id| Ingredient.find(id).name }.join(" ") if user_ingredient.length.positive?
     if params.values.include?("1")
-      checked = params.select { |_key, value| value == "1" }.keys
-      @recipes = Recipe.search_recipes("#{params[:query]} #{str}").where(checked.to_h { |value| [value, true] })
+      arr = params.select { |_key, value| value == "1" }.keys
+      @recipes = Recipe.search_recipes("#{params_query} #{user_ingredient}").where(arr.to_h { |key| [key, true] })
     else
-      @recipes = Recipe.search_recipes("#{params[:query]} #{str}")
+      @recipes = Recipe.search_recipes("#{params_query} #{user_ingredient}")
     end
   end
 
-  def inserted_ingredients
-    if params.values.include?("1")
-      checked = params.select { |_key, value| value == "1" }.keys
-      @recipes = Recipe.search_recipes(params[:query]).where(checked.to_h { |value| [value, true] })
-    else
-      @recipes = Recipe.search_recipes(params[:query])
-    end
+  def empty_query
+    arr = params.select { |_key, value| value == "1" }.keys
+    @recipes = Recipe.where(arr.to_h { |key| [key, true] })
   end
 end
