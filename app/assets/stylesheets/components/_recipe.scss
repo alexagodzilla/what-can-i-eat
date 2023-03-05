@@ -22,22 +22,26 @@
 	object-fit: cover;
 	border-radius: 4px;
 	margin: 8px auto;
+	margin-top: 16px;
 	display: block;
 }
 
 .card-trip h2 {
+	font-family: $headers-font;
 	font-size: 16px;
 	font-weight: bold;
 	margin: 0;
 }
 
-.card-trip p {
-	font-size: 13px;
+.card-trip-infos {
+	text-align: center;
 	opacity: 0.8;
 	margin: 0;
 }
 
-.card-trip a {
+.card-trip-infos > p > a {
+	font-family: $body-font;
+	font-size: 16px;
 	text-decoration: none;
 	color: black;
 	opacity: 0.9;
@@ -46,7 +50,7 @@
 .card-trip .card-trip-infos {
 	padding: 10px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: flex-end;
 	// position: relative;
 }
@@ -59,7 +63,7 @@
 	margin-right: 3px;
 }
 
-#text-bottom {
+.text-bottom {
 	position: absolute;
 	bottom: 0;
 	padding-left: 3px;

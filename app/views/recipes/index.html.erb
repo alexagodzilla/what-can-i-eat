@@ -1,10 +1,11 @@
 <div class="container">
+<br>
   <h1>What can I eat!?</h1>
-  <%# <div data-controller="search-form"> %>
-    <%= form_with url: recipes_path, method: :get, data: { action: "turbo:submit-end->search-form#search" } do |f| %>
+<br>
+    <%= form_with url: recipes_path, method: :get do |f| %>
       <div class="form-group">
         <%= f.label :query, "What's in your fridge?" %>
-        <%= f.text_field :query, class: "form-control", data: { target: "search-form.query" } %>
+        <%= f.text_field :query, class: "form-control" %>
         <%= f.label :vegetarian, "Vegetarian" %>
         <%= f.check_box :vegetarian, include_hidden: false %>
         <%= f.label :vegan, "Vegan" %>
@@ -16,12 +17,10 @@
       </div>
       <button type="submit" class="btn btn-primary mt-4 mb-4">Search</button>
     <% end %>
-  <%# </div> %>
 
-  <%# <div data-controller="search-results"> %>
-    <h3>Try these recipes with your ingredients</h3>
+    <h2>Try these recipes with your ingredients</h2>
     <br>
-    <%# <div data-target="search-results.list"> %>
+
       <div class="cards">
 
       <% @recipes.each do |recipe| %>
@@ -33,8 +32,11 @@
             <div class="card-trip-infos">
             <p><%= link_to recipe.title, recipe %></h3></p>
             </div>
+            <div class="text-bottom">
+           <p>ready in <%= recipe.total_time %> minutes</p>
+            </div>
 <div>
-        <%# </div> %>
+
 
       </div>
       </div>
