@@ -129,3 +129,5 @@ puts "creating reviews"
   )
   puts "created review #{Review.last.id}"
 end
+
+Chatroom.create!(name: "Main Room")
