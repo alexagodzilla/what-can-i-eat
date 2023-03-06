@@ -39,7 +39,9 @@
             <% total_rating += review.rating %>
             <% end %>
            <% average_rating = total_rating / recipe.reviews.count %>
-            <p><%= average_rating %> stars</p>
+            <% average_rating.times do %>
+            ⭐️
+            <% end %>
             <% end %>
            <p>ready in <%= recipe.total_time %>m</p>
             <p>servings: <%= recipe.serving_size %></p>

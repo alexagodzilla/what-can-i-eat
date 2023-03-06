@@ -65,10 +65,10 @@
 
 .text-bottom {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	font-family: $body-font;
 	font-size: 12px;
-	position: absolute;
+	// position: absolute;
 	bottom: 0;
 	padding-left: 3px;
 	padding-bottom: 12px;
