@@ -9,6 +9,7 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.last(5)
     end
+    @low_to_high = params[:order] == "Low to High"
   end
 
   def show
