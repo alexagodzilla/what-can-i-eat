@@ -64,6 +64,10 @@
 }
 
 .text-bottom {
+	display: flex;
+	justify-content: space-between;
+	font-family: $body-font;
+	font-size: 12px;
 	position: absolute;
 	bottom: 0;
 	padding-left: 3px;
