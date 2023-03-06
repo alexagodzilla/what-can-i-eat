@@ -11,4 +11,5 @@ class User < ApplicationRecord
   has_many :messages
 
   validates :username, presence: true, uniqueness: true, length: { minimum: 2 }
+  validates :first_name, presence: true
 end
