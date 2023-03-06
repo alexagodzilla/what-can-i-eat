@@ -68,12 +68,14 @@ recipes.each do |recipe|
         quantity_unit: unit
       )
     end
+    unless db_recipe.ingredients.include?(db_ingredient) && db_ingredient.recipes.include?(db_recipe)
     RecipeIngredient.create!(
       quantity: api_ingredient[:amount],
       recipe_id: db_recipe.id,
       ingredient_id: db_ingredient.id
     )
   end
+end
 end
 end
 end
