@@ -9,7 +9,9 @@
         <%= f.check_box :dairy_free, include_hidden: false %>
         <%= f.label :dairy_free, "Dairy free" %>
         <%= f.check_box :gluten_free, include_hidden: false %>
-        <%= f.label :gluten_free, "Gluten free" %> <br>
+        <%= f.label :gluten_free, "Gluten free" %>
+        <%= f.label :order, "Sort by Ratings" %>
+        <%= f.select :order, ["Ratings High to Low", "Ratings Low to High"], include_blank: true %><br>
         <% if current_user.ingredients.present? %>
         <div class="accordion w-50 my-3" id="accordionExample">
           <div class="accordion-item">
@@ -30,9 +32,9 @@
     <% end %>
     <h2 class="my-3">Hot new recipes</h2>
     <ul>
-
-      <% sort_recipes_by_rating(@recipes).each do |recipe| %>
+      <% sort_recipes_by_rating(@recipes, @low_to_high).each do |recipe| %>
         <li>
+          <%= recipe.average_rating %> |
           <%= link_to recipe.title, recipe %>
         </li>
       <% end %>
