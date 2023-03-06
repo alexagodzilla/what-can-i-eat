@@ -37,9 +37,14 @@
     <ul>
       <% sort_recipes_by_rating(@recipes, @low_to_high).each do |recipe| %>
         <li>
+        <% if recipe.average_rating == 0%>
+          <span>No reviews yet |</span>
+          <%= link_to recipe.title, recipe %>
+        <% else %>
           <%= recipe.average_rating %> |
           <%= link_to recipe.title, recipe %>
         </li>
+        <% end %>
       <% end %>
     </ul>
 </div>
