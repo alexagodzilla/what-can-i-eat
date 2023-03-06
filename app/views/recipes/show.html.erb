@@ -3,7 +3,7 @@
     <%= f.submit "Create bookmark" %>
   <% end %>
 
-  <% @current_user_bookmarks.each do |bookmark| %>
+  <% @user_bookmarks.each do |bookmark| %>
     <% if bookmark.recipe_id == @recipe.id %>
         <%= link_to "Remove bookmark", bookmark_path(bookmark.id),
         data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
@@ -45,12 +45,15 @@
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
       <p><%= review.content if review.content.present? %></p>
-      <% if current_user.id == review.user_id %>
-       <%= render 'recipes/form', recipe: @recipe, review: review %>
-      <% end %>
       <% if review.user == current_user %>
-        <%= link_to "Delete comment", review_path(review), data: { turbo_method: :delete,
-        turbo_confirm: "Are you sure you want to delete your comment?" } %>
+        <%= link_to review_path(review), data: { turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to delete your comment?" } do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      <% end %>
+      <% if current_user.id == review.user_id %>
+        <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+       <%= render 'recipes/form', recipe: @recipe, review: review %>
       <% end %>
       <hr>
     <% end %>

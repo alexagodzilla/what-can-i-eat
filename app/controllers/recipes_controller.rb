@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
     @bookmark = Bookmark.new
     @review = Review.new
     @recipe = Recipe.find(params[:id])
-    @current_user_bookmarks = Bookmark.where(user: current_user)
+    @user_bookmarks = Bookmark.where(user: current_user)
   end
 
   private

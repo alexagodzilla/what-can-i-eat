@@ -1,13 +1,16 @@
 <div class="container">
-  <h2>Your bookmarks</h2>
-  <% if @current_user_bookmarks.empty? %>
+  <h2>Bookmarks</h2>
+  <% if @user_bookmarks.empty? %>
     <h3>No bookmarks</h3>
   <% else %>
-  <ul>
-    <% @current_user_bookmarks.each do |bookmark| %>
+  <ul style="list-style-type: none; padding: 0">
+    <% @user_bookmarks.each do |bookmark| %>
       <li>
-        <%= bookmark.recipe.title %> <%= link_to "Unsave bookmark", bookmark_path(bookmark),
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this bookmark?" } %>
+        <%= link_to bookmark_path(bookmark), data: { turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to remove this bookmark?" } do %>
+          <i class="fa-solid fa-bookmark me-1"></i>
+        <% end %>
+        <%= link_to bookmark.recipe.title, recipe_path(bookmark.recipe) %>
       </li>
     <% end %>
   </ul>
@@ -15,23 +18,25 @@
 
   <h2>Ingredients</h2>
   <%= form_with(model: @user_ingredient) do |f| %>
-    <%= f.label :ingredient_id, "ADD INGREDIENT " %>
+    <%= f.label :ingredient_id, "*Add ingredient  " %>
     <%= f.collection_select :ingredient_id, Ingredient.order(:name), :id, :name %>
+    <%= f.label :quantity, "How much  " %>
     <%= f.number_field :quantity %>
     <%= f.submit "Submit" %>
   <% end %>
   <% if @user_ingredients.empty? %>
     <p>No ingredients yet..</p>
   <% else %>
-  <ul>
+  <ul style="list-style-type: none; padding: 0; margin-top: 10px;">
     <% @user_ingredients.each do |ingredient| %>
     <% db_ingredient = Ingredient.find(ingredient.ingredient_id) %>
       <li>
+        <%= link_to user_ingredient_path(ingredient), data: { turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to delete your ingredient?" } do %>
+          <i class="fa-regular fa-circle-xmark me-1"></i>
+        <% end %>
         <%= db_ingredient.name %>
-        <%= truncate_zero(ingredient.quantity) if ingredient.quantity.present? %>
-        <%= db_ingredient.quantity_unit if ingredient.quantity.present? %>
-        <%= link_to "Delete ingredient", user_ingredient_path(ingredient), data: { turbo_method: :delete,
-        turbo_confirm: "Are you sure you want to delete your ingredient?" } %>
+        <strong><%= truncate_zero(ingredient.quantity) if ingredient.quantity.present? %><%= db_ingredient.quantity_unit if ingredient.quantity.present? %></strong>
       </li>
     <% end %>
   <% end %>
