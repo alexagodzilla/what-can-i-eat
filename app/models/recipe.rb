@@ -13,6 +13,12 @@ class Recipe < ApplicationRecord
                   against: %i[title instructions],
                   using: { tsearch: { prefix: true } }
 
+  def average_rating
+    rev = reviews.where.not(rating: nil)
+    return 1 if rev.empty?
+    rev.pluck(:rating).sum / rev.count
+  end
+
   # scope :with_total_time, ->(total_time) {
   #   where('total_time <= ?', total_time.to_i) unless total_time.blank?
   # }

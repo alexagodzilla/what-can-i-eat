@@ -127,7 +127,7 @@ puts "creating reviews"
     user_id: User.all.sample.id,
     recipe_id: Recipe.all.sample.id,
     content: Faker::TvShows::GameOfThrones.quote,
-    rating: rand(3..5)
+    rating: rand(1..5)
   )
   puts "created review #{Review.last.id}"
 end
