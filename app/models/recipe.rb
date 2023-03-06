@@ -12,12 +12,11 @@ class Recipe < ApplicationRecord
   pg_search_scope :search_recipes,
                   against: %i[title instructions],
                   using: { tsearch: { prefix: true } }
-
   def average_rating
     rev = reviews.where.not(rating: nil)
-    return 1 if rev.empty?
+    return 0 if rev.empty?
     # Takes all the ratings from a single recipe (binding.pry)
-    rev.pluck(:rating).sum / rev.count
+    (rev.pluck(:rating).sum / rev.count).to_f
   end
 
   # scope :with_total_time, ->(total_time) {

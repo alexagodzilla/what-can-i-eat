@@ -11,7 +11,7 @@
         <%= f.check_box :gluten_free, include_hidden: false %>
         <%= f.label :gluten_free, "Gluten free" %>
         <%= f.label :order, "Sort by Ratings" %>
-        <%= f.select :order, ["Ratings High to Low", "Ratings Low to High"], include_blank: true %><br>
+        <%= f.select :order, ["High to Low", "Low to High"] %><br>
         <% if current_user.ingredients.present? %>
         <div class="accordion w-50 my-3" id="accordionExample">
           <div class="accordion-item">
