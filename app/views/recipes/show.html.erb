@@ -51,9 +51,11 @@
           <i class="fa-solid fa-trash-can"></i>
         <% end %>
       <% end %>
-      <% if current_user.id == review.user_id %>
-        <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-       <%= render 'recipes/form', recipe: @recipe, review: review %>
+      <% if current_user != nil %>
+        <% if current_user.id == review.user_id %>
+          <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+        <%= render 'recipes/form', recipe: @recipe, review: review %>
+        <% end %>
       <% end %>
       <hr>
     <% end %>
