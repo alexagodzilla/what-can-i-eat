@@ -110,3 +110,5 @@ puts "creating reviews"
     rating: rand(3..5)
   )
 end
+
+Chatroom.create!(name: "Main Room")
