@@ -4,5 +4,5 @@ class ChatroomsController < ApplicationController
     @message = Message.new
   end
 
-  #chartroom create redirect to chatroom.find?
+  # chartroom create redirect to chatroom.find?
 end

@@ -4,19 +4,19 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.chatroom = @chatroom
     @message.user = current_user
-    #if @message.save
+    # if @message.save
     @message.save
-      ChatroomChannel.broadcast_to(
-        @chatroom,
-        render_to_string(
-          partial: "messages/message",
-          locals: {message: @message}
-        )
+    ChatroomChannel.broadcast_to(
+      @chatroom,
+      render_to_string(
+        partial: "messages/message",
+        locals: { message: @message }
       )
-      # This full reset the page
-      # Redirect_to chatroom_path(@chatroom)
-      # This sends 200 status with no view
-      head :ok
+    )
+    # This full reset the page
+    # Redirect_to chatroom_path(@chatroom)
+    # This sends 200 status with no view
+    head :ok
     # else
     #   render "chatrooms/show", status: :unprocessable_entity
     # end
