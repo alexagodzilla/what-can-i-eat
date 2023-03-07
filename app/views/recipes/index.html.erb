@@ -33,23 +33,26 @@
             <p><%= link_to recipe.title, recipe %></h3></p>
             </div>
             <div class="text-bottom">
+            <div class="text-bottom-left">
             <%   unless recipe.reviews.empty? %>
             <% total_rating = 0 %>
             <% average_rating = recipe.reviews.each do |review| %>
             <% total_rating += review.rating %>
             <% end %>
+            <p>
            <% average_rating = total_rating / recipe.reviews.count %>
-            <% average_rating.times do %>
+            <%= average_rating%>
             ⭐️
             <% end %>
-            <% end %>
-           <p>ready in <%= recipe.total_time %>m</p>
+
+            </p>
+           <p>| ready in <%= recipe.total_time %>m |</p>
+            </div>
+            <div class="text-bottom-right">
+
             <p>servings: <%= recipe.serving_size %></p>
             </div>
-<div>
-
-
-      </div>
+            </div>
       </div>
       <% end %>
     </div>
