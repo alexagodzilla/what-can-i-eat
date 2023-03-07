@@ -34,7 +34,7 @@ recipes.each do |recipe|
   db_recipe = Recipe.find_by(title: recipe[:title])
     if db_recipe.nil?
   puts "creating recipe #{recipe[:title]}"
-  recipe[:image] = "https://unsplash.com/photos/ZrhtQyGFG6s" if recipe[:image].nil?
+  recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
   db_recipe = Recipe.create!(
     title: recipe[:title],
     # The following line is to fix the issue of the API not adding a space after a period and to remove the HTML tags
@@ -45,7 +45,7 @@ recipes.each do |recipe|
     # cooking_time: recipe[:cookingMinutes],
     total_time: recipe[:readyInMinutes],
     serving_size: recipe[:servings],
-    image_url: recipe[:image],
+    image_url: img,
     vegetarian: recipe[:vegetarian],
     vegan: recipe[:vegan],
     dairy_free: recipe[:dairyFree],
