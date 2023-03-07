@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   end
 
   def profile
+    @chatroom = Chatroom.first
     @user_bookmarks = Bookmark.where(user: current_user)
     @user_ingredients = UserIngredient.where(user: current_user)
     @user_ingredient = UserIngredient.new

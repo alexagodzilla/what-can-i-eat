@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
   def average_rating
     rev = reviews.where.not(rating: nil)
     return 0 if rev.empty?
+
     # Takes all the ratings from a single recipe (binding.pry)
     (rev.pluck(:rating).sum / rev.count).to_f
   end
