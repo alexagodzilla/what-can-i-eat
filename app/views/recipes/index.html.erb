@@ -44,18 +44,20 @@
           </div>
           <div class="text-bottom">
             <div class="text-bottom-left">
-              <% unless recipe.reviews.empty? %>
+              <% if recipe.reviews.empty? %>
+                <p>| No reviews</p>
+              <% else %>
                 <% total_rating = 0 %>
                 <% average_rating = recipe.reviews.each do |review| %>
                   <% total_rating += review.rating %>
+               <% (average_rating = total_rating / recipe.reviews.count).to_f %>
+                <p> | <%= average_rating %> ⭐️</p>
                 <% end %>
-                <p><% (average_rating = total_rating / recipe.reviews.count).to_f %>
-                <%= average_rating %>⭐️</p>
               <% end %>
-              <p>| Ready in <%= recipe.total_time %>m |</p>
+
             </div>
             <div class="text-bottom-right">
-              <p>Servings: <%= recipe.serving_size %></p>
+              <p>| Ready in <%= recipe.total_time %>m |</p>
             </div>
           </div>
         </div>
