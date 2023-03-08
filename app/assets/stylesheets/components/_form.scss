@@ -30,3 +30,17 @@ h5,
 h6 {
 	font-family: $headers-font;
 }
+
+.form .btn {
+	font-family: $body-font;
+}
+
+.headers-center {
+	text-align: center;
+}
+
+.checkboxes input[type="checkbox"],
+label {
+	font-family: $body-font;
+	margin-right: 10px;
+}
