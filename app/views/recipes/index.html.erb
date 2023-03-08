@@ -1,18 +1,19 @@
 <div class="container">
-  <h2 class="my-3">Search with your ingredients</h2>
+  <h2 class="my-3">Search by ingredients/recipe/diet, or choose items from your kitchen below</h2>
     <%= form_with url: recipes_path, method: :get do |f| %>
+      <div class="form">
       <%= f.text_field :query, class: "w-50" %> <br>
       <%= f.check_box :vegetarian, include_hidden: false %>
-      <%= f.label :vegetarian, "Vegetarian" %>
+      <%= f.label :vegetarian, "Vegetarian |" %>
       <%= f.check_box :vegan, include_hidden: false %>
-      <%= f.label :vegan, "Vegan" %>
+      <%= f.label :vegan, "Vegan |" %>
       <%= f.check_box :dairy_free, include_hidden: false %>
-      <%= f.label :dairy_free, "Dairy free" %>
+      <%= f.label :dairy_free, "Dairy free |" %>
       <%= f.check_box :gluten_free, include_hidden: false %>
-      <%= f.label :gluten_free, "Gluten free" %>
+      <%= f.label :gluten_free, "Gluten free |" %>
       <%= f.label :order, "Sort by Ratings" %>
       <%= f.select :order, ["High to Low"], :include_blank => true %><br>
-      <% if current_user != nil %>
+      </div><% if current_user != nil %>
         <% if current_user.ingredients.present? %>
           <div class="accordion w-50 my-3" id="accordionExample">
             <div class="accordion-item">
@@ -48,13 +49,12 @@
                 <p>| No reviews</p>
               <% else %>
                 <% total_rating = 0 %>
-                <% average_rating = recipe.reviews.each do |review| %>
+                <% recipe.reviews.each do |review| %>
                   <% total_rating += review.rating %>
+                  <% end %>
                <% (average_rating = total_rating / recipe.reviews.count).to_f %>
-                <p> | <%= average_rating %> ⭐️</p>
-                <% end %>
+                <p>  <%= average_rating %> ⭐️</p>
               <% end %>
-
             </div>
             <div class="text-bottom-right">
               <p>| Ready in <%= recipe.total_time %>m |</p>
