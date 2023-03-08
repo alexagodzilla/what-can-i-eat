@@ -2,42 +2,29 @@
     <%= form_with url: recipes_path, method: :get do |f| %>
       <div class="form">
       <br>
-      <h3>Search by keyword</h3>
-      <%= f.text_field :query, placeholder: "Search by ingredient/recipe/key word, eg: lemon chicken", class: "w-50" %> <span><%= f.label :order, "Sort by ratings" %>
+      <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. lemon chicken", class: "w-50" %> <span><%= f.label :order, "Sort by ratings" %>
       <%= f.select :order, ["High to Low"], :include_blank => true %><br></span>
       <br>
       <br>
       <h3>Filter recipes by dietary requirements</h3>
       <%= f.check_box :vegetarian, include_hidden: false %>
-      <%= f.label :vegetarian, "Vegetarian |" %>
+      <%= f.label :vegetarian, "Vegetarian" %>
       <%= f.check_box :vegan, include_hidden: false %>
-      <%= f.label :vegan, "Vegan |" %>
+      <%= f.label :vegan, "Vegan" %>
       <%= f.check_box :dairy_free, include_hidden: false %>
-      <%= f.label :dairy_free, "Dairy free |" %>
+      <%= f.label :dairy_free, "Dairy free" %>
       <%= f.check_box :gluten_free, include_hidden: false %>
-      <%= f.label :gluten_free, "Gluten free |" %>
+      <%= f.label :gluten_free, "Gluten free" %>
       <br>
       <br>
-      </div><% if current_user != nil %>
+      <% if current_user != nil %>
         <% if current_user.ingredients.present? %>
-          <div class="accordion w-50 my-3" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button form" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <h3>Add ingredients from your kitchen?</h3>
-                </button>
-              </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body checkboxes">
-                    <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
         <% end %>
       <% end %>
       <%= f.submit "Search" %>
     <% end %>
+    </div>
     <div class="headers-center">
     <h2 class="form my-3">Recipes</h2>
     </div>
