@@ -41,7 +41,7 @@
   <%= render 'recipes/form', recipe: @recipe, review: @review %>
   <br>
   <% if @recipe.reviews.empty? %>
-    <p><%= "There are no currently no comments.. Leave one now!" %></p>
+    <p><%= "There are no currently no comments... Leave one now!" %></p>
   <% else %>
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
