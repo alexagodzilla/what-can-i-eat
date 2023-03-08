@@ -28,20 +28,23 @@ json_names.each do |file_name|
   recipes.each do |recipe|
     db_recipe = Recipe.find_by(title: recipe[:title])
     if db_recipe.nil?
-      recipe[:image] = "https://unsplash.com/photos/ZrhtQyGFG6s" if recipe[:image].nil?
-      db_recipe = Recipe.create!(
-        title: recipe[:title],
-        instructions: strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2'),
-        # prep_time: recipe[:preparationMinutes],
-        # cooking_time: recipe[:cookingMinutes],
-        total_time: recipe[:readyInMinutes],
-        serving_size: recipe[:servings],
-        image_url: recipe[:image],
-        vegetarian: recipe[:vegetarian],
-        vegan: recipe[:vegan],
-        dairy_free: recipe[:dairyFree],
-        gluten_free: recipe[:glutenFree]
-      )
+
+  puts "creating recipe #{recipe[:title]}"
+  recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
+  db_recipe = Recipe.create!(
+    title: recipe[:title],
+    instructions: strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2'),
+    # prep_time: recipe[:preparationMinutes],
+    # cooking_time: recipe[:cookingMinutes],
+    total_time: recipe[:readyInMinutes],
+    serving_size: recipe[:servings],
+    image_url: img,
+    vegetarian: recipe[:vegetarian],
+    vegan: recipe[:vegan],
+    dairy_free: recipe[:dairyFree],
+    gluten_free: recipe[:glutenFree]
+  )
+
       recipe[:extendedIngredients].each do |api_ingredient|
         db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
         if db_ingredient.nil?

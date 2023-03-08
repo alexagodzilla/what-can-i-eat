@@ -1,27 +1,26 @@
 <div class="container">
   <h2 class="my-3">Search with your ingredients</h2>
     <%= form_with url: recipes_path, method: :get do |f| %>
-
-        <%= f.text_field :query, class: "w-50" %> <br>
-        <%= f.check_box :vegetarian, include_hidden: false %>
-        <%= f.label :vegetarian, "Vegetarian" %>
-        <%= f.check_box :vegan, include_hidden: false %>
-        <%= f.label :vegan, "Vegan" %>
-        <%= f.check_box :dairy_free, include_hidden: false %>
-        <%= f.label :dairy_free, "Dairy free" %>
-        <%= f.check_box :gluten_free, include_hidden: false %>
-        <%= f.label :gluten_free, "Gluten free" %>
-        <%= f.label :order, "Sort by Ratings" %>
-        <%= f.select :order, ["High to Low", "Low to High"] %><br>
-        <% if current_user != nil %>
-          <% if current_user.ingredients.present? %>
-            <div class="accordion w-50 my-3" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
+      <%= f.text_field :query, class: "w-50" %> <br>
+      <%= f.check_box :vegetarian, include_hidden: false %>
+      <%= f.label :vegetarian, "Vegetarian" %>
+      <%= f.check_box :vegan, include_hidden: false %>
+      <%= f.label :vegan, "Vegan" %>
+      <%= f.check_box :dairy_free, include_hidden: false %>
+      <%= f.label :dairy_free, "Dairy free" %>
+      <%= f.check_box :gluten_free, include_hidden: false %>
+      <%= f.label :gluten_free, "Gluten free" %>
+      <%= f.label :order, "Sort by Ratings" %>
+      <%= f.select :order, ["High to Low"], :include_blank => true %><br>
+      <% if current_user != nil %>
+        <% if current_user.ingredients.present? %>
+          <div class="accordion w-50 my-3" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   Add ingredients from your fridge?
                 </button>
-                </h2>
+              </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
@@ -34,17 +33,34 @@
       <%= f.submit "Search" %>
     <% end %>
     <h2 class="my-3">Hot new recipes</h2>
-    <ul>
+    <div class="cards">
       <% sort_recipes_by_rating(@recipes, @low_to_high).each do |recipe| %>
-        <li>
-        <% if recipe.average_rating == 0%>
-          <span>No reviews yet |</span>
-          <%= link_to recipe.title, recipe %>
-        <% else %>
-          <%= recipe.average_rating %> |
-          <%= link_to recipe.title, recipe %>
-        </li>
-        <% end %>
+      <div class="card-trip">
+        <div>
+            <%= image_tag recipe.image_url, alt: "Image of recipe" %>
+        </div>
+          <div class="card-trip-infos">
+            <p><%= link_to recipe.title, recipe %></h3></p>
+          </div>
+          <div class="text-bottom">
+            <div class="text-bottom-left">
+              <% unless recipe.reviews.empty? %>
+                <% total_rating = 0 %>
+                <% average_rating = recipe.reviews.each do |review| %>
+                  <% total_rating += review.rating %>
+                <% end %>
+                <p><% (average_rating = total_rating / recipe.reviews.count).to_f %>
+                <%= average_rating %>⭐️</p>
+              <% end %>
+              <p>| Ready in <%= recipe.total_time %>m |</p>
+            </div>
+            <div class="text-bottom-right">
+              <p>Servings: <%= recipe.serving_size %></p>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    </div>
+  </div>
+</div>
 </div>
