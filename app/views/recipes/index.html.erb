@@ -11,7 +11,7 @@
         <%= f.check_box :gluten_free, include_hidden: false %>
         <%= f.label :gluten_free, "Gluten free" %>
         <%= f.label :order, "Sort by Ratings" %>
-        <%= f.select :order, ["High to Low", "Low to High"] %><br>
+        <%= f.select :order, ["High to Low"], :include_blank => true %><br>
         <% if current_user != nil %>
           <% if current_user.ingredients.present? %>
             <div class="accordion w-50 my-3" id="accordionExample">
@@ -35,17 +35,6 @@
     <h2 class="my-3">Hot new recipes</h2>
 
 
-      <% sort_recipes_by_rating(@recipes, @low_to_high).each do |recipe| %>
-
-        <% if recipe.average_rating == 0%>
-
-          <% link_to recipe.title, recipe %>
-        <% else %>
-          <% recipe.average_rating %>
-          <% link_to recipe.title, recipe %>
-
-        <% end %>
-      <% end %>
 
       <div class="cards">
 

@@ -44,23 +44,7 @@ json_names.each do |file_name|
     dairy_free: recipe[:dairyFree],
     gluten_free: recipe[:glutenFree]
   )
-  recipe[:extendedIngredients].each do |api_ingredient|
-    db_ingredient = Ingredient.find_by(name: remove_integer(api_ingredient[:name]).capitalize)
 
-    if db_ingredient.nil?
-
-      # puts "ingredient #{api_ingredient[:name]} does not exist in db"
-      if api_ingredient[:unit] == "cup" || api_ingredient[:unit] == "cups"
-        unit = api_ingredient[:unit].downcase
-      else
-        unit = api_ingredient[:measures][:metric][:unitShort].downcase
-      end
-      db_ingredient = Ingredient.create!(
-        name: api_ingredient[:name].capitalize,
-        # amount: ingredient['amount'],
-        quantity_unit: unit
-
-      )
       recipe[:extendedIngredients].each do |api_ingredient|
         db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
         if db_ingredient.nil?
