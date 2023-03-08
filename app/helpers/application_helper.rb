@@ -12,5 +12,3 @@ module ApplicationHelper
     low_to_high ? res : res.reverse
   end
 end
-
-# db controller view helper
