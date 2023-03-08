@@ -1,9 +1,8 @@
 <div class="container">
-  <h3 class="form my-3">Search by keyword, select a diet, or choose items from your kitchen below</h3>
-  <br>
-  <br>
     <%= form_with url: recipes_path, method: :get do |f| %>
       <div class="form">
+      <br>
+      <h3>Search by keyword</h3>
       <%= f.text_field :query, placeholder: "Search by ingredient/recipe/key word, eg: lemon chicken", class: "w-50" %> <span><%= f.label :order, "Sort by ratings" %>
       <%= f.select :order, ["High to Low"], :include_blank => true %><br></span>
       <br>
@@ -25,7 +24,7 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button form" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Add ingredients from your kitchen?
+              <h3>Add ingredients from your kitchen?</h3>
                 </button>
               </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
