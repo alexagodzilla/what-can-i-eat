@@ -1,6 +1,6 @@
 class UserIngredientsController < ApplicationController
   def index
-    @user_ingredients = UserIngredient.where(user: current_user)
+    @user_ingredients = UserIngredient.all
   end
 
   def new
