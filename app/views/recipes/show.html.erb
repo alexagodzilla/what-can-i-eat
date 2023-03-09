@@ -3,7 +3,29 @@
     <%= f.submit "Create bookmark" %>
   <% end %>
 
+<br>
+<% users = User.all %>
+<% selected_users = [] %>
+<% users.each do |user| %>
+  <% user_ingredient_ids = user.ingredients.pluck(:id) %>
+  <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
+
+  <% if @recipe_ingredients.any? { |id| user_ingredient_ids.include?(id) } %>
+    <% selected_users << user %>
+  <% end %>
+<% end %>
+<ul>
+<% selected_users.each do |u| %>
+<li><%= u.username %> might have <% u.ingredients.each do |ingredient| %>
+<% if @recipe_ingredients.include?(ingredient.id) %>
+    <%= ingredient.name %>
+  <% end %>
+<% end %>
+</li>
+<% end %>
+</ul>
 <%= link_to "go to chat", chatroom_path(@chatroom), class: "btn btn-primary" %>
+
   <% @user_bookmarks.each do |bookmark| %>
     <% if bookmark.recipe_id == @recipe.id %>
         <%= link_to "Remove bookmark", bookmark_path(bookmark.id),
@@ -62,3 +84,4 @@
     <% end %>
   <% end %>
 </div>
+<% end %>
