@@ -11,7 +11,7 @@ class Recipe < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_recipes,
                   against: %i[title instructions],
-                  using: { tsearch: { prefix: true } }
+                  using: { tsearch: { any_word: true } }
   def average_rating
     rev = reviews.where.not(rating: nil)
     return 0 if rev.empty?
