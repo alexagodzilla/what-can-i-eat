@@ -3,7 +3,6 @@
     <%= f.submit "Create bookmark" %>
   <% end %>
 
-<div class="container">
 <br>
 <% users = User.all %>
 <% selected_users = [] %>
@@ -26,7 +25,7 @@
 <% end %>
 </ul>
 <%= link_to "go to chat", chatroom_path(@chatroom), class: "btn btn-primary" %>
-</div>
+
   <% @user_bookmarks.each do |bookmark| %>
     <% if bookmark.recipe_id == @recipe.id %>
         <%= link_to "Remove bookmark", bookmark_path(bookmark.id),
