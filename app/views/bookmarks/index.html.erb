@@ -1,0 +1,24 @@
+<div class="banner">
+  <div class="container">
+    <h2><%= link_to "Ingredients", profile_ingredients_path, style: "text-decoration: none;"%></h2>
+    <h2><%= link_to "Bookmarks", profile_bookmarks_path, style: "text-decoration: none; color: orange;" %></h2>
+    <h2><%= link_to "Friends", profile_friends_path, style: "text-decoration: none;"%></h2>
+  </div>
+</div>
+<div class="container">
+  <% if @user_bookmarks.empty? %>
+    <h3>No bookmarks yet...</h3>
+  <% else %>
+  <ul style="list-style-type: none; padding: 0">
+    <% @user_bookmarks.each do |bookmark| %>
+      <li>
+        <%= link_to bookmark_path(bookmark), data: { turbo_method: :delete,
+        turbo_confirm: "Are you sure you want to remove this bookmark?" }, style: "text-decoration: none;" do %>
+          <i class="fa-solid fa-bookmark me-1"></i>
+        <% end %>
+        <%= link_to bookmark.recipe.title, recipe_path(bookmark.recipe), style: "text-decoration: none;" %>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
