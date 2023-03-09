@@ -6,7 +6,7 @@
       <%= f.select :order, ["High to Low"], :include_blank => true %><br></span>
       <br>
       <br>
-      <h3>Filter recipes by dietary requirements</h3>
+      <h4>Filter recipes by dietary requirements</h4>
       <%= f.check_box :vegetarian, include_hidden: false %>
       <%= f.label :vegetarian, "Vegetarian" %>
       <%= f.check_box :vegan, include_hidden: false %>
@@ -17,6 +17,7 @@
       <%= f.label :gluten_free, "Gluten free" %>
       <br>
       <br>
+      <h4> Add your ingredients from the kitchen?</h4>
       <% if current_user != nil %>
         <% if current_user.ingredients.present? %>
           <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
