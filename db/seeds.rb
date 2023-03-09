@@ -16,9 +16,9 @@ puts "destroying all reviews"
 Review.destroy_all
 puts "destroying all recipes"
 Recipe.destroy_all
+puts "destroying all chatrooms"
 puts "destroying all messages"
 Message.destroy_all
-puts "destroying all chatrooms"
 Chatroom.destroy_all
 puts "destroying all users"
 User.destroy_all
@@ -77,8 +77,8 @@ end
 puts "creating users"
 15.times do
   User.create!(
-    first_name: Faker::Name.unique.first_name,
-    last_name: Faker::Name.unique.last_name,
+    first_name: (Faker::Name.unique.first_name).capitalize,
+    last_name: (Faker::Name.unique.last_name).capitalize,
     username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
     password: "123456"
