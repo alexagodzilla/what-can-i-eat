@@ -1,4 +1,8 @@
 class BookmarksController < ApplicationController
+  def index
+    @user_bookmarks = Bookmark.where(user: current_user)
+  end
+
   def create
     @bookmark = Bookmark.new
     @bookmark.user = current_user
@@ -9,6 +13,6 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to recipe_path(@bookmark.recipe)
+    redirect_to profile_bookmarks_path
   end
 end

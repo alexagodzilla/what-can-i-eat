@@ -1,6 +1,6 @@
 class UserIngredientsController < ApplicationController
   def index
-    @user_ingredients = UserIngredient.all
+    @user_ingredients = UserIngredient.where(user: current_user)
   end
 
   def new
@@ -22,7 +22,7 @@ class UserIngredientsController < ApplicationController
   def destroy
     @user_ingredient = UserIngredient.find(params[:id])
     @user_ingredient.destroy
-    redirect_to profile_path
+    redirect_to profile_ingredients_path
     # update later
   end
 

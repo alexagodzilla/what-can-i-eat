@@ -1,0 +1,19 @@
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+.banner h2 {
+  padding: 0;
+  color: $blue;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.banner a:hover {
+  color: $orange;
+  cursor: pointer;
+}
