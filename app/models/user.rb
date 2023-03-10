@@ -10,6 +10,19 @@ class User < ApplicationRecord
   has_many :ingredients, through: :user_ingredients
   has_many :messages
 
+  has_many :requester_friendships, class_name: 'Friendship', foreign_key: 'requester_id'
+  has_many :requested_friendships, class_name: 'Friendship', foreign_key: 'requested_id'
+
   validates :username, presence: true, uniqueness: true, length: { minimum: 2 }
   validates :first_name, presence: true
+
+  def friends
+    friend_ids = requester_friendships.where(status: "accepted").pluck(:requested_id) +
+                 requested_friendships.where(status: "accepted").pluck(:requester_id)
+    User.where(id: friend_ids)
+  end
 end
+
+# has_many :requesters, class_name: 'User', through: :requested_friendships
+# has_many :requesteds, class_name: 'User', through: :requester_friendships
+# these return the user instance but not filtered by status, so believe not useful

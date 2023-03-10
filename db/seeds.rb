@@ -16,9 +16,9 @@ puts "destroying all reviews"
 Review.destroy_all
 puts "destroying all recipes"
 Recipe.destroy_all
-puts "destroying all chatrooms"
 puts "destroying all messages"
 Message.destroy_all
+puts "destroying all chatrooms"
 Chatroom.destroy_all
 puts "destroying all users"
 User.destroy_all
@@ -118,4 +118,5 @@ puts "creating reviews"
   )
 end
 
+puts "creating chatroom"
 Chatroom.create!(name: "Main Room")
