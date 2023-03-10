@@ -5,14 +5,15 @@ Rails.application.routes.draw do
   get "profile/bookmarks", to: "bookmarks#index"
   get "profile/ingredients", to: "user_ingredients#index"
   get "profile/friends", to: "pages#friends"
-  resources :ingredients, only: %i[create]
-  resources :user_ingredients, only: %i[create edit update]
+  resources :ingredients, only: :create
+  resources :user_ingredients, only: %i[create update]
+  resources :friendships, only: %i[create update]
   resources :chatrooms, only: :show do
     resources :messages, only: :create
   end
   resources :recipes, only: %i[index show] do
-    resources :bookmarks, only: %i[create]
+    resources :bookmarks, only: :create
     resources :reviews, only: %i[create update]
   end
-  resources :reviews, :bookmarks, :ingredients, :user_ingredients, only: [:destroy]
+  resources :reviews, :bookmarks, :ingredients, :user_ingredients, :friendships, only: :destroy
 end
