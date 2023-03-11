@@ -1,7 +1,7 @@
-<div class="navbar sticky-top navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "sad_faces_big.png"%>
+    <%= image_tag "orange.png"%>
     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,18 +9,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Profile", profile_path, class: "nav-link" %>
+          <li class="nav-link">
+           <%= link_to "Bookmarks", profile_bookmarks_path, class: "nav-link" %>
           </li>
+          <li class="nav-link">
+           <%= link_to "My Pantry", profile_ingredients_path, class: "nav-link" %>
+           </li>
+           <li class="nav-link">
+            <%= link_to "Friends", profile_friends_path, class: "nav-link" %>
+            </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" data-bs-toggle="dropdown"><%= current_user.first_name %></a>
+            <a class="nav-link" href="#" data-bs-toggle="dropdown"><%= image_tag "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ", class: "avatar-bordered"%></a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Profile", profile_path, class: "dropdown-item" %>
               <%= link_to "Messages", Chatroom.first, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
-          </li>
-          <li>
-          <%= image_tag "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ", class: "photo" %>
           </li>
         <% else %>
           <li class="nav-item">
