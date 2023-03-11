@@ -48,6 +48,15 @@ json_names.each do |file_name|
     dairy_free: recipe[:dairyFree],
     gluten_free: recipe[:glutenFree]
   )
+  puts "creating steps"
+  recipe[:analyzedInstructions][0][:steps].each do |step|
+    step = Step.create!(
+      number: step[:number],
+      content: step[:step],
+      recipe_id: db_recipe.id
+    )
+  end
+  puts "creating ingredients"
 
       recipe[:extendedIngredients].each do |api_ingredient|
         db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
