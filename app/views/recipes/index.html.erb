@@ -33,7 +33,9 @@
       <% sort_recipes_by_rating(@recipes, @low_to_high).each do |recipe| %>
       <div class="card-trip">
         <div>
+          <%= link_to recipe_path(recipe) do %>
             <%= image_tag recipe.image_url, alt: "Image of recipe" %>
+          <% end %>
         </div>
           <div class="card-trip-infos">
             <p><%= link_to recipe.title, recipe %></h3></p>
@@ -47,8 +49,8 @@
                 <% recipe.reviews.each do |review| %>
                   <% total_rating += review.rating %>
                   <% end %>
-               <% (average_rating = total_rating / recipe.reviews.count).to_f %>
-                <p>  <%= average_rating %> ⭐️</p>
+               <% average_rating = total_rating / recipe.reviews.count %>
+                <p>  <%= average_rating.to_f %> ⭐️</p>
               <% end %>
             </div>
             <div class="text-bottom-right">
