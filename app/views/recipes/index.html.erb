@@ -1,12 +1,7 @@
 <div class="container">
-    <%= form_with url: recipes_path, method: :get do |f| %>
-      <div class="form">
-      <br>
-      <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. lemon chicken", class: "w-50" %> <span><%= f.label :order, "Sort by ratings" %>
-      <%= f.select :order, ["High to Low"], :include_blank => true %><br></span>
-      <br>
-      <br>
-      <h4>Filter recipes by dietary requirements</h4>
+  <%= form_with url: recipes_path, method: :get do |f| %>
+    <div class="form"><br>
+      <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. lemon chicken", class: "w-50" %><br><br>
       <%= f.check_box :vegetarian, include_hidden: false %>
       <%= f.label :vegetarian, "Vegetarian" %>
       <%= f.check_box :vegan, include_hidden: false %>
@@ -14,31 +9,29 @@
       <%= f.check_box :dairy_free, include_hidden: false %>
       <%= f.label :dairy_free, "Dairy free" %>
       <%= f.check_box :gluten_free, include_hidden: false %>
-      <%= f.label :gluten_free, "Gluten free" %>
-      <br>
-      <br>
-      <h4> Add your ingredients from the kitchen?</h4>
+      <%= f.label :gluten_free, "Gluten free" %><br><br>
+      <h4> Add your ingredients from your pantry?</h4>
       <% if current_user != nil %>
         <% if current_user.ingredients.present? %>
           <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false %>
         <% end %>
       <% end %>
       <%= f.submit "Search" %>
-    <% end %>
     </div>
-    <div class="headers-center">
-      <h2 class="form my-3">Recipes</h2>
-    </div>
-      <div data-controller="cards">
-        <div class="cards" data-cards-target="container">
-          <% @recipes.each do |recipe| %>
-            <div class="card-trip"
+  <% end %>
+  <div class="headers-center">
+    <h2 class="form my-3">Recipes</h2>
+  </div>
+    <div data-controller="cards">
+      <div class="cards" data-cards-target="container">
+        <% @recipes.each do |recipe| %>
+          <div class="card-trip"
               data-cards-target="card"
               data-average-rating=<%= recipe.average_rating || 0 %>
             >
-              <div>
-                  <%= image_tag recipe.image_url, alt: "Image of recipe" %>
-              </div>
+             <div>
+               <%= image_tag recipe.image_url, alt: "Image of recipe" %>
+             </div>
               <div class="card-trip-infos" >
                 <p><%= link_to recipe.title, recipe %></h3></p>
               </div>
@@ -62,11 +55,7 @@
           <button data-action="cards#sortCardsDesc">Descending</button>
         </div>
       </div>
-
-
     </div>
-
-
   </div>
 </div>
 </div>
