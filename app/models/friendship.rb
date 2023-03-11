@@ -6,4 +6,10 @@ class Friendship < ApplicationRecord
 
   validates :requester, uniqueness: { scope: :requested }
   validates :status, presence: true, inclusion: { in: %w[accepted rejected pending] }
+
+  def self.exist?(logged_in_user, other_user)
+    option1 = Friendship.where(requester: other_user, requested: logged_in_user).present?
+    option2 = Friendship.where(requester: logged_in_user, requested: other_user).present?
+    option1 || option2
+  end
 end
