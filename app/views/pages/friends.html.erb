@@ -8,5 +8,13 @@
 <div class="container">
   <% @friends.each do |friend| %>
     <p><%= friend.first_name %> <%= friend.last_name %></p>
+    <%= form_with model: @friendship do |f| %>
+      <%= f.radio_button :answer, "Accept", class: "friends-radio-button" %>
+      <%= f.label :accept, "Accept", class: "friends-label" %>
+      <%= f.radio_button :answer, "Reject", class: "friends-radio-button" %>
+      <%= f.label :reject, "Reject", class: "friends-label" %>
+      <%= f.submit "Confirm" %>
+    <% end %>
+    <hr>
   <% end %>
 </div>
