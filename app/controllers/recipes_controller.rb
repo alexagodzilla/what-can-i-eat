@@ -28,6 +28,9 @@ class RecipesController < ApplicationController
     if params.values.include?("1")
       arr = params.select { |_key, value| value == "1" }.keys
       @recipes = Recipe.search_recipes("#{params_query} #{user_ingredient}").where(arr.to_h { |key| [key, true] })
+      if @low_to_high
+        @recipes = @recipes.order_by_average_rating_asc
+      end
     else
       @recipes = Recipe.search_recipes("#{params_query} #{user_ingredient}")
     end
