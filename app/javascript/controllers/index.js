@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
+import CardsController from "./cards_controller"
+application.register("cards", CardsController)
+
 import ChatroomSubscriptionController from "./chatroom_subscription_controller"
 application.register("chatroom-subscription", ChatroomSubscriptionController)
+
+import StarRatingController from "./star_rating_controller"
+application.register("star-rating", StarRatingController)

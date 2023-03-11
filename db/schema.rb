@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_121110) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_113819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_121110) do
     t.boolean "gluten_free", default: false
     t.boolean "dairy_free", default: false
     t.integer "total_time"
+    t.float "average_rating"
   end
 
   create_table "reviews", force: :cascade do |t|
