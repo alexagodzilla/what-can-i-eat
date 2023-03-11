@@ -9,10 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-
-
+          <li class="nav-link">
+           <%= link_to "Bookmarks", profile_bookmarks_path, class: "nav-link" %>
           </li>
+          <li class="nav-link">
+           <%= link_to "My Pantry", profile_ingredients_path, class: "nav-link" %>
+           </li>
+           <li class="nav-link">
+            <%= link_to "Friends", profile_friends_path, class: "nav-link" %>
+            </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" data-bs-toggle="dropdown"><%= image_tag "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ", class: "avatar-bordered"%></a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
