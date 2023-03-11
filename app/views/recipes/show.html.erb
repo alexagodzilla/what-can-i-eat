@@ -61,6 +61,12 @@
   <h3>Method</h3>
   <p><%= @recipe.instructions %></p>
 
+  <% @recipe.steps.each do |step| %>
+    <h4><%= step.number %></h4>
+    <p><%= step.content %></p>
+  <% end %>
+
+
   <h3>Leave a comment:</h3>
   <%= render 'recipes/form', recipe: @recipe, review: @review %>
   <br>

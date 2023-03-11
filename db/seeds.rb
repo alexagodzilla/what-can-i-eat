@@ -7,6 +7,8 @@ puts "cleaning database..."
 puts "destroying all user ingredients"
 UserIngredient.destroy_all
 puts "destroying all recipe ingredients"
+puts "destroying all steps"
+Step.destroy_all
 RecipeIngredient.destroy_all
 puts "destroying all ingredients"
 Ingredient.destroy_all
@@ -49,13 +51,15 @@ json_names.each do |file_name|
     gluten_free: recipe[:glutenFree]
   )
   puts "creating steps"
-  recipe[:analyzedInstructions][0][:steps].each do |step|
+  unless recipe[:analyzedInstructions].empty?
+    recipe[:analyzedInstructions][0][:steps].each do |step|
     step = Step.create!(
       number: step[:number],
       content: step[:step],
       recipe_id: db_recipe.id
     )
   end
+end
   puts "creating ingredients"
 
       recipe[:extendedIngredients].each do |api_ingredient|
