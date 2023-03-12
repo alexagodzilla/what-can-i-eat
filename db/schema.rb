@@ -7,7 +7,6 @@
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
-#
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_03_11_170206) do
@@ -80,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_170206) do
     t.boolean "gluten_free", default: false
     t.boolean "dairy_free", default: false
     t.integer "total_time"
+    t.float "average_rating"
   end
 
   create_table "reviews", force: :cascade do |t|
