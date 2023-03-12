@@ -43,7 +43,7 @@
     <%= "Dairy-free" if @recipe.dairy_free? %>
   </p>
   <p><i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %></p>
-  <p><i class="fa-solid fa-clock me-3"></i><%= @recipe.total_time %>m</p>
+  <p><i class="fa-solid fa-clock me-3"></i><%= minutes_to_hour(@recipe.total_time) %></p>
 
   <h3>Ingredients</h3>
   <ul>
