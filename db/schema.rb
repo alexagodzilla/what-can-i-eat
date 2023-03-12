@@ -7,10 +7,9 @@
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
-#
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_113819) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_170206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +93,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_113819) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "steps", force: :cascade do |t|
+    t.integer "number"
+    t.text "content"
+    t.string "recipe"
+    t.string "references"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "recipe_id", null: false
+    t.index ["recipe_id"], name: "index_steps_on_recipe_id"
+  end
+
   create_table "user_ingredients", force: :cascade do |t|
     t.float "quantity"
     t.bigint "user_id", null: false
@@ -129,6 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_113819) do
   add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
+  add_foreign_key "steps", "recipes"
   add_foreign_key "user_ingredients", "ingredients"
   add_foreign_key "user_ingredients", "users"
 end

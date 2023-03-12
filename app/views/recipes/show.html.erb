@@ -59,7 +59,14 @@
   </ul>
 
   <h3>Method</h3>
+  <% if @recipe.steps.empty? %>
   <p><%= @recipe.instructions %></p>
+  <% else %>
+  <% @recipe.steps.each do |step| %>
+    <p>Step: <%= step.number %></p>
+    <p><%= step.content %></p>
+  <% end %>
+  <% end %>
 
   <h3>Leave a comment:</h3>
   <%= render 'recipes/form', recipe: @recipe, review: @review %>
