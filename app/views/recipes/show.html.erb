@@ -1,10 +1,10 @@
 <div class="container my-3">
   <% if user_signed_in? %>
-    <%= form_with(model: [@recipe, @bookmark]) do |f| %>
+    <%= form_with model: [@recipe, @bookmark] do |f| %>
       <%= f.submit "Create bookmark" %>
     <% end %>
   <% end %>
-  <br>
+
   <% if user_signed_in? %>
     <% users = User.all %>
     <% selected_users = [] %>
@@ -19,26 +19,25 @@
       <% selected_users.each do |u| %>
         <li><%= u.username %> might have <% u.ingredients.each do |ingredient| %>
           <% if @recipe_ingredients.include?(ingredient.id) %>
-            <%= ingredient.name %>
+            <%= ingredient.name.downcase %>
           <% end %>
         <% end %>
         </li>
       <% end %>
     </ul>
   <% end %>
-  <%= link_to "go to chat", chatroom_path(@chatroom), class: "btn btn-primary" if user_signed_in?%>
+  <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "btn btn-primary" if user_signed_in?%>
 
   <% @user_bookmarks.each do |bookmark| %>
     <% if bookmark.recipe_id == @recipe.id %>
-        <%= link_to "Remove bookmark", bookmark_path(bookmark.id),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-        %>
-      <% end %>
+      <%= link_to "Remove bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
     <% end %>
+  <% end %>
 
   <h2><%= @recipe.title %></h2>
   <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
-  <p><%= "Vegetarian" if @recipe.vegetarian? %>
+  <p>
+    <%= "Vegetarian" if @recipe.vegetarian? %>
     <%= "Vegan" if @recipe.vegan? %>
     <%= "Gluten-free" if @recipe.gluten_free? %>
     <%= "Dairy-free" if @recipe.dairy_free? %>
@@ -60,23 +59,28 @@
 
   <h3>Method</h3>
   <% if @recipe.steps.empty? %>
-  <p><%= @recipe.instructions %></p>
+    <p><%= @recipe.instructions %></p>
   <% else %>
-  <% @recipe.steps.each do |step| %>
-    <p>Step: <%= step.number %></p>
-    <p><%= step.content %></p>
-  <% end %>
+    <% @recipe.steps.each do |step| %>
+      <p><b>Step <%= step.number %></b></p>
+      <p><%= step.content %></p>
+    <% end %>
   <% end %>
 
-  <h3>Leave a comment:</h3>
+  <h3>Leave a comment</h3>
   <%= render 'recipes/form', recipe: @recipe, review: @review %>
-  <br>
   <% if @recipe.reviews.empty? %>
     <p><%= "There are no currently no comments... Leave one now!" %></p>
   <% else %>
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
       <p><%= review.content if review.content.present? %></p>
+      <% if !Friendship.exist?(current_user, review.user) && current_user != nil %>
+        <%= form_with model: @friendship, method: :post do |f| %>
+          <%= f.hidden_field :requested, value: review.user.id %>
+          <%= f.submit "Add friend" %>
+        <% end %>
+      <% end %>
       <% if review.user == current_user %>
         <%= link_to review_path(review), data: { turbo_method: :delete,
         turbo_confirm: "Are you sure you want to delete your comment?" } do %>
