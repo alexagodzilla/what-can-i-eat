@@ -1,19 +1,19 @@
 <div class="banner">
   <div class="container">
-    <h2><%= link_to "Ingredients", profile_ingredients_path, style: "text-decoration: none; color: orange;"%></h2>
     <h2><%= link_to "Bookmarks", profile_bookmarks_path, style: "text-decoration: none;"%></h2>
+    <h2><%= link_to "My Pantry", profile_ingredients_path, style: "text-decoration: none; color: orange;"%></h2>
     <h2><%= link_to "Friends", profile_friends_path, style: "text-decoration: none;"%></h2>
   </div>
 </div>
 
 <div class="container">
   <h3>Add ingredients I have in my kitchen</h3>
-  <%= form_with(model: @user_ingredient) do |f| %>
+  <%= form_with model: @user_ingredient do |f| %>
     <%= f.collection_select :ingredient_id, Ingredient.order(:name), :id, :name %>
     <%= f.submit "Submit" %>
   <% end %>
   <% if @user_ingredients.empty? %>
-    <p>No ingredients yet..</p>
+    <p>No ingredients yet...</p>
   <% else %>
   <ul style="list-style-type: none; padding: 0; margin-top: 10px;">
     <% @user_ingredients.each do |ingredient| %>
