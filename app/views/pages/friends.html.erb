@@ -6,8 +6,13 @@
   </div>
 </div>
 <div class="container">
+  <h3>Friends</h3>
+  <% current_user.friends.each do |friend| %>
+    <p><%= friend.first_name %> <%= friend.last_name if friend.last_name.present? %> (<%= friend.username %>)</p>
+  <% end %>
+  <h3>Friend requests</h3>
   <% @friends.each do |friend| %>
-    <p><%= friend.first_name %> <%= friend.last_name %></p>
+    <p><%= friend.first_name %> <%= friend.last_name if friend.last_name.present? %> (<%= friend.username %>)</p>
     <%= form_with model: @friendship do |f| %>
       <%= f.radio_button :answer, "Accept", class: "friends-radio-button" %>
       <%= f.label :accept, "Accept", class: "friends-label" %>
