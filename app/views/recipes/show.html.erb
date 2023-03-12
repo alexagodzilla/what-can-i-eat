@@ -75,7 +75,7 @@
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
       <p><%= review.content if review.content.present? %></p>
-      <% if !Friendship.exist?(current_user, review.user) && current_user != nil %>
+      <% if !Friendship.exist?(current_user, review.user) && current_user != nil && current_user.self?(current_user, review.user) %>
         <%= form_with model: @friendship, method: :post do |f| %>
           <%= f.hidden_field :requested, value: review.user.id %>
           <%= f.submit "Add friend" %>
