@@ -19,6 +19,7 @@ class RecipesController < ApplicationController
     @review = Review.new
     @recipe = Recipe.find(params[:id])
     @user_bookmarks = Bookmark.where(user: current_user)
+    @friendship = Friendship.new
   end
 
   private

@@ -1,14 +1,10 @@
 module ApplicationHelper
   def truncate_zero(ingredient_quantity)
-    if ingredient_quantity.to_s.end_with?('.0')
-      ingredient_quantity.to_i
-    else
-      ingredient_quantity.round(2)
-    end
+    ingredient_quantity.to_s.end_with?('.0') ? ingredient_quantity.to_i : ingredient_quantity.round(2)
   end
-
-  def sort_recipes_by_rating(recipes, low_to_high = false)
-    res = recipes.sort_by(&:average_rating)
-    low_to_high ? res : res.reverse
+  
+  def minutes_to_hour(total_time)
+    "1h" if total_time == 60
+    total_time > 60 ? "#{total_time / 60}h #{total_time - ((total_time / 60) * 60)}m" : "#{total_time}m"
   end
 end
