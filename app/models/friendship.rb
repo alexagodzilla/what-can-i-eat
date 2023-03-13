@@ -6,7 +6,7 @@ class Friendship < ApplicationRecord
 
   validates :requester, uniqueness: { scope: :requested }
   validates :status, presence: true, inclusion: { in: %w[accepted rejected pending] }
-
+  # This method is used inside of recipe show page, review section around line 78
   def self.exist?(logged_in_user, other_user)
     option1 = Friendship.where(requester: other_user, requested: logged_in_user).present?
     option2 = Friendship.where(requester: logged_in_user, requested: other_user).present?
