@@ -94,7 +94,10 @@ puts "creating users"
     last_name: Faker::Name.unique.last_name,
     username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
-    password: "123456"
+    password: "123456",
+    bio: Faker::Hipster.paragraph(sentence_count: 2),
+    diet: ["Vegetarian", "Vegan", "Gluten Free", "Dairy Free", "Everything"].sample,
+    image_url: "https://source.unsplash.com/featured/?face"
   )
 end
 
