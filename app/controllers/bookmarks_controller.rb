@@ -15,6 +15,6 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to profile_bookmarks_path, notice: "#{@bookmark.recipe.title} removed from bookmarks"
+    redirect_back_or_to profile_bookmarks_path, notice: "#{@bookmark.recipe.title} removed from bookmarks"
   end
 end

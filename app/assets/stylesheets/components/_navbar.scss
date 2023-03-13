@@ -1,12 +1,16 @@
 .navbar-lewagon {
 	height: 80px;
 	justify-content: space-between;
-	background: $blue;
+	background: $purple;
 	color: white;
 }
 
 .nav-link {
 	color: white;
+
+  &:hover {
+    color: rgb(255, 255, 255);
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
