@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true, length: { minimum: 2 }
   validates :first_name, presence: true
-
+  # Collects all the current user's friend's ids
   def friends
     friend_ids = requester_friendships.where(status: "accepted").pluck(:requested_id) +
                  requested_friendships.where(status: "accepted").pluck(:requester_id)

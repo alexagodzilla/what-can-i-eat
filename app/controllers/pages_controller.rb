@@ -9,6 +9,20 @@ class PagesController < ApplicationController
   end
 
   def friends
-    @friends = User.take(3) # for demo purposes. to be updated
+    @already_friends = current_user.friends
+    @pending_friends = current_user.pending_friends
+    # @friendships = []
+    # @pending_friends.each do |person|
+    #   @friendships << Friendship.where(requested: current_user, requester: person, status: "pending")
+    # end
+    @friendships = friendships_finder(@pending_friends)
+    @friendship_instance = Friendship.where(requested: current_user)
   end
+
+  def friendships_finder(pending_friends)
+    pending_friends.map do |person|
+      Friendship.where(requested: current_user, requester: person)
+    end
+  end
+
 end
