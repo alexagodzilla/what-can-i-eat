@@ -48,7 +48,8 @@ json_names.each do |file_name|
       vegetarian: recipe[:vegetarian],
       vegan: recipe[:vegan],
       dairy_free: recipe[:dairyFree],
-      gluten_free: recipe[:glutenFree]
+      gluten_free: recipe[:glutenFree],
+      average_rating: 0.0
     )
     puts "creating steps"
     unless recipe[:analyzedInstructions].empty?
