@@ -1,6 +1,6 @@
 <div class="container">
   <%= form_with model: @recipe, method: :get do |f| %>
-    <div id="homepage-form"><br>
+    <div id="homepage-form">
       <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
       <%= f.check_box :vegetarian, include_hidden: false %>
       <%= f.label :vegetarian, "Vegetarian" %>
