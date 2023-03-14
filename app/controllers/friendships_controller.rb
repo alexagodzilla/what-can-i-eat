@@ -8,4 +8,17 @@ class FriendshipsController < ApplicationController
 
     redirect_back_or_to profile_friends_path, notice: "Invite sent to #{@friendship.requested.username}"
   end
+
+  def update
+    @pending = Friendship.find(params[:id])
+    if params["friendship"]["answer"] == "Accept"
+      @pending.update(status: "accepted")
+      @pending.save!
+      redirect_to profile_friends_path
+    elsif params["friendship"]["answer"] == "Reject"
+      @pending.update(status: "rejected")
+      @pending.save!
+      redirect_to profile_friends_path
+    end
+  end
 end

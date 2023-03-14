@@ -48,7 +48,8 @@ json_names.each do |file_name|
       vegetarian: recipe[:vegetarian],
       vegan: recipe[:vegan],
       dairy_free: recipe[:dairyFree],
-      gluten_free: recipe[:glutenFree]
+      gluten_free: recipe[:glutenFree],
+      average_rating: 0.0
     )
     puts "creating steps"
     unless recipe[:analyzedInstructions].empty?
@@ -94,7 +95,10 @@ puts "creating users"
     last_name: Faker::Name.unique.last_name,
     username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
-    password: "123456"
+    password: "123456",
+    bio: Faker::Hipster.paragraph(sentence_count: 2),
+    diet: ["Vegetarian", "Vegan", "Gluten Free", "Dairy Free", "Everything"].sample,
+    image_url: "https://source.unsplash.com/featured/?face"
   )
 end
 

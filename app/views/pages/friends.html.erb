@@ -8,6 +8,7 @@
 <div class="container">
 
   <h3>Friends</h3>
+
   <% if (current_user.friends.count < 0)  %>
     <p>No friends</p>
   <% else %>
@@ -17,9 +18,13 @@
   <% end %>
 <% if (@friends.count > 0) %>
   <h3>Friend requests</h3>
-  <% @friends.each do |friend| %>
-    <p><%= friend.first_name %> <%= friend.last_name if friend.last_name.present? %> (<%= friend.username %>)</p>
-    <%= form_with model: @friendship do |f| %>
+  <% @pending_friends.each do |pender| %>
+    <p><%= pender.first_name %> <%= pender.last_name if pender.last_name.present? %> (<%= pender.username %>)</p>
+  <% end %>
+
+  <% @friendships.flatten.each do |pender| %>
+    <p>Status: <%= pender.status %> </p>
+    <%= form_with model: pender, method: :patch do |f| %>
       <%= f.radio_button :answer, "Accept", class: "friends-radio-button" %>
       <%= f.label :accept, "Accept", class: "friends-label" %>
       <%= f.radio_button :answer, "Reject", class: "friends-radio-button" %>
