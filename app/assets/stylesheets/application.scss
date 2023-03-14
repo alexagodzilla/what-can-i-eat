@@ -12,3 +12,9 @@
 @import "pages/index";
 @import "components/recipe";
 @import "components/form";
+
+body {
+	min-height: 120vh;
+	display: flex;
+	flex-direction: column;
+}
