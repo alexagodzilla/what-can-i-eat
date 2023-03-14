@@ -9,6 +9,6 @@ class PagesController < ApplicationController
   end
 
   def friends
-    @friends = User.take(6)
+    @friends = User.take(3) # for demo purposes. to be updated
   end
 end

@@ -6,9 +6,9 @@ include ActionView::Helpers::SanitizeHelper
 puts "cleaning database..."
 puts "destroying all user ingredients"
 UserIngredient.destroy_all
-puts "destroying all recipe ingredients"
 puts "destroying all steps"
 Step.destroy_all
+puts "destroying all recipe ingredients"
 RecipeIngredient.destroy_all
 puts "destroying all ingredients"
 Ingredient.destroy_all
@@ -35,54 +35,54 @@ json_names.each do |file_name|
     db_recipe = Recipe.find_by(title: recipe[:title])
     if db_recipe.nil?
 
-  puts "creating recipe #{recipe[:title]}"
-  recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
-  db_recipe = Recipe.create!(
-    title: recipe[:title],
-    instructions: strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2'),
-    # prep_time: recipe[:preparationMinutes],
-    # cooking_time: recipe[:cookingMinutes],
-    total_time: recipe[:readyInMinutes],
-    serving_size: recipe[:servings],
-    image_url: img,
-    vegetarian: recipe[:vegetarian],
-    vegan: recipe[:vegan],
-    dairy_free: recipe[:dairyFree],
-    gluten_free: recipe[:glutenFree]
-  )
-  puts "creating steps"
-  unless recipe[:analyzedInstructions].empty?
-    recipe[:analyzedInstructions][0][:steps].each do |step|
-    step = Step.create!(
-      number: step[:number],
-      content: step[:step],
-      recipe_id: db_recipe.id
+    puts "creating recipe #{recipe[:title]}"
+    recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
+    db_recipe = Recipe.create!(
+      title: recipe[:title],
+      instructions: strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2'),
+      # prep_time: recipe[:preparationMinutes],
+      # cooking_time: recipe[:cookingMinutes],
+      total_time: recipe[:readyInMinutes],
+      serving_size: recipe[:servings],
+      image_url: img,
+      vegetarian: recipe[:vegetarian],
+      vegan: recipe[:vegan],
+      dairy_free: recipe[:dairyFree],
+      gluten_free: recipe[:glutenFree]
     )
-  end
-end
-  puts "creating ingredients"
-
-      recipe[:extendedIngredients].each do |api_ingredient|
-        db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
-        if db_ingredient.nil?
-          if api_ingredient[:unit] == "cup" || api_ingredient[:unit] == "cups"
-            unit = api_ingredient[:unit].downcase
-          else
-            unit = api_ingredient[:measures][:metric][:unitShort].downcase
-          end
-          db_ingredient = Ingredient.create!(
-            name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip,
-            quantity_unit: unit
-          )
-        end
-        unless db_recipe.ingredients.include?(db_ingredient) && db_ingredient.recipes.include?(db_recipe)
-          RecipeIngredient.create!(
-            quantity: api_ingredient[:amount],
-            recipe_id: db_recipe.id,
-            ingredient_id: db_ingredient.id
-          )
-        end
+    puts "creating steps"
+    unless recipe[:analyzedInstructions].empty?
+      recipe[:analyzedInstructions][0][:steps].each do |step|
+        Step.create!(
+          number: step[:number],
+          content: step[:step],
+          recipe_id: db_recipe.id
+        )
       end
+    end
+
+    puts "creating ingredients"
+    recipe[:extendedIngredients].each do |api_ingredient|
+      db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
+      if db_ingredient.nil?
+        if api_ingredient[:unit] == "cup" || api_ingredient[:unit] == "cups"
+          unit = api_ingredient[:unit].downcase
+        else
+          unit = api_ingredient[:measures][:metric][:unitShort].downcase
+        end
+        db_ingredient = Ingredient.create!(
+          name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip,
+          quantity_unit: unit
+        )
+      end
+      unless db_recipe.ingredients.include?(db_ingredient) && db_ingredient.recipes.include?(db_recipe)
+        RecipeIngredient.create!(
+          quantity: api_ingredient[:amount],
+          recipe_id: db_recipe.id,
+          ingredient_id: db_ingredient.id
+        )
+      end
+    end
     end
   end
 end
@@ -90,8 +90,8 @@ end
 puts "creating users"
 15.times do
   User.create!(
-    first_name: (Faker::Name.unique.first_name).capitalize,
-    last_name: (Faker::Name.unique.last_name).capitalize,
+    first_name: Faker::Name.unique.first_name,
+    last_name: Faker::Name.unique.last_name,
     username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
     password: "123456"

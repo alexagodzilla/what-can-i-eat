@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "profile/ingredients", to: "user_ingredients#index"
   get "profile/friends", to: "pages#friends"
   resources :ingredients, only: :create
-  resources :user_ingredients, only: %i[create update]
+  resources :user_ingredients, only: :create
   resources :friendships, only: %i[create update]
   resources :chatrooms, only: :show do
     resources :messages, only: :create

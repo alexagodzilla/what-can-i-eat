@@ -1,0 +1,53 @@
+#homepage-form input[type="checkbox"] {
+  position: absolute;
+  transform: scale(0);
+
+  + label {
+    cursor: pointer;
+    background-color: rgba($magenta, 0.2);
+    border-radius: 50rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba($magenta, 0.2);
+    color: $magenta;
+  }
+
+  &:checked + label {
+    cursor: pointer;
+    background-color: $magenta;
+    border: 1px solid $magenta;
+    color: $white;
+  }
+}
+
+#homepage-form input[type="text"] {
+  padding: 0.5rem;
+  width: 35vw;
+  border: 0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+#btn-ingredients {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0.2rem 0.5rem;
+
+  &:hover {
+    background-color: rgba($purple, 0.2);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.fa-plus {
+  color: $magenta;
+  margin-left: 0.3rem;
+}
+
+#break-text {
+  white-space: pre;
+}
