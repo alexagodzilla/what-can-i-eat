@@ -1,7 +1,7 @@
 <div class="container">
   <%= form_with model: @recipe, method: :get do |f| %>
-    <div id="homepage-form" class="form"><br>
-      <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %><br><br>
+    <div id="homepage-form">
+      <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
       <%= f.check_box :vegetarian, include_hidden: false %>
       <%= f.label :vegetarian, "Vegetarian" %>
       <%= f.check_box :vegan, include_hidden: false %>
@@ -9,7 +9,7 @@
       <%= f.check_box :dairy_free, include_hidden: false %>
       <%= f.label :dairy_free, "Dairy-free" %>
       <%= f.check_box :gluten_free, include_hidden: false %>
-      <%= f.label :gluten_free, "Gluten-free" %><br><br>
+      <%= f.label :gluten_free, "Gluten-free" %>
       <% if current_user == nil %>
         <p id="break-text">You can add ingredients that you often have to the pantry
 and include them here whenever you like!</p>
