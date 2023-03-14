@@ -5,7 +5,12 @@
 @import "form_legend_clear";
 @import "navbar";
 @import "footer";
+@import "recipe";
 @import "profile_banner";
 @import "friend_form";
 @import "homepage_form";
 @import "button";
+
+body {
+  background-color: $seashell;
+}
