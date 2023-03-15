@@ -20,20 +20,20 @@
             </div>
           </div>
 
-            <% if current_user == nil %>
-              <p id="break-text">You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
-              <%= link_to profile_ingredients_path do %>
-              <button id="btn-ingredients">Add to pantry<i class="fa-solid fa-plus"></i></button>
+             <% if current_user == nil %>
+              <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
+              <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                  Add to pantry<i class="fa-solid fa-plus"></i>
               <% end %>
             <% end %>
-
-            <% if current_user.present? %>
+            
+            <% if user_signed_in? %>
               <div class="drop-menu">
                 <button type="button" class="collapsible">Include ingredients from your pantry</button>
                 <div class="content">
                   <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
-                  <%= link_to profile_ingredients_path do %>
-                    <button id="btn-ingredients">Add to pantry<i class="fa-solid fa-plus"></i></button>
+                  <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                      Add to pantry<i class="fa-solid fa-plus"></i>
                   <% end %>
                 </div>
               </div>
@@ -51,12 +51,42 @@
 
 
   <h2 class="headers-center my-3">Trending recipes</h2>
+=======
+<div class="container">
+  <%= form_with model: @recipe, method: :get, id: "homepage-form" do |f| %>
+    <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
+    <%= f.check_box :vegetarian, include_hidden: false %>
+    <%= f.label :vegetarian, "Vegetarian" %>
+    <%= f.check_box :vegan, include_hidden: false %>
+    <%= f.label :vegan, "Vegan" %>
+    <%= f.check_box :dairy_free, include_hidden: false %>
+    <%= f.label :dairy_free, "Dairy-free" %>
+    <%= f.check_box :gluten_free, include_hidden: false %>
+    <%= f.label :gluten_free, "Gluten-free" %>
+
+    <% if current_user == nil %>
+      <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
+      <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+        Add to pantry<i class="fa-solid fa-plus"></i>
+      <% end %>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <h5>Include ingredients from your pantry</h5>
+      <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
+      <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+        Add to pantry<i class="fa-solid fa-plus"></i>
+      <% end %>
+    <% end %>
+
+    <%= f.submit "Find my recipe!", class: "form-btn-green" %>
+  <% end %>
+
+  <h2 class="headers-center">Trending recipes</h2>
   <div data-controller="cards">
     <p>Sort by ratings: </p>
-    <div class="py-3">
-      <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
-      <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
-    </div>
+    <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
+    <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
     <div class="cards" data-cards-target="container">
       <% @recipes.each do |recipe| %>
         <div class="card-trip" data-cards-target="card" data-average-rating=<%= recipe.average_rating || 0 %>>

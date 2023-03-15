@@ -11,6 +11,10 @@
     color: $magenta;
   }
 
+  + label:hover {
+    background-color: rgba($magenta, 0.15);
+  }
+
   &:checked + label {
     cursor: pointer;
     background-color: $magenta;
@@ -31,15 +35,13 @@
   border: none;
   margin: 0;
   padding: 0.2rem 0.5rem;
+  text-decoration: none;
+  color: $black;
 
   &:hover {
     background-color: #FBEBDA;
     border-radius: 4px;
-    padding: 0.2rem 0.5rem;
-  }
-
-  a {
-    text-decoration: none;
+    padding: 0.4rem 0.5rem;
   }
 }
 
@@ -48,9 +50,6 @@
   margin-left: 0.3rem;
 }
 
-#break-text {
-  white-space: pre;
-}
 
 /* Recipe index page form */
 .collapsible {
@@ -125,3 +124,4 @@
   position: relative;
   top:0;
 }
+
