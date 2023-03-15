@@ -13,8 +13,6 @@ class PagesController < ApplicationController
     @friendships = friendships_finder(@pending_friends)
   end
 
-  private
-
   def friendships_finder(pending_friends)
     pending_friends.map do |person|
       Friendship.where(requested: current_user, requester: person)
