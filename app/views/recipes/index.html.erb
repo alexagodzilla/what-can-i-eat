@@ -17,7 +17,7 @@
       <% end %>
     <% end %>
 
-    <% if current_user.present? %>
+    <% if user_signed_in? %>
       <h5>Include ingredients from your pantry</h5>
       <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
       <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>

@@ -9,10 +9,8 @@ class PagesController < ApplicationController
   end
 
   def friends
-    @already_friends = current_user.friends
     @pending_friends = current_user.pending_friends
     @friendships = friendships_finder(@pending_friends)
-    @friendship_instance = Friendship.where(requested: current_user)
   end
 
   def friendships_finder(pending_friends)
