@@ -6,22 +6,19 @@
   <% end %>
 
   <% if user_signed_in? %>
-    <% users = User.all %>
     <% selected_users = [] %>
-    <% users.each do |user| %>
-      <% user_ingredient_ids = user.ingredients.pluck(:id) %>
+    <% current_user.friends.each do |user| %>
       <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
-      <% if @recipe_ingredients.any? { |id| user_ingredient_ids.include?(id) } %>
-        <% selected_users << user %>
-      <% end %>
+      <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
     <% end %>
     <ul>
-      <% selected_users.each do |u| %>
-        <li><%= u.username %> might have <% u.ingredients.each do |ingredient| %>
+      <% selected_users.each do |user| %>
+        <li>
+        <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
           <% if @recipe_ingredients.include?(ingredient.id) %>
-            <%= ingredient.name.downcase %>
+          <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
           <% end %>
-        <% end %>
+        <% end %>in their pantry!
         </li>
       <% end %>
     </ul>
@@ -75,7 +72,7 @@
     <% @recipe.reviews.each do |review| %>
       <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
       <p><%= review.content if review.content.present? %></p>
-      <% if !Friendship.exist?(current_user, review.user) && current_user.present? && current_user != review.user %>
+      <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
         <%= form_with model: @friendship, method: :post do |f| %>
           <%= f.hidden_field :requested, value: review.user.id %>
           <%= f.submit "Add friend" %>
