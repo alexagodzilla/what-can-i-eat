@@ -5,19 +5,24 @@
     <h2><%= link_to "Friends", profile_friends_path, style: "text-decoration: none; color: orange;" %></h2>
   </div>
 </div>
+
 <div class="container">
   <h3>Friends</h3>
-  <% @already_friends.each do |friend| %>
-    <p><%= friend.first_name %> <%= friend.last_name if friend.last_name.present? %> (<%= friend.username %>)</p>
+  <% if (current_user.friends.count < 0)  %>
+    <p>No friends</p>
+  <% else %>
+    <% current_user.friends.each do |friend| %>
+      <p><%= friend.first_name %> <%= friend.last_name if friend.last_name.present? %> (<%= friend.username %>)</p>
+    <% end %>
   <% end %>
-  <h3>Friend requests</h3>
-  <% @pending_friends.each do |pender| %>
-    <p><%= pender.first_name %> <%= pender.last_name if pender.last_name.present? %> (<%= pender.username %>)</p>
-  <% end %>
-
-  <% @friendships.flatten.each do |pender| %>
-    <p>Status: <%= pender.status %> </p>
-    <%= form_with model: pender, method: :patch do |f| %>
+  <% if (@friends.count > 0) %>
+    <h3>Friend requests</h3>
+    <% @pending_friends.each do |pender| %>
+      <p><%= pender.first_name %> <%= pender.last_name if pender.last_name.present? %> (<%= pender.username %>)</p>
+    <% end %>
+    <% @friendships.flatten.each do |pender| %>
+      <p>Status: <%= pender.status %> </p>
+      <%= form_with model: pender, method: :patch do |f| %>
       <%= f.radio_button :answer, "Accept", class: "friends-radio-button" %>
       <%= f.label :accept, "Accept", class: "friends-label" %>
       <%= f.radio_button :answer, "Reject", class: "friends-radio-button" %>
@@ -26,4 +31,5 @@
     <% end %>
     <hr>
   <% end %>
+<% end %>
 </div>

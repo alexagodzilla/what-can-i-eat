@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
     elsif params.values.include?("1") && params[:query].empty?
       empty_query
     else
-      @recipes = Recipe.last(5)
+      @recipes = Recipe.last(12)
     end
   end
 
