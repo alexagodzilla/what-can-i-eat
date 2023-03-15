@@ -1,0 +1,30 @@
+.friends-container {
+	display: flex;
+	width: 85%;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.friend-card {
+	background-color: #f5f5f5;
+	width: 300px;
+	padding: 20px;
+	text-align: center;
+}
+
+.friend-card img {
+	width: 100%;
+	height: auto;
+}
+
+.friend-card h2 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.friend-card p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
