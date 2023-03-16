@@ -1,33 +1,50 @@
-<div class="container">
-  <%= form_with model: @recipe, method: :get, id: "homepage-form" do |f| %>
-    <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
-    <%= f.check_box :vegetarian, include_hidden: false %>
-    <%= f.label :vegetarian, "Vegetarian" %>
-    <%= f.check_box :vegan, include_hidden: false %>
-    <%= f.label :vegan, "Vegan" %>
-    <%= f.check_box :dairy_free, include_hidden: false %>
-    <%= f.label :dairy_free, "Dairy-free" %>
-    <%= f.check_box :gluten_free, include_hidden: false %>
-    <%= f.label :gluten_free, "Gluten-free" %>
+  <div class="container form-container">
+    <%= form_with model: @recipe, method: :get do |f| %>
+      <div id="homepage-form" class="form">
+        <div class="text-box">
+          <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
+        </div>
+        <div class="dropdowns">
+          <div class="drop-menu">
+            <button type="button" class="collapsible">Dietary requirements</button>
+            <div class="content">
+              <%= f.check_box :vegetarian, include_hidden: false %>
+              <%= f.label :vegetarian, "Vegetarian" %>
+              <%= f.check_box :vegan, include_hidden: false %>
+              <%= f.label :vegan, "Vegan" %>
+              <%= f.check_box :dairy_free, include_hidden: false %>
+              <%= f.label :dairy_free, "Dairy-free" %>
+              <%= f.check_box :gluten_free, include_hidden: false %>
+              <%= f.label :gluten_free, "Gluten-free" %>
+            </div>
+          </div>
 
-    <% if current_user == nil %>
-      <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
-      <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
-        Add to pantry<i class="fa-solid fa-plus"></i>
+             <% if current_user == nil %>
+              <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
+              <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                  Add to pantry<i class="fa-solid fa-plus"></i>
+              <% end %>
+            <% end %>
+            
+            <% if user_signed_in? %>
+              <div class="drop-menu">
+                <button type="button" class="collapsible">Include ingredients from your pantry</button>
+                <div class="content">
+                  <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
+                  <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                      Add to pantry<i class="fa-solid fa-plus"></i>
+                  <% end %>
+                </div>
+              </div>
+           <% end %>
+        </div>
+        <div class="submit">
+          <%= f.submit "Find my recipe!", class: "form-btn-green" %>
+        </div>
+      </div>
       <% end %>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <h5>Include ingredients from your pantry</h5>
-      <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
-      <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
-        Add to pantry<i class="fa-solid fa-plus"></i>
-      <% end %>
-    <% end %>
-
-    <%= f.submit "Find my recipe!", class: "form-btn-green" %>
-  <% end %>
-
+  </div>
+  
   <h2 class="headers-center">Trending recipes</h2>
   <div data-controller="cards">
     <p>Sort by ratings: </p>
@@ -57,3 +74,20 @@
     </div>
   </div>
 </div>
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
