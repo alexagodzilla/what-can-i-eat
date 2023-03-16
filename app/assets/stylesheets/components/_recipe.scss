@@ -1,15 +1,14 @@
 .cards {
-  width: fit-content;
-  margin: 0 auto 20px auto;
+	width: fit-content;
+	margin: 0 auto 20px auto;
 	display: grid;
-  padding-left: 16px;
+	padding-left: 16px;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 16px;
-  padding: 0 16px;
+	padding: 0 16px;
 }
 
 .card-trip {
-	// overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -19,8 +18,7 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	width: 18rem;
 	border-radius: 4px;
-	// height: 300px;
-	// position: relative;
+	font-family: $body-font;
 }
 
 .card-trip img {
@@ -31,13 +29,6 @@
 	margin: 8px auto;
 	margin-top: 16px;
 	display: block;
-}
-
-.card-trip h2 {
-	font-family: $headers-font;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 0;
 }
 
 .card-trip-infos {
@@ -60,15 +51,6 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-end;
-	// position: relative;
-}
-
-#price-icon {
-	margin-right: 5px;
-}
-
-#people-icon {
-	margin-right: 3px;
 }
 
 .text-bottom {
@@ -95,6 +77,7 @@
 	margin-right: 8px;
 }
 
-.text-bottom-left > p:first-of-type {
-	margin-right: 6px;
+.delete-bookmark {
+	margin-left: 8px;
+	margin-bottom: 16px;
 }
