@@ -1,4 +1,4 @@
-  <div class="container form-container">
+ <div class="container form-container">
     <%= form_with model: @recipe, method: :get do |f| %>
       <div id="homepage-form" class="form">
         <div class="text-box">
@@ -25,7 +25,7 @@
                   Add to pantry<i class="fa-solid fa-plus"></i>
               <% end %>
             <% end %>
-            
+
             <% if user_signed_in? %>
               <div class="drop-menu">
                 <button type="button" class="collapsible">Include ingredients from your pantry</button>
@@ -44,19 +44,25 @@
       </div>
       <% end %>
   </div>
-  
+
   <h2 class="headers-center">Trending recipes</h2>
+
   <div data-controller="cards">
-    <p>Sort by ratings: </p>
-    <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
-    <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
+    <div class="sort-buttons-container">
+      <p>Sort by ratings: </p>
+      <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
+      <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
+    </div>
     <div class="cards" data-cards-target="container">
       <% @recipes.each do |recipe| %>
         <div class="card-trip" data-cards-target="card" data-average-rating=<%= recipe.average_rating || 0 %>>
           <%= image_tag recipe.image_url, alt: "Image of recipe" %>
+
           <div class="card-trip-infos" >
             <p><%= link_to recipe.title, recipe %></h3></p>
           </div>
+
+
           <div class="text-bottom">
             <div class="text-bottom-left">
               <% if recipe.reviews.empty? %>
@@ -72,8 +78,8 @@
         </div>
       <% end %>
     </div>
-  </div>
-</div>
+
+
 
 <script>
   var coll = document.getElementsByClassName("collapsible");

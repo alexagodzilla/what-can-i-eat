@@ -52,6 +52,19 @@
 
 
 /* Recipe index page form */
+.form-container{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width:50%;
+  padding: 10px;
+  background-color: $blue;
+  border-radius: 15px;
+}
+
+.submit input {
+  margin-top:2px;
+}
+
 .collapsible {
   border-radius: 15px;
   background-color: red;
@@ -109,7 +122,9 @@
 }
 
 .text-box input {
-  width: 64%;
+  margin-top: 15px;
+  width: 51rem;
+  height:3rem;
   background-color: greenyellow;
   border-radius: 15px;
 }
@@ -123,5 +138,6 @@
 .submit input[type=submit]{
   position: relative;
   top:0;
+  width:70%;
+  border-radius:12px;
 }
-
