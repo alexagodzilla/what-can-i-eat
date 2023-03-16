@@ -1,12 +1,12 @@
 .navbar-lewagon {
-	height: 80px;
+	height: 90px;
 	justify-content: space-between;
 	background: $purple;
-	color: white;
+	color: $seashell;
 }
 
 .nav-link {
-	color: white;
+	color: $almond;
 
   &:hover {
     color: rgb(255, 255, 255);
@@ -25,4 +25,20 @@
 .photo {
 	border-radius: 50%;
 	width: 40px;
+}
+
+.home-logo {
+  display: fixed;
+}
+
+#front-logo {
+  display: block;
+  width: 250px;
+  // margin-top: 5px;
+  // margin-bottom: 5px;
+  margin-left: -70em;
+}
+
+#round-logo {
+  width: 90px;
 }
