@@ -35,19 +35,17 @@
               <p><i class="fa-solid fa-clock"></i> <%= minutes_to_hour(bookmark.recipe.total_time) %></p>
             </div>
           </div>
-        </div>
-      <% end %>
+          <div class="delete-button">
+            <%= link_to "Remove bookmark", bookmark_path(bookmark), data: { turbo_method: :delete,
+              turbo_confirm: "Are you sure you want to remove this bookmark?" }, style: "text-decoration: none;" %>
+
+</div>
+</div>
+        <% end %>
+
+
     </div>
   </div>
 </div>
 <% end %>
 </div>
-
-
-
-        <%# <%= link_to recipe.title, recipe_path(bookmark), style: "text-decoration: none;" %> %>
-      <%# </li>
-    <% end %>
-  </ul>
-  <%# <% end %>
-</div> %> %>
