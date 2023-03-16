@@ -1,9 +1,13 @@
 <div class="navbar sticky-top navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "Round_logo.png", id: 'round-logo'%>
-    <% end %>
-    <%= image_tag "final_logo.png", id: 'front-logo'%>
+    <div class="d-flex justify-content-around">
+      <div style="margin-top: 1.1rem">
+        <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "Round_logo.png", id: 'round-logo'%>
+        <% end %>
+      </div>
+      <%= image_tag "final_logo.png", id: 'front-logo'%>
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
