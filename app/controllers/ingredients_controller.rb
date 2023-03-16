@@ -6,7 +6,6 @@ class IngredientsController < ApplicationController
     else
       redirect_to profile_path, status: :unprocessable_entity
     end
-    # will update that later
   end
 
   private
