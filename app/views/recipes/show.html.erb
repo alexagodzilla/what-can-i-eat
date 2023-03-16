@@ -1,96 +1,129 @@
+
 <div class="container my-3">
-  <% if user_signed_in? %>
-    <%= form_with model: [@recipe, @bookmark] do |f| %>
-      <%= f.submit "Create bookmark" %>
-    <% end %>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <% selected_users = [] %>
-    <% current_user.friends.each do |user| %>
-      <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
-      <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
-    <% end %>
-    <ul>
-      <% selected_users.each do |user| %>
-        <li>
-        <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
-          <% if @recipe_ingredients.include?(ingredient.id) %>
-          <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
-          <% end %>
-        <% end %>in their pantry!
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-  <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "btn btn-primary" if user_signed_in?%>
-
-  <% @user_bookmarks.each do |bookmark| %>
-    <% if bookmark.recipe_id == @recipe.id %>
-      <%= link_to "Remove bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-    <% end %>
-  <% end %>
-
   <h2><%= @recipe.title %></h2>
-  <%= image_tag @recipe.image_url, alt: "Image of recipe", id: "recipe-image" %>
-  <p>
-    <%= "Vegetarian" if @recipe.vegetarian? %>
-    <%= "Vegan" if @recipe.vegan? %>
-    <%= "Gluten-free" if @recipe.gluten_free? %>
-    <%= "Dairy-free" if @recipe.dairy_free? %>
-  </p>
-  <p><i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %></p>
-  <p><i class="fa-solid fa-clock me-3"></i><%= minutes_to_hour(@recipe.total_time) %></p>
+  <div class="modal-body row pic-friends">
+    <div class="col-md-6">
+      <div class="recipe-image">
+        <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
+      </div>
 
-  <h3>Ingredients</h3>
-  <ul>
-    <% @recipe.ingredients.each do |ingredient| %>
-    <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
-      <li>
-        <strong><%= truncate_zero(recipe_ingredient.quantity) %>
-        <%= ingredient.quantity_unit %></strong>
-        <%= ingredient.name %>
-      </li>
-    <% end %>
-  </ul>
+      <div class="bookmarks">
+          <% if user_signed_in? %>
+            <%= form_with model: [@recipe, @bookmark] do |f| %>
+            <%= f.submit "Create bookmark" %>
+            <% end %>
+          <% end %>
 
-  <h3>Method</h3>
-  <% if @recipe.steps.empty? %>
-    <p><%= @recipe.instructions %></p>
-  <% else %>
-    <% @recipe.steps.each do |step| %>
-      <p><b>Step <%= step.number %></b></p>
-      <p><%= step.content %></p>
-    <% end %>
-  <% end %>
+        <% @user_bookmarks.each do |bookmark| %>
+          <% if bookmark.recipe_id == @recipe.id %>
+          <%= link_to "Remove bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-  <h3>Leave a comment</h3>
-  <%= render 'recipes/form', recipe: @recipe, review: @review %>
-  <% if @recipe.reviews.empty? %>
-    <p><%= "There are no currently no comments... Leave one now!" %></p>
-  <% else %>
-    <% @recipe.reviews.each do |review| %>
-      <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
-      <p><%= review.content if review.content.present? %></p>
-      <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
-        <%= form_with model: @friendship, method: :post do |f| %>
-          <%= f.hidden_field :requested, value: review.user.id %>
-          <%= f.submit "Add friend" %>
+
+    <div class="col-md-6" class="friends-chat">
+      <div class="friends">
+        <% if user_signed_in? %>
+        <% selected_users = [] %>
+        <% current_user.friends.each do |user| %>
+          <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
+          <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
+        <% end %>
+        <ul>
+          <% selected_users.each do |user| %>
+            <li>
+            <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
+              <% if @recipe_ingredients.include?(ingredient.id) %>
+              <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
+              <% end %>
+            <% end %>in their pantry!
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
+      <div class="chat">
+        <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "btn btn-primary" if user_signed_in?%>
+      </div>
+    </div>
+  </div>
+
+  <div class="diet-serving-time">
+    <div class="diet">
+      <%= "Vegetarian" if @recipe.vegetarian? %>
+      <%= "Vegan" if @recipe.vegan? %>
+      <%= "Gluten-free" if @recipe.gluten_free? %>
+      <%= "Dairy-free" if @recipe.dairy_free? %>
+    </div>
+    <div class="serving-size">
+      <p><i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %></p>
+    </div>
+    <div class="total-time">
+      <p><i class="fa-solid fa-clock me-3"></i><%= minutes_to_hour(@recipe.total_time) %></p>
+    </div>
+  </div>
+
+  <div class="modal-body row recipe-details">
+    <div class="col-md-6 ingredients">
+       <h3>Ingredients</h3>
+      <ul>
+        <% @recipe.ingredients.each do |ingredient| %>
+          <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
+          <li>
+            <strong><%= truncate_zero(recipe_ingredient.quantity) %>
+            <%= ingredient.quantity_unit %></strong>
+            <%= ingredient.name %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+
+    <div class="col-md-6 method">
+      <h3>Method</h3>
+      <% if @recipe.steps.empty? %>
+        <p><%= @recipe.instructions %></p>
+      <% else %>
+        <% @recipe.steps.each do |step| %>
+          <p><b>Step <%= step.number %></b></p>
+          <p><%= step.content %></p>
         <% end %>
       <% end %>
-      <% if review.user == current_user %>
-        <%= link_to review_path(review), data: { turbo_method: :delete,
-        turbo_confirm: "Are you sure you want to delete your comment?" } do %>
-          <i class="fa-solid fa-trash-can"></i>
+    </div>
+  </div>
+
+  <div class="reviews">
+    <h3>Leave a comment</h3>
+    <%= render 'recipes/form', recipe: @recipe, review: @review %>
+      <% if @recipe.reviews.empty? %>
+        <p><%= "There are no currently no comments... Leave one now!" %></p>
+      <% else %>
+        <% @recipe.reviews.each do |review| %>
+          <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
+          <p><%= review.content if review.content.present? %></p>
+          <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
+            <%= form_with model: @friendship, method: :post do |f| %>
+              <%= f.hidden_field :requested, value: review.user.id %>
+              <%= f.submit "Add friend" %>
+            <% end %>
+          <% end %>
+          <% if review.user == current_user %>
+            <%= link_to review_path(review), data: { turbo_method: :delete,
+            turbo_confirm: "Are you sure you want to delete your comment?" } do %>
+              <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+          <% end %>
+          <% if current_user.present? %>
+            <% if current_user.id == review.user_id %>
+              <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+              <%= render 'recipes/form', recipe: @recipe, review: review %>
+            <% end %>
+          <% end %>
+          <hr>
         <% end %>
       <% end %>
-      <% if current_user.present? %>
-        <% if current_user.id == review.user_id %>
-          <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-        <%= render 'recipes/form', recipe: @recipe, review: review %>
-        <% end %>
-      <% end %>
-      <hr>
-    <% end %>
-  <% end %>
+  </div>
+
 </div>
