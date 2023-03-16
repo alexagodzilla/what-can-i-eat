@@ -11,6 +11,10 @@
     color: $magenta;
   }
 
+  + label:hover {
+    background-color: rgba($magenta, 0.15);
+  }
+
   &:checked + label {
     cursor: pointer;
     background-color: $magenta;
@@ -21,7 +25,7 @@
 
 #homepage-form input[type="text"] {
   padding: 0.5rem;
-  width: 35vw;
+  //width: 35vw;
   border: 0;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
@@ -31,15 +35,13 @@
   border: none;
   margin: 0;
   padding: 0.2rem 0.5rem;
+  text-decoration: none;
+  color: $black;
 
   &:hover {
     background-color: #FBEBDA;
     border-radius: 4px;
-    padding: 0.2rem 0.5rem;
-  }
-
-  a {
-    text-decoration: none;
+    padding: 0.4rem 0.5rem;
   }
 }
 
@@ -48,6 +50,94 @@
   margin-left: 0.3rem;
 }
 
-#break-text {
-  white-space: pre;
+
+/* Recipe index page form */
+.form-container{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width:50%;
+  padding: 10px;
+  background-color: $blue;
+  border-radius: 15px;
+}
+
+.submit input {
+  margin-top:2px;
+}
+
+.collapsible {
+  border-radius: 15px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  width: 25rem;
+  height:3rem;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  width: 25rem;
+  padding: 5px 18px;
+  display: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.dropdowns {
+  display:flex;
+  justify-content: center;
+}
+
+.drop-menu {
+  margin: 8px;
+}
+
+.content label {
+  margin: 5px;
+}
+
+.text-box{
+  width: 100%;
+  text-align: center;
+}
+
+.text-box input {
+  margin-top: 15px;
+  width: 51rem;
+  height:3rem;
+  background-color: greenyellow;
+  border-radius: 15px;
+}
+
+.submit {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.submit input[type=submit]{
+  position: relative;
+  top:0;
+  width:70%;
+  border-radius:12px;
 }

@@ -1,10 +1,11 @@
 .cards {
+	width: fit-content;
+	margin: 0 auto 20px auto;
 	display: grid;
+	padding-left: 16px;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 16px;
-	padding-right: 16px;
-	padding-left: 24px;
-	margin-bottom: 16px;
+	padding: 0 16px;
 }
 
 .card-trip {
