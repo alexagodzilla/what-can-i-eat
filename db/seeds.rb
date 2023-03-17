@@ -129,8 +129,7 @@ puts "creating bookmarks"
 end
 
 puts "creating reviews"
-recipes = Recipe.all
-recipes.each do |recipe|
+Recipe.all.each do |recipe|
   rand(3..5).times do
     Review.create!(
       user_id: User.all.sample.id,
