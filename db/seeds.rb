@@ -26,7 +26,7 @@ puts "destroying all users"
 User.destroy_all
 
 puts "reading json files"
-json_names = %w[vegetarian_recipes vegan_recipes gluten_free_recipes dairy_free_recipes recipe_api_data]
+json_names = %w[vegetarian_recipes vegan_recipes gluten_free_recipes dairy_free_recipes recipe_api_data chicken_recipes extra_dairy_free_recipes extra_vegetarian_recipes extra_vegan_recipes extra_gluten_free_recipes]
 json_names.each do |file_name|
   recipes = JSON.parse(File.read("#{Rails.root}/public/#{file_name}.json"), symbolize_names: true)[:recipes]
 
@@ -37,9 +37,10 @@ json_names.each do |file_name|
 
     puts "creating recipe #{recipe[:title]}"
     recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
+    recipe[:instructions].empty? ? instructions = recipe[:summary] : instructions = strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2')
     db_recipe = Recipe.create!(
       title: recipe[:title],
-      instructions: strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2'),
+      instructions: instructions,
       # prep_time: recipe[:preparationMinutes],
       # cooking_time: recipe[:cookingMinutes],
       total_time: recipe[:readyInMinutes],
