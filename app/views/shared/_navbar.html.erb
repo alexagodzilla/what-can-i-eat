@@ -6,7 +6,9 @@
           <%= image_tag "Round_logo.png", id: 'round-logo' %>
         <% end %>
       </div>
-      <%= image_tag "final_logo.png", id: 'front-logo' %>
+      <%= link_to root_path do %>
+        <%= image_tag "final_logo.png", id: 'front-logo' %>
+      <% end %>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
