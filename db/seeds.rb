@@ -4,6 +4,8 @@ require 'action_view'
 include ActionView::Helpers::SanitizeHelper
 
 puts "cleaning database..."
+puts "destroying all friendships"
+Friendship.destroy_all
 puts "destroying all user ingredients"
 UserIngredient.destroy_all
 puts "destroying all steps"
@@ -90,7 +92,7 @@ json_names.each do |file_name|
 end
 
 puts "creating users"
-15.times do
+200.times do
   User.create!(
     first_name: Faker::Name.unique.first_name,
     last_name: Faker::Name.unique.last_name,
@@ -104,7 +106,7 @@ puts "creating users"
 end
 
 puts "creating user_ingredients"
-5.times do
+100.times do
   user = User.all.sample
   ingredient_ids = Ingredient.all.pluck(:id).sample(5)
   ingredient_ids.each do |ingredient_id|
@@ -116,7 +118,7 @@ puts "creating user_ingredients"
 end
 
 puts "creating bookmarks"
-75.times do
+150.times do
   recipe_id = Recipe.all.sample.id
   if Bookmark.where(recipe_id:).empty?
     Bookmark.create!(
@@ -127,13 +129,39 @@ puts "creating bookmarks"
 end
 
 puts "creating reviews"
-200.times do
-  Review.create!(
-    user_id: User.all.sample.id,
-    recipe_id: Recipe.all.sample.id,
-    content: Faker::TvShows::GameOfThrones.quote,
-    rating: rand(3..5)
-  )
+recipes = Recipe.all
+recipes.each do |recipe|
+  rand(3..5).times do
+    Review.create!(
+      user_id: User.all.sample.id,
+      recipe_id: recipe.id,
+      content: Faker::TvShows::GameOfThrones.quote,
+      rating: rand(3..5)
+    )
+  end
+end
+
+# 200.times do
+#   Review.create!(
+#     user_id: User.all.sample.id,
+#     recipe_id: Recipe.all.sample.id,
+#     content: Faker::TvShows::GameOfThrones.quote,
+#     rating: rand(3..5)
+#   )
+# end
+
+puts "creating friendships"
+User.all.each do |user|
+  rand(3..5).times do
+    friend = User.all.sample
+    unless user == friend || user.friends.include?(friend)
+      Friendship.create!(
+        requester_id: user.id,
+        requested_id: friend.id,
+        status: "accepted"
+      )
+    end
+  end
 end
 
 puts "creating chatroom"

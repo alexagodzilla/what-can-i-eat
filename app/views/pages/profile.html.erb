@@ -5,3 +5,9 @@
     <h2><%= link_to "Friends", profile_friends_path, style: "text-decoration: none;"%></h2>
   </div>
 </div>
+
+<%= current_user.id %>
+
+<% current_user.friends.each do %>
+  <p><%= friend.first_name %> <%= friend.last_name if friend.last_name.present? %> (<%= friend.username %>)</p>
+<% end %>
