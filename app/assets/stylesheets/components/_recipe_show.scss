@@ -1,3 +1,16 @@
+.fa-bookmark {
+  font-size: 2.4rem;
+  margin-top: 10px; // for visual purposes during testing
+  color: $magenta;
+}
+
+.btn-bookmark {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
 #friends-ingredients {
   background-color: $almond;
   padding: 0.2rem;

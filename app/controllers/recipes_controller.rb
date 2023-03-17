@@ -12,7 +12,6 @@ class RecipesController < ApplicationController
   end
 
   def show
-    # To find the chatroom from the recipe show page
     @chatroom = Chatroom.first
     @bookmark = Bookmark.new
     @review = Review.new

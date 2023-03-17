@@ -11,7 +11,6 @@ class ReviewsController < ApplicationController
     else
       render "recipes/show", status: :unprocessable_entity
     end
-    # going to update the redirecting
   end
 
   def update
