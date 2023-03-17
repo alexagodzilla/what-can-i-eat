@@ -1,85 +1,84 @@
-  <div class="pages-container">
-    <div class="form-container">
-        <%= form_with model: @recipe, method: :get do |f| %>
-          <div id="homepage-form" class="form">
-            <div class="text-box">
-              <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
-            </div>
-            <div class="dropdowns">
-              <div class="drop-menu">
-                <button type="button" class="collapsible">Dietary requirements</button>
-                <div class="content">
-                  <%= f.check_box :vegetarian, include_hidden: false %>
-                  <%= f.label :vegetarian, "Vegetarian" %>
-                  <%= f.check_box :vegan, include_hidden: false %>
-                  <%= f.label :vegan, "Vegan" %>
-                  <%= f.check_box :dairy_free, include_hidden: false %>
-                  <%= f.label :dairy_free, "Dairy-free" %>
-                  <%= f.check_box :gluten_free, include_hidden: false %>
-                  <%= f.label :gluten_free, "Gluten-free" %>
-                </div>
-              </div>
-
-                <% if current_user == nil %>
-                  <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
-                  <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
-                      Add to pantry<i class="fa-solid fa-plus"></i>
-                  <% end %>
-                <% end %>
-
-                <% if user_signed_in? %>
-                  <div class="drop-menu">
-                    <button type="button" class="collapsible">Include ingredients from your pantry</button>
-                    <div class="content">
-                      <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
-                      <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
-                          Add to pantry<i class="fa-solid fa-plus"></i>
-                      <% end %>
-                    </div>
-                  </div>
-              <% end %>
-            </div>
-            <div class="submit">
-              <%= f.submit "Find my recipe!", class: "form-btn-green" %>
+<div class="pages-container">
+  <div class="form-container">
+    <%= form_with model: @recipe, method: :get do |f| %>
+      <div id="homepage-form" class="form">
+        <div class="text-box">
+          <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
+        </div>
+        <div class="dropdowns">
+          <div class="drop-menu">
+            <button type="button" class="collapsible">Dietary requirements</button>
+            <div class="content">
+              <%= f.check_box :vegetarian, include_hidden: false %>
+              <%= f.label :vegetarian, "Vegetarian" %>
+              <%= f.check_box :vegan, include_hidden: false %>
+              <%= f.label :vegan, "Vegan" %>
+              <%= f.check_box :dairy_free, include_hidden: false %>
+              <%= f.label :dairy_free, "Dairy-free" %>
+              <%= f.check_box :gluten_free, include_hidden: false %>
+              <%= f.label :gluten_free, "Gluten-free" %>
             </div>
           </div>
+
+          <% if current_user == nil %>
+            <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
+            <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                Add to pantry<i class="fa-solid fa-plus"></i>
+            <% end %>
           <% end %>
-      </div>
 
-      <h2 class="headers-center">Trending recipes</h2>
-
-      <div data-controller="cards">
-        <div class="sort-buttons-container">
-          <p>Sort by ratings: </p>
-          <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
-          <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
-        </div>
-        <div class="cards" data-cards-target="container">
-          <% @recipes.each do |recipe| %>
-            <div class="card-trip" data-cards-target="card" data-average-rating=<%= recipe.average_rating || 0 %>>
-              <%= image_tag recipe.image_url, alt: "Image of recipe" %>
-
-              <div class="card-trip-infos" >
-                <p><%= link_to recipe.title, recipe %></h3></p>
-              </div>
-
-
-              <div class="text-bottom">
-                <div class="text-bottom-left">
-                  <% if recipe.reviews.empty? %>
-                    <p>No reviews</p>
-                  <% else %>
-                    <p><%= recipe.average_rating.round(1) %> ⭐️</p>
-                  <% end %>
-                </div>
-                <div class="text-bottom-right">
-                  <p><i class="fa-solid fa-clock"></i> <%= minutes_to_hour(recipe.total_time) %></p>
-                </div>
+          <% if user_signed_in? %>
+            <div class="drop-menu">
+              <button type="button" class="collapsible">Include ingredients from your pantry</button>
+              <div class="content">
+                <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
+                <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                    Add to pantry<i class="fa-solid fa-plus"></i>
+                <% end %>
               </div>
             </div>
           <% end %>
         </div>
-  </div>
+        <div class="submit">
+          <%= f.submit "Find my recipe!", class: "form-btn-green" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <h2 class="headers-center">Trending recipes</h2>
+
+    <div data-controller="cards">
+      <div class="sort-buttons-container">
+        <p>Sort by ratings: </p>
+        <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
+        <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
+      </div>
+      <div class="cards" data-cards-target="container">
+        <% @recipes.each do |recipe| %>
+          <div class="card-trip" data-cards-target="card" data-average-rating=<%= recipe.average_rating || 0 %>>
+            <%= image_tag recipe.image_url, alt: "Image of recipe" %>
+
+          <div class="card-trip-infos" >
+            <p><%= link_to recipe.title, recipe %></h3></p>
+          </div>
+
+          <div class="text-bottom">
+            <div class="text-bottom-left">
+              <% if recipe.reviews.empty? %>
+                <p>No reviews</p>
+              <% else %>
+                <p><%= recipe.average_rating.round(1) %> ⭐️</p>
+              <% end %>
+            </div>
+            <div class="text-bottom-right">
+              <p><i class="fa-solid fa-clock"></i> <%= minutes_to_hour(recipe.total_time) %></p>
+            </div>
+          </div>
+      </div>
+        <% end %>
+    </div>
+</div>
 
 
 <script>
