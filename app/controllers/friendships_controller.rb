@@ -11,11 +11,12 @@ class FriendshipsController < ApplicationController
 
   def update
     @pending = Friendship.find(params[:id])
-    if params["friendship"]["answer"] == "Accept"
+    case params["friendship"]["answer"]
+    when "Accept"
       @pending.update(status: "accepted")
       @pending.save!
       redirect_to profile_friends_path, notice: "You are now friends with #{@pending.requester.first_name}!"
-    elsif params["friendship"]["answer"] == "Reject"
+    when "Reject"
       @pending.update(status: "rejected")
       @pending.save!
       redirect_to profile_friends_path, notice: "You have rejected #{@pending.requester.first_name}"
