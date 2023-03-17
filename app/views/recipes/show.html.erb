@@ -1,4 +1,3 @@
-
 <div class="container my-3">
   <h2><%= @recipe.title %></h2>
   <div class="modal-body row pic-friends">
@@ -8,37 +7,46 @@
       </div>
 
       <div class="bookmarks">
-          <% if user_signed_in? %>
-            <%= form_with model: [@recipe, @bookmark] do |f| %>
-            <%= f.submit "Create bookmark" %>
+        <% if user_signed_in? %>
+          <%= form_with model: [@recipe, @bookmark] do |f| %>
+            <% if !Bookmark.where(user: current_user, recipe: @recipe).present? %>
+              <%= f.button class: "btn-bookmark" do %>
+                <i class="fa-regular fa-bookmark" ></i>
+              <% end %>
             <% end %>
           <% end %>
-
-        <% @user_bookmarks.each do |bookmark| %>
-          <% if bookmark.recipe_id == @recipe.id %>
-          <%= link_to "Remove bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          <% @user_bookmarks.each do |bookmark| %>
+            <% if bookmark.recipe == @recipe %>
+              <%= link_to bookmark_path(bookmark), data: { turbo_method: :delete } do %>
+                <i class="fa-solid fa-bookmark"></i>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if user_signed_in? == false %>
+          <%= link_to new_user_registration_path do %>
+            <i class="fa-regular fa-bookmark" ></i>
           <% end %>
         <% end %>
       </div>
     </div>
 
-
     <div class="col-md-6" class="friends-chat">
       <div class="friends">
         <% if user_signed_in? %>
-        <% selected_users = [] %>
-        <% current_user.friends.each do |user| %>
-          <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
-          <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
+          <% selected_users = [] %>
+          <% current_user.friends.each do |user| %>
+            <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
+            <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
         <% end %>
         <ul>
           <% selected_users.each do |user| %>
             <li>
-            <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
-              <% if @recipe_ingredients.include?(ingredient.id) %>
-              <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
-              <% end %>
-            <% end %>in their pantry!
+              <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
+                <% if @recipe_ingredients.include?(ingredient.id) %>
+                <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
+                <% end %>
+              <% end %>in their pantry!
             </li>
           <% end %>
         </ul>
@@ -80,7 +88,6 @@
       </ul>
     </div>
 
-
     <div class="col-md-6 method">
       <h3>Method</h3>
       <% if @recipe.steps.empty? %>
@@ -97,33 +104,29 @@
   <div class="reviews">
     <h3>Leave a comment</h3>
     <%= render 'recipes/form', recipe: @recipe, review: @review %>
-      <% if @recipe.reviews.empty? %>
-        <p><%= "There are no currently no comments... Leave one now!" %></p>
-      <% else %>
-        <% @recipe.reviews.each do |review| %>
-          <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
-          <p><%= review.content if review.content.present? %></p>
-          <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
-            <%= form_with model: @friendship, method: :post do |f| %>
-              <%= f.hidden_field :requested, value: review.user.id %>
-              <%= f.submit "Add friend" %>
-            <% end %>
+    <% if @recipe.reviews.empty? %>
+      <p><%= "There are no currently no comments... Leave one now!" %></p>
+    <% else %>
+      <% @recipe.reviews.each do |review| %>
+        <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
+        <p><%= review.content if review.content.present? %></p>
+        <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
+          <%= form_with model: @friendship, method: :post do |f| %>
+            <%= f.hidden_field :requested, value: review.user.id %>
+            <%= f.submit "Add friend" %>
           <% end %>
-          <% if review.user == current_user %>
-            <%= link_to review_path(review), data: { turbo_method: :delete,
-            turbo_confirm: "Are you sure you want to delete your comment?" } do %>
-              <i class="fa-solid fa-trash-can"></i>
-              <% end %>
-          <% end %>
-          <% if current_user.present? %>
-            <% if current_user.id == review.user_id %>
-              <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-              <%= render 'recipes/form', recipe: @recipe, review: review %>
-            <% end %>
-          <% end %>
-          <hr>
         <% end %>
+        <% if current_user.present? %>
+          <% if review.user == current_user %>
+            <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+            <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+            <%= render 'recipes/form', recipe: @recipe, review: review %>
+          <% end %>
+        <% end %>
+        <hr>
       <% end %>
+    <% end %>
   </div>
-
 </div>
