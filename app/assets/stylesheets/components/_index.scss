@@ -17,6 +17,11 @@ body {
 }
 
 .pages-container {
-  width: fit-content;
   margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  //padding-bottom: 2.5rem;
 }
