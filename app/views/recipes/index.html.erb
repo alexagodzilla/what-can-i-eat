@@ -55,11 +55,11 @@
     </div>
     <div class="cards" data-cards-target="container">
       <% @recipes.each do |recipe| %>
-        <div class="card-trip" data-cards-target="card" data-average-rating="<%= recipe.average_rating || 0 %>">
+        <div class="card-recipe" data-cards-target="card" data-average-rating="<%= recipe.average_rating || 0 %>">
           <div class="img-wrap">
             <%= image_tag recipe.image_url, alt: "Image of recipe", class: "card-image" %>
           </div>
-          <div class="card-trip-infos" >
+          <div class="card-recipe-infos" >
             <p><%= link_to recipe.title, recipe %></h3></p>
           </div>
           <div class="text-bottom">

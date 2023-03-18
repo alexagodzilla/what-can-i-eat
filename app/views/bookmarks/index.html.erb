@@ -15,12 +15,12 @@
 
 
 
-<div class="card-trip" data-cards-target="card" data-average-rating=<%= bookmark.recipe.average_rating || 0 %>>
+<div class="card-recipe" data-cards-target="card" data-average-rating=<%= bookmark.recipe.average_rating || 0 %>>
                     <div class="container">
                     <i class="fa-solid fa-bookmark me-1"></i>
                     </div>
           <%= image_tag bookmark.recipe.image_url, alt: "Image of recipe" %>
-          <div class="card-trip-infos" >
+          <div class="card-recipe-infos" >
             <p><%= link_to bookmark.recipe.title, recipe_path(bookmark.recipe) %></p>
           </div>
           <div class="text-bottom">
