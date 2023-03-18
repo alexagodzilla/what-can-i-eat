@@ -74,7 +74,7 @@
   </div>
 
   <div class="modal-body row recipe-details">
-    <div class="col-md-5 ingredients">
+    <div class="col-md-4 ingredients">
        <h3>Ingredients</h3>
        <br>
       <ul>
@@ -85,12 +85,11 @@
             <%= ingredient.quantity_unit %></strong>
             <%= ingredient.name %>
           </li>
-          <br>
         <% end %>
       </ul>
     </div>
 
-    <div class="col-md-7 method">
+    <div class="col-md-8 method">
       <h3>Method</h3>
       <br>
       <% if @recipe.steps.empty? %>
