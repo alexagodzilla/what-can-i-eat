@@ -74,8 +74,9 @@
   </div>
 
   <div class="modal-body row recipe-details">
-    <div class="col-md-6 ingredients">
+    <div class="col-md-4 ingredients">
        <h3>Ingredients</h3>
+       <br>
       <ul>
         <% @recipe.ingredients.each do |ingredient| %>
           <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
@@ -88,8 +89,9 @@
       </ul>
     </div>
 
-    <div class="col-md-6 method">
+    <div class="col-md-8 method">
       <h3>Method</h3>
+      <br>
       <% if @recipe.steps.empty? %>
         <p><%= @recipe.instructions %></p>
       <% else %>

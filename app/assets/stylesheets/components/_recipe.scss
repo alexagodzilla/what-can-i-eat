@@ -81,3 +81,36 @@
 	margin-left: 8px;
 	margin-bottom: 16px;
 }
+
+.recipe-details {
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	margin-top: 8px;
+	margin-bottom: 32px;
+	padding: 16px;
+	border-radius: 4px;
+}
+
+.ingredients {
+	margin-top: 16px;
+	border-right: solid 1px $gray-200;
+	padding-left: 32px;
+}
+
+.ingredients ul {
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.ingredients li {
+	list-style: none;
+	padding-left: 0;
+	margin-left: 0;
+	padding-bottom: 12px;
+}
+
+.method {
+	margin-top: 16px;
+	padding-left: 32px;
+	padding-right: 32px;
+}
