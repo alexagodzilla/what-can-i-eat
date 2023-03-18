@@ -5,11 +5,11 @@ require_relative '../config/environment'
 
 
 api_key = ENV.fetch('SPOONACULAR_API_KEY')
-diet = "vegetarian"
+diet = "chicken"
 
 # https://api.spoonacular.com/recipes/716429/information?apiKey=YOUR-API-KEY&includeNutrition=true
 # url = "https://api.spoonacular.com/recipes/random?apiKey=#{api_key}&number=100"
-url_with_diet = "https://api.spoonacular.com/recipes/random?number=75&tags=#{diet}&apiKey=#{api_key}"
+url_with_diet = "https://api.spoonacular.com/recipes/random?number=100&tags=#{diet}&apiKey=#{api_key}"
 
 response = URI.open(url_with_diet).read
 
@@ -22,6 +22,6 @@ puts data
 #   file.write(JSON.pretty_generate(data))
 # end
 
-File.open("#{Rails.root}/public/vegetarian_recipes.json", "w") do |file|
+File.open("#{Rails.root}/public/chicken_recipes.json", "w") do |file|
   file.write(JSON.pretty_generate(data))
 end
