@@ -6,15 +6,15 @@
 
   + label {
     cursor: pointer;
-    background-color: rgba($magenta, 0.2);
+    background-color: rgba($magenta, 0.9);
     border-radius: 50rem;
     padding: 0.2rem 0.5rem;
-    border: 1px solid rgba($magenta, 0.2);
-    color: $magenta;
+    border: 1px solid rgba($magenta, 0.9);
+    color: white;
   }
 
   + label:hover {
-    background-color: rgba($magenta, 0.15);
+    background-color: rgba($magenta, 0.8);
   }
 
   &:checked + label {
@@ -27,7 +27,6 @@
 
 #homepage-form input[type="text"] {
   padding: 0.5rem;
-  //width: 35vw;
   border: 0;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
@@ -41,7 +40,7 @@
   color: $black;
 
   &:hover {
-    background-color: #FBEBDA;
+    background-color: rgba(251, 235, 218, 0.5);
     border-radius: 4px;
     padding: 0.4rem 0.5rem;
   }
@@ -54,29 +53,26 @@
 
 /* Recipe index page form */
 .form-container{
-  margin: 5vh auto;
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
-  background-color: $blue;
-  border-radius: 15px;
+  margin: 3vh auto;
+  padding: 20px;
+  background-color: rgba($seashell, 0.35); // check with ale
+  border-radius: 10px;
   position: absolute;
-  top: 160px;
-  left: 350px;
-}
+  top: 116px;
+  left: 298px;}
 
 .submit input {
   margin-top:2px;
 }
 
 .collapsible {
-  border-radius: 15px;
-  background-color: red;
+  border-radius: 12px;
+  background-color: rgba($purple, 0.9);
   color: white;
   cursor: pointer;
   padding: 8px;
-  width: 23vw;
-  height:3rem;
+  width: 25vw;
+  height: 2.5rem;
   border: none;
   text-align: left;
   outline: none;
@@ -84,15 +80,18 @@
 }
 
 .active, .collapsible:hover {
-  background-color: #555;
+  background-color: rgba($purple, 0.8);
 }
 
 .content {
-  width: 25rem;
-  padding: 5px 18px;
+  width: 25vw; // edit
   display: none;
   overflow: hidden;
   background-color: transparent;
+
+  label {
+    margin: 5px;
+  }
 }
 
 .collapsible:after {
@@ -116,32 +115,32 @@
   margin: 8px;
 }
 
-.content label {
-  margin: 5px;
-}
-
 .text-box{
   width: 100%;
   text-align: center;
-}
 
-.text-box input {
-  margin-top: 15px;
-  width: 100%;
-  height:3rem;
-  background-color: greenyellow;
-  border-radius: 15px;
+  input {
+    width: 100%;
+    height: 3rem;
+    background-color: white;
+    border-radius: 8px;
+  }
 }
 
 .submit {
   display: flex;
   width: 100%;
   justify-content: center;
-}
 
-.submit input[type=submit]{
-  position: relative;
-  top:0;
-  width:70%;
-  border-radius:12px;
+  input {
+    margin-top: 2px;
+  }
+
+  input[type=submit]{
+    position: relative;
+    top: 0;
+    width: 70%;
+    border-radius: 8px;
+  }
+
 }
