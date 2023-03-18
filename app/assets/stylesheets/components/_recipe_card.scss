@@ -8,8 +8,8 @@
 	padding: 0 16px;
 }
 
-.card-trip {
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+.card-recipe {
+  box-shadow: 3px 3px 10px rgba(69, 69, 69, 0.5);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -19,21 +19,21 @@
 	width: 18rem;
 	border-radius: 15px;
 	font-family: $body-font;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 8px;
+    display: block;
+  }
 }
 
-.card-trip img {
-	height: 100%;
-  width: 100%;
-	object-fit: cover;
-	border-radius: 15px 15px 0 0;
-	margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 8px;
-	display: block;
-}
-
-.card-trip-infos {
+.card-recipe-infos {
 	text-align: center;
 	opacity: 0.8;
 	margin: 0;
@@ -41,17 +41,19 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-end;
-}
 
-.card-trip-infos > p > a {
-	font-family: $body-font;
-	font-weight: bold;
-	font-size: 16px;
-	text-decoration: none;
-	color: black;
-	opacity: 0.9;
-}
+  p > a {
+    font-family: $body-font;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgba(black, 0.9);
 
+    &:hover {
+      color: rgba(black, 0.8);
+    }
+  }
+}
 
 .text-bottom {
 	display: flex;
@@ -80,37 +82,4 @@
 .delete-bookmark {
 	margin-left: 8px;
 	margin-bottom: 16px;
-}
-
-.recipe-details {
-	background-color: rgba(255, 255, 255, 0.6);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	margin-top: 8px;
-	margin-bottom: 32px;
-	padding: 16px;
-	border-radius: 4px;
-}
-
-.ingredients {
-	margin-top: 16px;
-	border-right: solid 1px $gray-200;
-	padding-left: 32px;
-}
-
-.ingredients ul {
-	padding-left: 0;
-	margin-left: 0;
-}
-
-.ingredients li {
-	list-style: none;
-	padding-left: 0;
-	margin-left: 0;
-	padding-bottom: 12px;
-}
-
-.method {
-	margin-top: 16px;
-	padding-left: 32px;
-	padding-right: 32px;
 }
