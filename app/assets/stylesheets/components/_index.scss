@@ -11,6 +11,11 @@
 @import "homepage_form";
 @import "button";
 @import "recipe_show";
+@import "banner";
+
+html {
+  overflow-x: hidden
+}
 
 body {
   background-color: $seashell;

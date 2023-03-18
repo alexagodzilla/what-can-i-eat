@@ -1,38 +1,40 @@
 <div class="pages-container">
-  <div class="form-container">
-    <%= form_with model: @recipe, method: :get do |f| %>
-      <div id="homepage-form" class="form">
-        <div class="text-box">
-          <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
-        </div>
-        <div class="dropdowns">
-          <div class="drop-menu">
-            <button type="button" class="collapsible">Dietary requirements</button>
-            <div class="content">
-              <%= f.check_box :vegetarian, include_hidden: false %>
-              <%= f.label :vegetarian, "Vegetarian" %>
-              <%= f.check_box :vegan, include_hidden: false %>
-              <%= f.label :vegan, "Vegan" %>
-              <%= f.check_box :dairy_free, include_hidden: false %>
-              <%= f.label :dairy_free, "Dairy-free" %>
-              <%= f.check_box :gluten_free, include_hidden: false %>
-              <%= f.label :gluten_free, "Gluten-free" %>
-            </div>
+  <div class="banner">
+    <h1 style="width: 600px;">Don't waste any more ingredients - find a recipe today with what you have!</h1>
+    <div class="form-container" style="position: absolute; top: 160px; left: 350px;">
+      <%= form_with model: @recipe, method: :get do |f| %>
+        <div id="homepage-form" class="form">
+          <div class="text-box">
+            <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
           </div>
-          <% if current_user == nil %>
-            <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
-            <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
-                Add to pantry<i class="fa-solid fa-plus"></i>
-            <% end %>
-          <% end %>
-          <% if user_signed_in? %>
+          <div class="dropdowns">
             <div class="drop-menu">
-              <button type="button" class="collapsible">Include ingredients from your pantry</button>
+              <button type="button" class="collapsible">Dietary requirements</button>
               <div class="content">
-                <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
-                <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
-                    Add to pantry<i class="fa-solid fa-plus"></i>
-                <% end %>
+                <%= f.check_box :vegetarian, include_hidden: false %>
+                <%= f.label :vegetarian, "Vegetarian" %>
+                <%= f.check_box :vegan, include_hidden: false %>
+                <%= f.label :vegan, "Vegan" %>
+                <%= f.check_box :dairy_free, include_hidden: false %>
+                <%= f.label :dairy_free, "Dairy-free" %>
+                <%= f.check_box :gluten_free, include_hidden: false %>
+                <%= f.label :gluten_free, "Gluten-free" %>
+              </div>
+            </div>
+            <% if current_user == nil %>
+              <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
+              <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                  Add to pantry<i class="fa-solid fa-plus"></i>
+              <% end %>
+            <% end %>
+            <% if user_signed_in? %>
+              <div class="drop-menu">
+                <button type="button" class="collapsible">Include ingredients from your pantry</button>
+                <div class="content">
+                  <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
+                  <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
+                      Add to pantry<i class="fa-solid fa-plus"></i>
+                  <% end %>
               </div>
             </div>
           <% end %>
@@ -41,6 +43,7 @@
           <%= f.submit "Find my recipe!", class: "form-btn-green" %>
         </div>
       </div>
+    </div>
       <% end %>
   </div>
   <h2 class="headers-center">Trending recipes</h2>
