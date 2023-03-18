@@ -1,0 +1,21 @@
+// might need editing on other screens
+
+.banner {
+  padding: 0;
+  height: 420px;
+  width: 100vw;
+  position: relative;
+  background-image: url("homepage-banner.jpg");
+  margin-bottom: 10px;
+}
+
+.pages-container h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  top: 95px;
+  left: 370px;
+}
