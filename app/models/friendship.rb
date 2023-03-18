@@ -13,8 +13,3 @@ class Friendship < ApplicationRecord
     option1 || option2
   end
 end
-
-f = Friendship.first(5)
-f.each do |friendship|
-  friendship.status = "accepted"
-end
