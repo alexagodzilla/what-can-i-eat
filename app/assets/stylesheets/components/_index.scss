@@ -5,7 +5,7 @@
 @import "form_legend_clear";
 @import "navbar";
 @import "footer";
-@import "recipe";
+@import "recipe_card";
 @import "profile_banner";
 @import "friend_form";
 @import "homepage_form";
@@ -19,10 +19,17 @@ html {
 
 body {
   background-color: $seashell;
+  min-height: 120vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .pages-container {
   margin: 0 auto;
   position: relative;
   min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $headers-font;
 }
