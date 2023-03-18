@@ -1,12 +1,14 @@
 // might need editing on other screens
 
-.banner {
+.homepage-banner {
   padding: 0;
   height: 420px;
   width: 100vw;
   position: relative;
   background-image: url("homepage-banner.jpg");
   margin-bottom: 10px;
+  background-size: cover;
+	background-position: center;
 }
 
 .pages-container h1 {
@@ -16,6 +18,6 @@
   font-size: 32px;
   font-weight: bold;
   position: absolute;
-  top: 95px;
-  left: 370px;
+  top: 40px;
+  left: 334px;
 }
