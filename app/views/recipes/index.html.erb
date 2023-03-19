@@ -49,34 +49,12 @@
   <h2 class="headers-center">Trending recipes</h2>
   <div data-controller="cards">
     <div class="sort-buttons-container">
-      <p>Sort by ratings: </p>
       <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
       <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
     </div>
     <div class="cards" data-cards-target="container">
       <% @recipes.each do |recipe| %>
-        <div class="card-trip" data-cards-target="card" data-average-rating="<%= recipe.average_rating || 0 %>">
-          <div class="img-wrap">
-            <%= image_tag recipe.image_url, alt: "Image of recipe", class: "card-image" %>
-          </div>
-          <div class="card-trip-infos" >
-            <p><%= link_to recipe.title, recipe %></h3></p>
-          </div>
-          <div class="text-bottom">
-            <div class="text-bottom-left">
-              <% if recipe.reviews.empty? %>
-                <p>No reviews</p>
-              <% else %>
-                <p><%= recipe.average_rating.round(1) %> ⭐️</p>
-              <% end %>
-            </div>
-
-            <div class="text-bottom-right">
-              <p><i class="fa-solid fa-clock"></i> <%= minutes_to_hour(recipe.total_time) %></p>
-            </div>
-
-          </div>
-        </div>
+        <%= render "shared/cards", recipe: recipe %>
       <% end %>
     </div>
   </div>
