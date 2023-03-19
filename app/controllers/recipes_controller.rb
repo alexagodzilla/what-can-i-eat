@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
     elsif params.values.include?("1") && params[:query].empty?
       empty_query
     else
-      @recipes = Recipe.where(title: "Easy Eggplant Curry")
+      @recipes = Recipe.where(id: popular_recipes_ids)
     end
   end
 
@@ -36,4 +36,16 @@ class RecipesController < ApplicationController
     arr = params.select { |_key, value| value == "1" }.keys
     @recipes = Recipe.where(arr.to_h { |key| [key, true] })
   end
+
+  def popular_recipes_ids
+    Recipe.where(title: "Easy Eggplant Curry").pluck(:id) +
+      Recipe.where(title: "Dolsot Bibimbap").pluck(:id) +
+      Recipe.where(title: "Smokey Rainbow Chili").pluck(:id) +
+      Recipe.where(title: "Vietnamese Pancakes with Vegetables, Herbs and a Fragrant Dipping Sauce (Bánh Xèo)").pluck(:id) +
+      Recipe.where(title: "Super Speedy Spicy Sweet and Sour Shrimp").pluck(:id) +
+      Recipe.where(title: "Spaghetti Squash & Tomato Basil Meat Sauce").pluck(:id) +
+      Recipe.where(title: "Caldo Verde - Portuguese Kale Soup").pluck(:id) +
+      Recipe.where(title: "Grilled Fish With Sun Dried Tomato Relish").pluck(:id)
+  end
+  # other less minging recipes: Thai Savory Brown Fried Rice; Kale & chickpea stew with cumin, smoked paprika and lime
 end

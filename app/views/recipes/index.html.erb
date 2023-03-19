@@ -50,7 +50,7 @@
   <% if params[:query].present? || params.values.include?("1") || params[:ingredient_id].present? %>
     <h2 class="headers-center">Results</h2>
   <% else %>
-    <h2 class="headers-center">Trending recipes</h2>
+    <h2 class="headers-center">Popular recipes <i class="fa-solid fa-bolt", style="color: #FFBD00; font-size: 24px;"></i></h2>
   <% end %>
   <div data-controller="cards">
     <div class="sort-buttons-container">
