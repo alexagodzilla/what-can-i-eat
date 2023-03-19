@@ -106,7 +106,7 @@
     <h3>Leave a comment</h3>
     <%= render 'recipes/form', recipe: @recipe, review: @review %>
     <% if @recipe.reviews.empty? %>
-      <p><%= "There are no currently no comments... Leave one now!" %></p>
+      <p>There are no currently no comments... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
       <%if review.rating.present? %>
@@ -128,7 +128,7 @@
               <i class="fa-solid fa-trash-can"></i>
             <% end %>
             <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-            <%# <%= render 'recipes/form', recipe: @recipe, review: review %> %>
+            <%# <%= render 'recipes/form', recipe: @recipe, review: review %>
           <% end %>
         <% end %>
         <hr>
