@@ -38,7 +38,7 @@ json_names.each do |file_name|
     if db_recipe.nil?
 
     puts "creating recipe #{recipe[:title]}"
-    recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
+    recipe[:image].nil? ? img = "https://unsplash.com/photos/ZrhtQyGFG6s" : img = recipe[:image]
     recipe[:instructions].empty? ? instructions = recipe[:summary] : instructions = strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2')
     db_recipe = Recipe.create!(
       title: recipe[:title],
@@ -117,16 +117,16 @@ puts "creating user_ingredients"
   end
 end
 
-puts "creating bookmarks"
-150.times do
-  recipe_id = Recipe.all.sample.id
-  if Bookmark.where(recipe_id:).empty?
-    Bookmark.create!(
-      user_id: User.all.sample.id,
-      recipe_id:
-    )
-  end
-end
+# puts "creating bookmarks"
+# 150.times do
+#   recipe_id = Recipe.all.sample.id
+#   if Bookmark.where(recipe_id:).empty?
+#     Bookmark.create!(
+#       user_id: User.all.sample.id,
+#       recipe_id:
+#     )
+#   end
+# end
 
 puts "creating reviews"
 Recipe.all.each do |recipe|
@@ -149,19 +149,53 @@ end
 #   )
 # end
 
-puts "creating friendships"
-User.all.each do |user|
-  rand(3..5).times do
-    friend = User.all.sample
-    unless user == friend || user.friends.include?(friend)
-      Friendship.create!(
-        requester_id: user.id,
-        requested_id: friend.id,
-        status: "accepted"
-      )
-    end
-  end
-end
+# puts "creating friendships"
+# User.all.each do |user|
+#   rand(3..5).times do
+#     friend = User.all.sample
+#     unless user == friend || user.friends.include?(friend)
+#       Friendship.create!(
+#         requester_id: user.id,
+#         requested_id: friend.id,
+#         status: "accepted"
+#       )
+#     end
+#   end
+# end
 
 puts "creating chatroom"
 Chatroom.create!(name: "Main Room")
+
+puts "creating Amie"
+puts "amie's email is amie@me.com"
+Amie = User.create!(
+  first_name: "Amie",
+  last_name: Faker::Name.unique.last_name,
+  username: Faker::Internet.unique.username,
+  email: "amie@me.com",
+  password: "123456",
+  bio: Faker::Hipster.paragraph(sentence_count: 2),
+  diet: "Gluten Free",
+  image_url: "https://source.unsplash.com/featured/?face"
+)
+
+puts "creating Amie's bookmarks"
+puts "amie's bookmarks are gluten free recipes"
+gluten_free_recipes = Recipe.where(gluten_free: true)
+
+3.times do
+  recipe_id = gluten_free_recipes.sample.id
+  if Bookmark.where(recipe_id:).empty?
+    Bookmark.create!(
+      user_id: Amie.id,
+      recipe_id:
+    )
+  end
+end
+
+puts "creating Amie's user_ingredients"
+
+
+puts "creating Amie's friends"
+puts "creating Fran"
+puts "Fran's email is fran@me.com"
