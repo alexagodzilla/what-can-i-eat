@@ -1,3 +1,9 @@
+.bookmark-visible {
+  position: absolute;
+  margin-left: 240px;
+  margin-top: 0;
+}
+
 .cards {
 	width: fit-content;
 	margin: 0 auto 20px auto;
@@ -79,7 +85,3 @@
 	margin-right: 8px;
 }
 
-.delete-bookmark {
-	margin-left: 8px;
-	margin-bottom: 16px;
-}
