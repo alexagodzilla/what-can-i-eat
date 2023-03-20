@@ -38,7 +38,7 @@
 	margin: 0;
 	padding: 0.2rem 0.5rem;
 	text-decoration: none;
-	color: $black;
+	color: rgba(59, 27, 54, 0.8);
 
 	&:hover {
 		background-color: rgba(251, 235, 218, 0.5);
@@ -145,4 +145,12 @@
 		width: 70%;
 		border-radius: 8px;
 	}
+}
+
+.pantry-btn {
+	margin-top: 4px;
+	font-weight: 600;
+	font-size: 16px;
+	font-size: 16;
+	color: rgba(59, 27, 54, 0.8);
 }
