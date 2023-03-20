@@ -2,24 +2,23 @@
 	height: 90px;
 	justify-content: space-between;
 	background: $purple;
-	color: $seashell;
+
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+
+  .navbar-brand img {
+    border-radius: 50%;
+    width: 40px;
+  }
 }
 
 .nav-link {
 	color: $almond;
 
   &:hover {
-    color: rgb(255, 255, 255);
+    color: $seashell;
   }
-}
-
-.navbar-lewagon .navbar-collapse {
-	flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-	border-radius: 50%;
-	width: 40px;
 }
 
 .photo {
@@ -27,9 +26,8 @@
 	width: 40px;
 }
 
-
 #front-logo {
-  width: 250px;
+  width: 255px;
   // margin-top: 5px;
   // margin-bottom: 5px;
 }
