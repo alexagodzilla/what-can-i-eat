@@ -33,8 +33,10 @@
                 <div class="content">
                   <p><%= "You can add your kitchen staples to the pantry to use here any time" if current_user.ingredients.empty? %></p>
                   <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
+                  <div class="pantry-btn">
                   <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
                       Add to pantry<i class="fa-solid fa-plus"></i>
+                  </div>
                   <% end %>
               </div>
             </div>
