@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["select"]
 
   connect() {
-    console.log('STAR!!')
     new StarRating(this.selectTarget);
   }
 }
