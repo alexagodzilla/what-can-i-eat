@@ -1,7 +1,5 @@
 <%= form_with(model: [recipe, review]) do |f| %>
-  <%= f.label :rating, "Rating out of 5" %>
-  <%= f.text_field :rating %>
-  <%= f.label :content, "Comment" %>
-  <%= f.text_field :content %>
-  <%= f.submit "Submit" %>
+  <%= f.select :rating, options_for_select(0..5), {}, { data: { controller: "star-rating", star_rating_target: "select" } } %>
+  <%= f.text_area :content, placeholder: "Enjoy this recipe? Any questions or tips? Leave some feedback here!" %>
+  <%= f.submit "Post" %>
 <% end %>

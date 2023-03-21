@@ -1,6 +1,6 @@
 <div class="pages-container">
   <div class="homepage-banner">
-    <h1 style="width: 600px;">Don't waste any more ingredients - find a recipe today with what you have!</h1>
+    <h1 style="width: 600px;">Don't waste any more food - find a recipe today with what you have!</h1>
     <div class="form-container">
       <%= form_with model: @recipe, method: :get do |f| %>
         <div id="homepage-form" class="form">
@@ -22,7 +22,7 @@
               </div>
             </div>
             <% if current_user == nil %>
-              <p>You can add ingredients that you often have to the pantry and include them here whenever you like!</p>
+              <p>You can add your kitchen staples to the pantry and include them here whenever you like!</p>
               <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
                   Add to pantry<i class="fa-solid fa-plus"></i>
               <% end %>
@@ -31,6 +31,7 @@
               <div class="drop-menu">
                 <button type="button" class="collapsible">Include ingredients from your pantry</button>
                 <div class="content">
+                  <p><%= "You can add your kitchen staples to the pantry to use here any time" if current_user.ingredients.empty? %></p>
                   <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
                   <div class="pantry-btn">
                   <%= link_to profile_ingredients_path, id:"btn-ingredients" do %>
@@ -42,48 +43,29 @@
           <% end %>
         </div>
         <div class="submit">
-          <%= f.submit "Find my recipe!", class: "form-btn-green" %>
+          <%= f.submit "Find my recipe", class: "form-btn-green" %>
         </div>
       </div>
     </div>
       <% end %>
   </div>
-  <h2 class="headers-center">Trending recipes</h2>
+  <% if params[:query].present? || params.values.include?("1") || params[:ingredient_id].present? %>
+    <h2 class="headers-center">Results</h2>
+  <% else %>
+    <h2 class="headers-center">Popular recipes <i class="fa-solid fa-bolt", style="color: #FFBD00; font-size: 24px;"></i></h2>
+  <% end %>
   <div data-controller="cards">
     <div class="sort-buttons-container">
-      <p>Sort by ratings: </p>
       <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
       <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
     </div>
     <div class="cards" data-cards-target="container">
       <% @recipes.each do |recipe| %>
-        <div class="card-trip" data-cards-target="card" data-average-rating="<%= recipe.average_rating || 0 %>">
-          <div class="img-wrap">
-            <%= image_tag recipe.image_url, alt: "Image of recipe", class: "card-image" %>
-          </div>
-          <div class="card-trip-infos" >
-            <p><%= link_to recipe.title, recipe %></h3></p>
-          </div>
-          <div class="text-bottom">
-            <div class="text-bottom-left">
-              <% if recipe.reviews.empty? %>
-                <p>No reviews</p>
-              <% else %>
-                <p><%= recipe.average_rating.round(1) %> ⭐️</p>
-              <% end %>
-            </div>
-
-            <div class="text-bottom-right">
-              <p><i class="fa-solid fa-clock"></i> <%= minutes_to_hour(recipe.total_time) %></p>
-            </div>
-
-          </div>
-        </div>
+        <%= render "shared/cards", recipe: recipe %>
       <% end %>
     </div>
   </div>
 </div>
-
 
 <script>
   var coll = document.getElementsByClassName("collapsible");

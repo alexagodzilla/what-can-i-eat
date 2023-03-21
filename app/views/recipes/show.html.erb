@@ -76,7 +76,6 @@
   <div class="modal-body row recipe-details">
     <div class="col-md-4 ingredients">
        <h3>Ingredients</h3>
-       <br>
       <ul>
         <% @recipe.ingredients.each do |ingredient| %>
           <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
@@ -91,7 +90,6 @@
 
     <div class="col-md-8 method">
       <h3>Method</h3>
-      <br>
       <% if @recipe.steps.empty? %>
         <p><%= @recipe.instructions %></p>
       <% else %>
@@ -103,14 +101,21 @@
     </div>
   </div>
 
+
   <div class="reviews">
-    <h3>Leave a comment</h3>
-    <%= render 'recipes/form', recipe: @recipe, review: @review %>
-    <% if @recipe.reviews.empty? %>
-      <p><%= "There are no currently no comments... Leave one now!" %></p>
+    <div id="comment-submission">
+      <h3>Leave a comment or rating! (<%= @recipe.reviews.count %>)</h3>
+      <%= render 'recipes/form', recipe: @recipe, review: @review %>
+    </div>
+      <% if @recipe.reviews.empty? %>
+        <p>There are no currently no comments... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
-        <p><%= review.rating if review.rating.present? %>/5 ⭐ --<small><%= review.user.username %></small></p>
+      <% if review.rating.present? %>
+        <% review.rating.times do %>
+          <%= image_tag "star.png", class: "single-star"%>
+        <% end %>
+        <p><small><%= review.user.username %></small></p>
         <p><%= review.content if review.content.present? %></p>
         <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
           <%= form_with model: @friendship, method: :post do |f| %>
@@ -118,13 +123,14 @@
             <%= f.submit "Add friend" %>
           <% end %>
         <% end %>
+    <% end %>
         <% if current_user.present? %>
           <% if review.user == current_user %>
             <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
               <i class="fa-solid fa-trash-can"></i>
             <% end %>
             <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-            <%= render 'recipes/form', recipe: @recipe, review: review %>
+            <%# <%= render 'recipes/form', recipe: @recipe, review: review %>
           <% end %>
         <% end %>
         <hr>
