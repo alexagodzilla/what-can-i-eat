@@ -1,4 +1,14 @@
 <div class="container my-3">
+
+ <div class="back-button">
+  <%= link_to :back do %>
+    <span>
+      <i class="fa-solid fa-chevron-left"></i>
+      <span>Back</span>
+    </span>
+  <% end %>
+</div>
+
   <h2><%= @recipe.title %></h2>
   <div class="modal-body row pic-friends">
     <div class="col-md-6">
