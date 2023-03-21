@@ -103,15 +103,17 @@
 
 
   <div class="reviews">
-    <h3>Leave a comment</h3>
-    <%= render 'recipes/form', recipe: @recipe, review: @review %>
-    <% if @recipe.reviews.empty? %>
-      <p>There are no currently no comments... Leave one now!</p>
+    <div id="comment-submission">
+      <h3>Leave a comment or rating! (<%= @recipe.reviews.count %>)</h3>
+      <%= render 'recipes/form', recipe: @recipe, review: @review %>
+    </div>
+      <% if @recipe.reviews.empty? %>
+        <p>There are no currently no comments... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
-      <%if review.rating.present? %>
+      <% if review.rating.present? %>
         <% review.rating.times do %>
-          <span><%= image_tag "star.png", class: "single-star"%></span>
+          <%= image_tag "star.png", class: "single-star"%>
         <% end %>
         <p><small><%= review.user.username %></small></p>
         <p><%= review.content if review.content.present? %></p>

@@ -7,6 +7,12 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
 @import "star-rating.js/dist/star-rating.css";
+:root {
+  --gl-star-size: 36px;
+  --gl-tooltip-padding: .1em .5em;
+  --gl-tooltip-border-radius: 3px;
+  --gl-tooltip-size: 0;
+}
 
 // Your CSS partials
 @import "components/index";
