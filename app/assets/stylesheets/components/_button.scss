@@ -37,3 +37,11 @@
 	margin: 0 auto 20px auto;
 	width: fit-content;
 }
+
+.back-button {
+	a {
+		text-decoration: none;
+		color: $black;
+	}
+	margin-bottom: 0.5rem;
+}
