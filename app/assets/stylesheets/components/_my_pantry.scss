@@ -27,11 +27,11 @@
     height: 4.5vh;
     border-radius: 10px;
     border: 0;
-    background-color: orange;
+    background-color: $purple;
     letter-spacing: 1.5px;
     font-size: 15px;
     transition: all .3s ease;
-    box-shadow: rgba(255, 166, 0, 0.692) 0px 5px 0px 0px;
+    box-shadow: $magenta 0px 5px 0px 0px;
     color: hsl(0, 0%, 100%);
 
       &:hover {
