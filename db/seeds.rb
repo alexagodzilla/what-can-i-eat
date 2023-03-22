@@ -176,7 +176,7 @@ Amie = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Gluten Free",
-  image_url: "https://source.unsplash.com/featured/?face"
+  image_url: "https://randomuser.me/api/portraits/women/8.jpg"
 )
 
 puts "creating Amie's bookmarks"
@@ -217,7 +217,7 @@ Fran = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Everything",
-  image_url: "https://source.unsplash.com/featured/?face"
+  image_url: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
 )
 
 puts "creating Fran's user_ingredients"
@@ -242,7 +242,7 @@ Ila = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Everything",
-  image_url: "https://source.unsplash.com/featured/?face"
+  image_url: "https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
 )
 
 puts "creating Ila's user_ingredients"

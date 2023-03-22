@@ -1,7 +1,10 @@
+// contents: style for leaving a comment. style for comments/ratings themselves
+// #1 leave a comment styling
+
 #comment-submission {
   background-color: white;
   padding: 1.5rem;
-  margin-bottom: 1.8rem; // for testing purposes
+  margin-bottom: 2.5rem;
   width: 40vw;
   box-shadow: 3px 3px 10px rgba(209, 190, 160, 0.5);
   border-radius: 8px;
@@ -30,5 +33,36 @@
     inline-size: 32vw;
     height: 8rem;
     overflow-wrap: break-word;
+  }
+}
+
+// comments styling
+#comments {
+  margin-bottom: 10px;
+}
+
+#comments-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#flex-left {
+  flex: 1;
+
+  p:nth-child(2) {
+    margin-bottom: 4px;
+  }
+
+  p:nth-child(3), p:nth-child(4) {
+    font-size: 0.9em;
+    margin-bottom: 0;
+  }
+}
+
+#flex-right {
+  flex: 5;
+
+  p {
+    margin-top: 20px;
   }
 }
