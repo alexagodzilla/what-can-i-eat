@@ -107,6 +107,7 @@
     </div>
   </div>
 
+  <div class="reviews">
     <div id="comment-submission">
       <h3>Leave a comment or rating (<%= @recipe.reviews.count %>)</h3>
       <%= render 'recipes/form', recipe: @recipe, review: @review %>
@@ -134,8 +135,11 @@
           <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
             <%= form_with model: @friendship, method: :post do |f| %>
               <%= f.hidden_field :requested, value: review.user.id %>
-              <%= f.submit "Add friend" %>
+              <%= f.submit "Add friend", class: "btn-purple" %>
             <% end %>
+          <% end %>
+          <% if current_user.invites_sent.include?(review.user) %>
+          <p id="invite-sent">Invite sent</p>
           <% end %>
         <% end %>
           <% if current_user.present? %>
@@ -151,4 +155,5 @@
         <hr>
       <% end %>
     <% end %>
+  </div>
 </div>

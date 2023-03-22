@@ -26,6 +26,11 @@ class User < ApplicationRecord
     friend_ids = requested_friendships.where(status: "pending").pluck(:requester_id)
     User.where(id: friend_ids)
   end
+
+  def invites_sent
+    friend_ids = requester_friendships.where(status: "pending").pluck(:requested_id)
+    User.where(id: friend_ids)
+  end
 end
 
 # has_many :requesters, class_name: 'User', through: :requested_friendships
