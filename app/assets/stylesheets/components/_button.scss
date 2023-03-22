@@ -1,39 +1,63 @@
 // pink button
 .form-btn-magenta {
-  background-color: $magenta;
-  border-radius: 50rem;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid $magenta;
-  display: block;
+	background-color: $magenta;
+	border-radius: 50rem;
+	padding: 0.2rem 0.5rem;
+	border: 1px solid $magenta;
+	display: block;
 
-  &:hover {
-    background-color: rgba($magenta, 0.9);
-  }
+	&:hover {
+		background-color: rgba($magenta, 0.9);
+	}
 
-  a {
-    text-decoration: none;
-    color: $white;
-  }
+	a {
+		text-decoration: none;
+		color: $white;
+	}
 }
 
 // green button
 .form-btn-green {
-  background-color: $green;
-  border-radius: 4px;
-  padding: 0.3rem 0.5rem;
-  border: 1px solid $green;
-  display: block;
-  color: $white;
-  margin-top: 1rem;
+	background-color: $green;
+	border-radius: 4px;
+	padding: 0.3rem 0.5rem;
+	border: 1px solid $green;
+	display: block;
+	color: $white;
+	margin-top: 1rem;
 
-  &:hover {
-    background-color: rgba($green, 0.9);
-  }
+	&:hover {
+		background-color: rgba($green, 0.9);
+	}
 }
 
+// add friend button
+.btn-purple {
+  background-color: $purple;
+  border-radius: 15px;
+  padding: 0.2rem 0.5rem;
+  color: white;
+  font-size: 0.9em;
+  border: 1.5px solid $magenta;
+  margin-top: 0.6rem;
+
+  &:hover {
+		background-color: rgba($purple, 0.9);
+	}
+}
+
+// other
 .sort-buttons-container {
-  padding: 2vh;
-  position: relative;
-  margin: 0 auto 20px auto;
-  width: fit-content;
+	padding: 2vh;
+	position: relative;
+	margin: 0 auto 20px auto;
+	width: fit-content;
+}
+
+.back-button {
+	a {
+		text-decoration: none;
+		color: $black;
+	}
+	margin-bottom: 0.5rem;
 }

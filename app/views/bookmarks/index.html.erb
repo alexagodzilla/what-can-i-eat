@@ -1,12 +1,9 @@
-<div class="banner">
-  <div class="container">
-    <h2><%= link_to "Bookmarks", profile_bookmarks_path, style: "text-decoration: none; color: orange;" %></h2>
-    <h2><%= link_to "My Pantry", profile_ingredients_path, style: "text-decoration: none;"%></h2>
-    <h2><%= link_to "Friends", profile_friends_path, style: "text-decoration: none;"%></h2>
+<div class="profile-container">
+  <div class="banner">
+      <h2><%= link_to "Bookmarks", profile_bookmarks_path, id: "header-pink" %></h2>
+      <h2><%= link_to "My Pantry", profile_ingredients_path %></h2>
+      <h2><%= link_to "Friends", profile_friends_path %></h2>
   </div>
-</div>
-
-<div class="container">
   <div class="cards">
     <% if @user_bookmarks.empty? %>
       <h3>No bookmarks yet...</h3>

@@ -38,7 +38,7 @@ json_names.each do |file_name|
     if db_recipe.nil?
 
     puts "creating recipe #{recipe[:title]}"
-    recipe[:image].nil? ? img = "/assets/kelsey-chance-ZrhtQyGFG6s-unsplash.jpg" : img = recipe[:image]
+    recipe[:image].nil? ? img = "https://unsplash.com/photos/ZrhtQyGFG6s" : img = recipe[:image]
     recipe[:instructions].empty? ? instructions = recipe[:summary] : instructions = strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2')
     db_recipe = Recipe.create!(
       title: recipe[:title],
@@ -117,16 +117,16 @@ puts "creating user_ingredients"
   end
 end
 
-puts "creating bookmarks"
-150.times do
-  recipe_id = Recipe.all.sample.id
-  if Bookmark.where(recipe_id:).empty?
-    Bookmark.create!(
-      user_id: User.all.sample.id,
-      recipe_id:
-    )
-  end
-end
+# puts "creating bookmarks"
+# 150.times do
+#   recipe_id = Recipe.all.sample.id
+#   if Bookmark.where(recipe_id:).empty?
+#     Bookmark.create!(
+#       user_id: User.all.sample.id,
+#       recipe_id:
+#     )
+#   end
+# end
 
 puts "creating reviews"
 Recipe.all.each do |recipe|
@@ -149,19 +149,126 @@ end
 #   )
 # end
 
-puts "creating friendships"
-User.all.each do |user|
-  rand(3..5).times do
-    friend = User.all.sample
-    unless user == friend || user.friends.include?(friend)
-      Friendship.create!(
-        requester_id: user.id,
-        requested_id: friend.id,
-        status: "accepted"
-      )
-    end
-  end
-end
+# puts "creating friendships"
+# User.all.each do |user|
+#   rand(3..5).times do
+#     friend = User.all.sample
+#     unless user == friend || user.friends.include?(friend)
+#       Friendship.create!(
+#         requester_id: user.id,
+#         requested_id: friend.id,
+#         status: "accepted"
+#       )
+#     end
+#   end
+# end
 
 puts "creating chatroom"
 Chatroom.create!(name: "Main Room")
+
+puts "creating Amie"
+puts "amie's email is amie@me.com"
+Amie = User.create!(
+  first_name: "Amie",
+  last_name: Faker::Name.unique.last_name,
+  username: Faker::Internet.unique.username,
+  email: "amie@me.com",
+  password: "123456",
+  bio: Faker::Hipster.paragraph(sentence_count: 2),
+  diet: "Gluten Free",
+  image_url: "https://randomuser.me/api/portraits/women/8.jpg"
+)
+
+puts "creating Amie's bookmarks"
+puts "amie's bookmarks are gluten free recipes"
+gluten_free_recipes = Recipe.where(gluten_free: true)
+
+3.times do
+  recipe_id = gluten_free_recipes.sample.id
+  if Bookmark.where(recipe_id:).empty?
+    Bookmark.create!(
+      user_id: Amie.id,
+      recipe_id:
+    )
+  end
+end
+
+puts "creating Amie's user_ingredients"
+
+garlic_id = Ingredient.find_by(name: "Garlic").id
+beef_id = Ingredient.find_by(name: "Beef").id
+cumin_id = Ingredient.find_by(name: "Cumin").id
+
+[garlic_id, beef_id, cumin_id].each do |ingredient_id|
+  UserIngredient.create!(
+    user_id: Amie.id,
+    ingredient_id: ingredient_id
+  )
+end
+
+
+puts "creating Fran"
+puts "Fran's email is fran@me.com"
+Fran = User.create!(
+  first_name: "Fran",
+  last_name: Faker::Name.unique.last_name,
+  username: Faker::Internet.unique.username,
+  email: "fran@me.com",
+  password: "123456",
+  bio: Faker::Hipster.paragraph(sentence_count: 2),
+  diet: "Everything",
+  image_url: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+)
+
+puts "creating Fran's user_ingredients"
+onion_id = Ingredient.find_by(name: "Onion").id
+tomato_id = Ingredient.find_by(name: "Tomato").id
+ketchup_id = Ingredient.find_by(name: "Ketchup").id
+
+[onion_id, tomato_id, ketchup_id].each do |ingredient_id|
+  UserIngredient.create!(
+    user_id: Fran.id,
+    ingredient_id: ingredient_id
+  )
+end
+
+puts "creating Ila"
+puts "Ila's email is ila@me.com"
+Ila = User.create!(
+  first_name: "Ila",
+  last_name: Faker::Name.unique.last_name,
+  username: Faker::Internet.unique.username,
+  email: "ila@me.com",
+  password: "123456",
+  bio: Faker::Hipster.paragraph(sentence_count: 2),
+  diet: "Everything",
+  image_url: "https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+)
+
+puts "creating Ila's user_ingredients"
+peanut_butter_id = Ingredient.find_by(name: "Smooth peanut butter").id
+onion_id = Ingredient.find_by(name: "Onion").id
+sherry_id = Ingredient.find_by(name: "Sherry").id
+
+[peanut_butter_id, onion_id, sherry_id].each do |ingredient_id|
+  UserIngredient.create!(
+    user_id: Ila.id,
+    ingredient_id: ingredient_id
+  )
+end
+
+puts "creating Friendship between Amie and Fran"
+Friendship.create!(
+  requester_id: Amie.id,
+  requested_id: Fran.id,
+  status: "accepted"
+)
+
+puts "creating Friendship between Amie and Ila"
+Friendship.create!(
+  requester_id: Amie.id,
+  requested_id: Ila.id,
+  status: "accepted"
+)
+
+puts "seeding done"

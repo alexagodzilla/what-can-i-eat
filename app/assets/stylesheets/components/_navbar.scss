@@ -2,24 +2,23 @@
 	height: 90px;
 	justify-content: space-between;
 	background: $purple;
-	color: $seashell;
-}
 
-.nav-link {
-	color: $almond;
+  .navbar-collapse {
+    flex-grow: 0;
+  }
 
-  &:hover {
-    color: rgb(255, 255, 255);
+  .navbar-brand img {
+    border-radius: 50%;
+    width: 40px;
   }
 }
 
-.navbar-lewagon .navbar-collapse {
-	flex-grow: 0;
-}
+.nav-link {
+	color: white;
 
-.navbar-lewagon .navbar-brand img {
-	border-radius: 50%;
-	width: 40px;
+  &:hover {
+    color: $magenta;
+  }
 }
 
 .photo {
@@ -27,9 +26,8 @@
 	width: 40px;
 }
 
-
 #front-logo {
-  width: 250px;
+  width: 255px;
   // margin-top: 5px;
   // margin-bottom: 5px;
 }

@@ -17,8 +17,7 @@
 }
 
 #recipe-image {
-  border-radius: 8px;
-  box-shadow: 5px 5px $almond;
+  position: relative;
 }
 
 // For show page's ingredients and method
@@ -56,29 +55,10 @@
 }
 
 // For star ratings
-.star-rating {
-  display: inline-block;
-  font-size: 0;
-}
-
-.star {
-  width: 1em;
-  height: 1em;
-  margin: 0 0.1em;
-  background-color: gray;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.star.active {
-  background-color: yellow;
-}
-
 .single-star {
-  height: 24px;
+  height: 20px;
   margin: 0 -0.11em;
 }
-
 
 .button {
   /* Variables */
@@ -126,4 +106,19 @@
 .chat:active .chat-button {
   /* Push the button downwards when pressed */
   transform: translateY(0);
+}
+
+.bookmarks {
+  position: absolute;
+  top: 0px;
+  left: 520px;
+}
+
+.chat-to-friends {
+  margin-top: 28px;
+  margin-left: 18px;
+}
+
+.friends {
+  margin-top: 42px;
 }

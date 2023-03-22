@@ -1,5 +1,13 @@
 <div class="container my-3">
-  <h2><%= @recipe.title %></h2>
+  <div class="back-button">
+    <%= link_to :back do %>
+      <span>
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>Back</span>
+      </span>
+    <% end %>
+  </div>
+  <h2 style= "margin-bottom: 22px;"><%= @recipe.title %></h2>
   <div class="modal-body row pic-friends">
     <div class="col-md-6">
       <div class="recipe-image">
@@ -32,28 +40,26 @@
     </div>
 
     <div class="col-md-6" class="friends-chat">
-      <div class="friends">
+      <div class="friends ">
         <% if user_signed_in? %>
           <% selected_users = [] %>
           <% current_user.friends.each do |user| %>
             <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
             <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
         <% end %>
-        <ul>
           <% selected_users.each do |user| %>
-            <li>
-              <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
+              <%= image_tag (user.image_url.present? ? user.image_url : "https://source.unsplash.com/200x200/?user"), class:"avatar-friends" %>
+              <%= user.first_name.capitalize %> might have<% user.ingredients.each do |ingredient| %>
                 <% if @recipe_ingredients.include?(ingredient.id) %>
-                <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
+                  <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
                 <% end %>
-              <% end %>in their pantry!
-            </li>
+              <% end %>in their pantry
+              <br>
           <% end %>
-        </ul>
         <% end %>
       </div>
       <div class="chat">
-        <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "chat-button" if user_signed_in?%>
+        <%= link_to "Chat", chatroom_path(@chatroom), class: "chat-button" if user_signed_in?%>
       </div>
     </div>
   </div>
@@ -101,36 +107,51 @@
     </div>
   </div>
 
-
   <div class="reviews">
-    <h3>Leave a comment</h3>
-    <%= render 'recipes/form', recipe: @recipe, review: @review %>
+    <div id="comment-submission">
+      <h3>Leave a comment or rating (<%= @recipe.reviews.count %>)</h3>
+      <%= render 'recipes/form', recipe: @recipe, review: @review %>
+    </div>
     <% if @recipe.reviews.empty? %>
       <p>There are no currently no comments... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
-      <%if review.rating.present? %>
-        <% review.rating.times do %>
-          <span><%= image_tag "star.png", class: "single-star"%></span>
-        <% end %>
-        <p><small><%= review.user.username %></small></p>
-        <p><%= review.content if review.content.present? %></p>
-        <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
-          <%= form_with model: @friendship, method: :post do |f| %>
-            <%= f.hidden_field :requested, value: review.user.id %>
-            <%= f.submit "Add friend" %>
-          <% end %>
-        <% end %>
-    <% end %>
-        <% if current_user.present? %>
-          <% if review.user == current_user %>
-            <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
-              <i class="fa-solid fa-trash-can"></i>
+      <div id="comments">
+        <% if review.rating.present? %>
+        <div id="comments-flex">
+          <div id="flex-left">
+            <%= image_tag review.user.image_url, class: "avatar-bordered" %>
+            <p><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></p>
+            <p><%= review.user.username %></p>
+            <p><%= review.user.reviews.count %> comments</p>
+          </div>
+          <div id="flex-right">
+            <% review.rating.times do %>
+              <%= image_tag "star.png", class: "single-star"%>
             <% end %>
-            <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-            <%# <%= render 'recipes/form', recipe: @recipe, review: review %>
+            <p><%= review.content if review.content.present? %></p>
+          </div>
+        </div>
+          <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
+            <%= form_with model: @friendship, method: :post do |f| %>
+              <%= f.hidden_field :requested, value: review.user.id %>
+              <%= f.submit "Add friend", class: "btn-purple" %>
+            <% end %>
+          <% end %>
+          <% if current_user.invites_sent.include?(review.user) %>
+          <p id="invite-sent">Invite sent</p>
           <% end %>
         <% end %>
+          <% if current_user.present? %>
+            <% if review.user == current_user %>
+              <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
+                <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+              <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+              <%# <%= render 'recipes/form', recipe: @recipe, review: review %>
+            <% end %>
+          <% end %>
+        </div>
         <hr>
       <% end %>
     <% end %>
