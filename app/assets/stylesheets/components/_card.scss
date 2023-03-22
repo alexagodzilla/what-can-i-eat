@@ -1,9 +1,16 @@
+// recipe bookmarks
 .bookmark-visible {
   position: absolute;
   margin-left: 13rem;
   margin-top: 0;
 }
 
+// recipe card star
+.fa-star {
+  color: #FFBD00;
+}
+
+// recipe cards
 .cards {
 	width: fit-content;
 	margin: 0 auto 20px auto;
