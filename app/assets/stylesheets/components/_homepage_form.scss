@@ -53,33 +53,51 @@
 }
 
 /* Recipe index page form */
-.form-container {
-	right: 20vw;
-	left: 20vw;
-	padding: 20px;
-	background-color: rgba($seashell, 0.35); // check with ale
-	border-radius: 10px;
-	position: absolute;
-	top: 116px;
-	// left: 298px;
+
+.form-container{
+  right:20vw;
+  left:20vw;
+  padding: 20px;
+  background-color: rgba($seashell, 0.35); // check with ale
+  border-radius: 10px;
+  position: absolute;
+  top: 116px;
 }
 
 .submit input {
 	margin-top: 2px;
 }
 
-.collapsible {
-	border-radius: 12px;
-	background-color: rgba($purple, 0.9);
-	color: white;
-	cursor: pointer;
-	padding: 8px;
-	width: 25vw;
-	height: 2.5rem;
-	border: none;
-	text-align: left;
-	outline: none;
-	font-size: 15px;
+.collapsible, .submit-button {
+  cursor: pointer;
+  width: 602px;
+  height: 2.5rem;
+  border: none;
+  text-align: left;
+  outline: none;
+  padding: 10px 40px;
+  height: 4.5vh;
+  border-radius: 10px;
+  border: 0;
+  background-color: $purple;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all .3s ease;
+  box-shadow: $magenta 0px 5px 0px 0px;
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 15px;
+
+    &:hover {
+      box-shadow: #ef057e  0px 7px 0px 0px;
+    }
+
+    &:active {
+      background-color: #b94a83;
+      /*50, 168, 80*/
+      box-shadow: rgb(189, 28, 63) 0px 0px 0px 0px;
+      transform: translateY(2px);
+      transition: 200ms;
+    }
 }
 
 .active,
@@ -155,3 +173,33 @@
 	font-size: 16;
 	color: rgba(59, 27, 54, 0.8);
 }
+
+
+/* Submit button here just for time reasons*/
+
+.submit-button, .sort-buttons-container button{
+  padding: 17px 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(255, 56, 86);
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+  transition: all .3s ease;
+  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+
+    &:hover {
+    box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+    }
+
+    &:active {
+    background-color: rgb(255, 56, 86);
+    /*50, 168, 80*/
+    box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms;
+    }
+ }

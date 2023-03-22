@@ -43,7 +43,7 @@
           <% end %>
         </div>
         <div class="submit">
-          <%= f.submit "Find my recipe", class: "form-btn-green" %>
+          <%= f.submit "Find my recipe", class: "submit-button" %>
         </div>
       </div>
     </div>
@@ -56,8 +56,8 @@
   <% end %>
   <div data-controller="cards">
     <div class="sort-buttons-container">
-      <button class="btn btn-outline-success" data-action="cards#sortCardsAsc">Low to high</button>
-      <button class="btn btn-outline-success" data-action="cards#sortCardsDesc">High to low</button>
+      <button data-action="cards#sortCardsAsc">Low to high</button>
+      <button data-action="cards#sortCardsDesc">High to low</button>
     </div>
     <div class="cards" data-cards-target="container">
       <% @recipes.each do |recipe| %>
