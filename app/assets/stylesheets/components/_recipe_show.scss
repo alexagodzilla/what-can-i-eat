@@ -17,8 +17,7 @@
 }
 
 #recipe-image {
-  border-radius: 8px;
-  box-shadow: 5px 5px $almond;
+  position: relative;
 }
 
 // For show page's ingredients and method
@@ -59,4 +58,19 @@
 .single-star {
   height: 24px;
   margin: 0 -0.11em;
+}
+
+.bookmarks {
+  position: absolute;
+  top: 0px;
+  left: 520px;
+}
+
+.chat-to-friends {
+  margin-top: 28px;
+  margin-left: 18px;
+}
+
+.friends {
+  margin-top: 42px;
 }
