@@ -59,7 +59,9 @@
         <% end %>
       </div>
       <div class="chat">
-        <%= link_to "Chat", chatroom_path(@chatroom), class: "chat-button" if user_signed_in?%>
+        <% if user_signed_in? && selected_users.any? %>
+          <%= link_to "Chat", chatroom_path(@chatroom), class: "btn btn-primary chat-to-friends" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -120,7 +122,7 @@
         <% if review.rating.present? %>
         <div id="comments-flex">
           <div id="flex-left">
-            <%= image_tag review.user.image_url, class: "avatar-bordered" %>
+            <%= image_tag (review.user.image_url.present? ? review.user.image_url : "https://source.unsplash.com/200x200/?user"), class: "avatar-bordered" %>
             <p><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></p>
             <p><%= review.user.username %></p>
             <p><%= review.user.reviews.count %> comments</p>
