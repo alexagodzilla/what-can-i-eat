@@ -53,7 +53,7 @@
         <% end %>
       </div>
       <div class="chat">
-        <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "btn btn-primary" if user_signed_in?%>
+        <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "chat-button" if user_signed_in?%>
       </div>
     </div>
   </div>

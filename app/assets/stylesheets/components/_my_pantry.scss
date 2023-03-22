@@ -35,13 +35,13 @@
     color: hsl(0, 0%, 100%);
 
       &:hover {
-        box-shadow: rgb(240, 189, 95) 0px 7px 0px 0px;
+        box-shadow: #ef057e 0px 7px 0px 0px;
       }
 
       &:active {
-        background-color: rgba(206, 136, 8, 0.865);
+        background-color: rgba(36, 1, 234, 0.865);
         /*50, 168, 80*/
-        box-shadow: rgb(189, 189, 28) 0px 0px 0px 0px;
+        box-shadow: rgb(28, 189, 55) 0px 0px 0px 0px;
         transform: translateY(2px);
         transition: 200ms;
       }
