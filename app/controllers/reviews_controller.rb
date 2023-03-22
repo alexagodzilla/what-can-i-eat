@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    redirect_to recipe_path(@review.recipe), notice: "Comment deleted."
+    redirect_to recipe_path(@review.recipe), notice: "Comment deleted"
   end
 
   private
