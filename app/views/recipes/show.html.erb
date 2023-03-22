@@ -1,5 +1,5 @@
 <div class="container my-3">
-  <h2><%= @recipe.title %></h2>
+  <h2 style= "margin-bottom: 22px;"><%= @recipe.title %></h2>
   <div class="modal-body row pic-friends">
     <div class="col-md-6">
       <div class="recipe-image">
@@ -32,28 +32,26 @@
     </div>
 
     <div class="col-md-6" class="friends-chat">
-      <div class="friends">
+      <div class="friends ">
         <% if user_signed_in? %>
           <% selected_users = [] %>
           <% current_user.friends.each do |user| %>
             <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
             <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
         <% end %>
-        <ul>
           <% selected_users.each do |user| %>
-            <li>
-              <%= user.first_name %> might have<% user.ingredients.each do |ingredient| %>
+              <%= image_tag (user.image_url.present? ? user.image_url : "https://source.unsplash.com/200x200/?user"), class:"avatar-friends" %>
+              <%= user.first_name.capitalize %> might have<% user.ingredients.each do |ingredient| %>
                 <% if @recipe_ingredients.include?(ingredient.id) %>
-                <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
+                  <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
                 <% end %>
-              <% end %>in their pantry!
-            </li>
+              <% end %>in their pantry
+              <br>
           <% end %>
-        </ul>
         <% end %>
       </div>
       <div class="chat">
-        <%= link_to "Chat to friends", chatroom_path(@chatroom), class: "btn btn-primary" if user_signed_in?%>
+        <%= link_to "Chat", chatroom_path(@chatroom), class: "btn btn-primary chat-to-friends" if user_signed_in?%>
       </div>
     </div>
   </div>
