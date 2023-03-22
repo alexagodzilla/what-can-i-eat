@@ -1,147 +1,157 @@
 // styling for dropdown option buttons/tags
 
 #homepage-form input[type="checkbox"] {
-  position: absolute;
-  transform: scale(0);
+	position: absolute;
+	transform: scale(0);
 
-  + label {
-    cursor: pointer;
-    background-color: rgba($magenta, 0.9);
-    border-radius: 50rem;
-    padding: 0.2rem 0.5rem;
-    border: 1px solid rgba($magenta, 0.9);
-    color: white;
-  }
+	+ label {
+		cursor: pointer;
+		background-color: rgba($magenta, 0.9);
+		border-radius: 50rem;
+		padding: 0.2rem 0.5rem;
+		border: 1px solid rgba($magenta, 0.9);
+		color: white;
+	}
 
-  + label:hover {
-    background-color: rgba($magenta, 0.8);
-  }
+	+ label:hover {
+		background-color: rgba($magenta, 0.8);
+	}
 
-  &:checked + label {
-    cursor: pointer;
-    background-color: $magenta;
-    border: 1px solid $magenta;
-    color: $white;
-  }
+	&:checked + label {
+		cursor: pointer;
+		background-color: $magenta;
+		border: 2px solid rgba(59, 27, 54, 0.8);
+		color: $white;
+		box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+	}
 }
 
 #homepage-form input[type="text"] {
-  padding: 0.5rem;
-  border: 0;
-  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	padding: 0.5rem;
+	border: 0;
+	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
 }
 
 #btn-ingredients {
-  background-color: transparent;
-  border: none;
-  margin: 0;
-  padding: 0.2rem 0.5rem;
-  text-decoration: none;
-  color: $black;
+	background-color: transparent;
+	border: none;
+	margin: 0;
+	padding: 0.2rem 0.5rem;
+	text-decoration: none;
+	color: rgba(59, 27, 54, 0.8);
 
-  &:hover {
-    background-color: rgba(251, 235, 218, 0.5);
-    border-radius: 4px;
-    padding: 0.4rem 0.5rem;
-  }
+	&:hover {
+		background-color: rgba(251, 235, 218, 0.5);
+		border-radius: 4px;
+		padding: 0.4rem 0.5rem;
+	}
 }
 
 .fa-plus {
-  color: $magenta;
-  margin-left: 0.3rem;
+	color: $purple;
+	margin-left: 0.3rem;
 }
 
 /* Recipe index page form */
-.form-container{
-  right:20vw;
-  left:20vw;
-  padding: 20px;
-  background-color: rgba($seashell, 0.35); // check with ale
-  border-radius: 10px;
-  position: absolute;
-  top: 116px;
-  left: 298px;}
+.form-container {
+	right: 20vw;
+	left: 20vw;
+	padding: 20px;
+	background-color: rgba($seashell, 0.35); // check with ale
+	border-radius: 10px;
+	position: absolute;
+	top: 116px;
+	left: 298px;
+}
 
 .submit input {
-  margin-top:2px;
+	margin-top: 2px;
 }
 
 .collapsible {
-  border-radius: 12px;
-  background-color: rgba($purple, 0.9);
-  color: white;
-  cursor: pointer;
-  padding: 8px;
-  width: 25vw;
-  height: 2.5rem;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+	border-radius: 12px;
+	background-color: rgba($purple, 0.9);
+	color: white;
+	cursor: pointer;
+	padding: 8px;
+	width: 25vw;
+	height: 2.5rem;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
 }
 
-.active, .collapsible:hover {
-  background-color: rgba($purple, 0.8);
+.active,
+.collapsible:hover {
+	background-color: rgba($purple, 0.8);
 }
 
 .content {
-  width: 25vw; // edit
-  display: none;
-  overflow: hidden;
-  background-color: transparent;
+	width: 25vw; // edit
+	display: none;
+	overflow: hidden;
+	background-color: transparent;
 
-  label {
-    margin: 5px;
-  }
+	label {
+		margin: 5px;
+	}
 }
 
 .collapsible:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
-  font-size: 13px;
-  color: white;
-  float: right;
-  margin-left: 5px;
+	content: "\02795"; /* Unicode character for "plus" sign (+) */
+	font-size: 13px;
+	color: white;
+	float: right;
+	margin-left: 5px;
 }
 
 .active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
+	content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
 .dropdowns {
-  display:flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .drop-menu {
-  margin: 8px;
+	margin: 8px;
 }
 
-.text-box{
-  width: 100%;
-  text-align: center;
+.text-box {
+	width: 100%;
+	text-align: center;
 
-  input {
-    width: 100%;
-    height: 3rem;
-    background-color: white;
-    border-radius: 8px;
-  }
+	input {
+		width: 100%;
+		height: 3rem;
+		background-color: white;
+		border-radius: 8px;
+	}
 }
 
 .submit {
-  display: flex;
-  width: 100%;
-  justify-content: center;
+	display: flex;
+	width: 100%;
+	justify-content: center;
 
-  input {
-    margin-top: 2px;
-  }
+	input {
+		margin-top: 2px;
+	}
 
-  input[type=submit]{
-    position: relative;
-    top: 0;
-    width: 70%;
-    border-radius: 8px;
-  }
+	input[type="submit"] {
+		position: relative;
+		top: 0;
+		width: 70%;
+		border-radius: 8px;
+	}
+}
 
+.pantry-btn {
+	margin-top: 4px;
+	font-weight: 600;
+	font-size: 16px;
+	font-size: 16;
+	color: rgba(59, 27, 54, 0.8);
 }

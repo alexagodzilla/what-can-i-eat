@@ -1,4 +1,12 @@
 <div class="container my-3">
+  <div class="back-button">
+    <%= link_to :back do %>
+      <span>
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>Back</span>
+      </span>
+    <% end %>
+  </div>
   <h2 style= "margin-bottom: 22px;"><%= @recipe.title %></h2>
   <div class="modal-body row pic-friends">
     <div class="col-md-6">
@@ -101,15 +109,17 @@
 
 
   <div class="reviews">
-    <h3>Leave a comment</h3>
-    <%= render 'recipes/form', recipe: @recipe, review: @review %>
-    <% if @recipe.reviews.empty? %>
-      <p>There are no currently no comments... Leave one now!</p>
+    <div id="comment-submission">
+      <h3>Leave a comment or rating! (<%= @recipe.reviews.count %>)</h3>
+      <%= render 'recipes/form', recipe: @recipe, review: @review %>
+    </div>
+      <% if @recipe.reviews.empty? %>
+        <p>There are no currently no comments... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
-      <%if review.rating.present? %>
+      <% if review.rating.present? %>
         <% review.rating.times do %>
-          <span><%= image_tag "star.png", class: "single-star"%></span>
+          <%= image_tag "star.png", class: "single-star"%>
         <% end %>
         <p><small><%= review.user.username %></small></p>
         <p><%= review.content if review.content.present? %></p>

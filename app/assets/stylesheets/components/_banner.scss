@@ -1,24 +1,22 @@
 // might need editing on other screens
-
 .homepage-banner {
-  padding: 0;
-  height: 420px;
-  width: 100vw;
-  position: relative;
-  background-image: url("homepage-banner.jpg");
-  margin-bottom: 10px;
-  background-size: cover;
+	padding: 0;
+	height: 420px;
+	width: 100vw;
+	position: relative;
+	background-image: url("homepage-banner.jpg");
+	margin-bottom: 10px;
+	background-size: cover;
 	background-position: center;
-  margin: 10vh auto;
 }
 
 .pages-container h1 {
-  margin: 0;
-  color: white;
-  text-shadow: 1px 1px 10px rgba(0,0,0,0.2);
-  font-size: 32px;
-  font-weight: bold;
-  position: absolute;
-  top: 40px;
-  left: 334px;
+	margin: 0;
+	color: white;
+	text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+	font-size: 32px;
+	font-weight: bold;
+	position: absolute;
+	top: 40px;
+	left: 334px;
 }

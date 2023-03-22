@@ -1,19 +1,25 @@
 .banner {
-	background-size: cover;
-	background-position: center;
 	padding-top: 32px;
 	padding-bottom: 32px;
 
   h2 {
     padding: 0;
-    color: $blue;
     font-size: 32px;
     font-weight: bold;
     margin: 10px;
   }
 
+  a {
+    text-decoration: none;
+    color: $purple;
+  }
+
   a:hover {
-    color: $orange;
+    color: $magenta;
     cursor: pointer;
   }
+}
+
+#header-pink {
+  color: $magenta;
 }

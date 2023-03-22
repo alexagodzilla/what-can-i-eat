@@ -55,24 +55,6 @@
 }
 
 // For star ratings
-.star-rating {
-  display: inline-block;
-  font-size: 0;
-}
-
-.star {
-  width: 1em;
-  height: 1em;
-  margin: 0 0.1em;
-  background-color: gray;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.star.active {
-  background-color: yellow;
-}
-
 .single-star {
   height: 24px;
   margin: 0 -0.11em;
