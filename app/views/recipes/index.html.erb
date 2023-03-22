@@ -29,7 +29,7 @@
             <% end %>
             <% if user_signed_in? %>
               <div class="drop-menu">
-                <button type="button" class="collapsible">Include ingredients from your pantry</button>
+                <button type="button" class="collapsible">Your pantry ingredients</button>
                 <div class="content">
                   <p><%= "You can add your kitchen staples to the pantry to use here any time" if current_user.ingredients.empty? %></p>
                   <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
