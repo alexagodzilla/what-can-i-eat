@@ -88,8 +88,8 @@
         <% @recipe.ingredients.each do |ingredient| %>
           <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
           <li>
-            <strong><%= truncate_zero(recipe_ingredient.quantity) %>
-            <%= ingredient.quantity_unit %></strong>
+            <div class="ingredient-format"><%= truncate_zero(recipe_ingredient.quantity) %>
+            <%= ingredient.quantity_unit %></div>
             <%= ingredient.name %>
           </li>
         <% end %>
