@@ -67,13 +67,12 @@
   </div>
 
   <div class="diet-serving-time col-md-6">
-
       <div class="diet">
-          <%= image_tag "vegetarianFra.png" if @recipe.vegetarian? %>
-          <%= image_tag "veganFra.png" if @recipe.vegan? %>
-          <%= image_tag "dairyfreeFra.png" if @recipe.dairy_free? %>
+          <%= image_tag "vegetarian.png" if @recipe.vegetarian? %>
+          <%= image_tag "vegan.png" if @recipe.vegan? %>
+          <%= image_tag "dairyfree.png" if @recipe.dairy_free? %>
         <div class="glutenfree">
-          <%= image_tag "glutenfreeFra3.png" if @recipe.gluten_free? %>
+          <%= image_tag "glutenfree.png" if @recipe.gluten_free? %>
         </div>
       </div>
       <div class="serving-time">
