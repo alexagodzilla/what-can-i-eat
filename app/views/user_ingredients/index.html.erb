@@ -7,10 +7,10 @@
 
   <div class="container">
     <div class="phrases">
-      <h5>Here you can add the ingredients you usually have in your kitchen.</h5>
-      <h5>You can then select them to find the recipes that include what you have</h5>
+      <h4>Here you can add the ingredients you usually have in your kitchen.</h4>
+      <h4>You can then select them to find the recipes that include what you have.</h4>
     </div>
-    <h3><span><i class="fa-solid fa-utensils"></i></span> Add the ingredients you already have!</h3>
+    <h3><span><i class="fa-solid fa-utensils"></i></span> Add the ingredients you already have</h3>
 
     <%= form_with model: @user_ingredient, class: "pantry-form" do |f| %>
       <%= f.collection_select :ingredient_id, Ingredient.order(:name), :id, :name %>
