@@ -100,7 +100,6 @@
     }
 }
 
-
 .active,
 .collapsible:hover {
 	background-color: rgba($purple, 0.8);
@@ -125,11 +124,9 @@
   color: white;
 }
 
-
 .active:after {
 	content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
-
 
 .dropdowns {
 	display: flex;
