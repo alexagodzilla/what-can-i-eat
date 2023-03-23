@@ -54,14 +54,14 @@
 
 /* Recipe index page form */
 
-.form-container{
-  right:20vw;
-  left:20vw;
-  padding: 20px;
-  background-color: rgba($seashell, 0.35); // check with ale
-  border-radius: 10px;
-  position: absolute;
-  top: 116px;
+.form-container {
+	right: 20vw;
+	left: 20vw;
+	padding: 20px;
+	background-color: rgba($seashell, 0.35); // check with ale
+	border-radius: 10px;
+	position: absolute;
+	top: 116px;
 }
 
 .submit input {
@@ -69,35 +69,35 @@
 }
 
 .collapsible {
-  cursor: pointer;
-  width: 22.3rem;
-  height: 2.5rem;
-  border: none;
-  text-align: left;
-  outline: none;
-  padding: 10px 40px;
-  height: 4.5vh;
-  border-radius: 10px;
-  border: 0;
-  background-color: $purple;
-  letter-spacing: 1.5px;
-  font-size: 15px;
-  transition: all .3s ease;
-  box-shadow: $magenta 0px 5px 0px 0px;
-  color: hsl(0, 0%, 100%);
-  margin-bottom: 15px;
+	cursor: pointer;
+	width: 22.3rem;
+	height: 2.5rem;
+	border: none;
+	text-align: left;
+	outline: none;
+	padding: 10px 40px;
+	height: 4.5vh;
+	border-radius: 10px;
+	border: 0;
+	background-color: $purple;
+	letter-spacing: 1.5px;
+	font-size: 15px;
+	transition: all 0.3s ease;
+	box-shadow: $magenta 0px 5px 0px 0px;
+	color: hsl(0, 0%, 100%);
+	margin-bottom: 15px;
 
-    &:hover {
-      box-shadow: $magenta  0px 7px 0px 0px;
-    }
+	&:hover {
+		box-shadow: $magenta 0px 7px 0px 0px;
+	}
 
-    &:active {
-      background-color: $magenta;
-      /*50, 168, 80*/
-      box-shadow: $magenta 0px 0px 0px 0px;
-      transform: translateY(2px);
-      transition: 200ms;
-    }
+	&:active {
+		background-color: $magenta;
+		/*50, 168, 80*/
+		box-shadow: $magenta 0px 0px 0px 0px;
+		transform: translateY(2px);
+		transition: 200ms;
+	}
 }
 
 .active,
@@ -121,7 +121,7 @@
 	font-size: 13px;
 	float: right;
 	margin-left: 5px;
-  color: white;
+	color: white;
 }
 
 .active:after {
@@ -135,7 +135,7 @@
 
 .drop-menu {
 	margin: 8px;
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .text-box {
@@ -175,36 +175,37 @@
 	color: rgba(59, 27, 54, 0.8);
 }
 
-
 /* Submit button here just for time reasons*/
 
-.submit-button, .sort-buttons-container button{
-  padding-top: 0.4rem 0 0.3rem 0;
-  border-radius: 10px;
-  border: 0;
-  background-color: rgb(255, 56, 86);
-  letter-spacing: 1.5px;
-  font-size: 15px;
-  text-align: center;
-  font-weight: bold;
-  transition: all .3s ease;
-  box-shadow: #c92e46 0 0.3rem 0 0;
-  color: hsl(0, 0%, 100%);
-  text-decoration: none;
+.submit-button,
+.sort-buttons-container button {
+	padding-top: 0.4rem 0 0.3rem 0;
+	border-radius: 10px;
+	border: 0;
+	background-color: $green;
+	letter-spacing: 1.5px;
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	box-shadow: #c6dfa2 2px 2px 2px 2px;
+	// box-shadow: #c92e46 0 0.3rem 0 0;
+	color: hsl(0, 0%, 100%);
+	text-decoration: none;
 
-    &:hover {
-    box-shadow: rgb(201, 46, 70) 0px 0.2rem 0px 0px;
-    }
+	&:hover {
+		box-shadow: rgb(201, 46, 70) 0px 0.2rem 0px 0px;
+	}
 
-    &:active {
-    background-color: rgb(255, 56, 86);
-    /*50, 168, 80*/
-    box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
-    transform: translateY(5px);
-    transition: 200ms;
-    }
- }
+	&:active {
+		background-color: rgb(255, 56, 86);
+		/*50, 168, 80*/
+		box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+		transform: translateY(5px);
+		transition: 200ms;
+	}
+}
 
- .sort-buttons-container button {
-  padding: 0.5rem;
- }
+.sort-buttons-container button {
+	padding: 0.5rem;
+}
