@@ -91,6 +91,45 @@ json_names.each do |file_name|
   end
 end
 
+# Only for demo purposes
+twenty_set_faces = [
+  "https://randomuser.me/api/portraits/men/32.jpg",
+  "https://randomuser.me/api/portraits/men/29.jpg",
+  "https://randomuser.me/api/portraits/men/35.jpg",
+  "https://randomuser.me/api/portraits/men/4.jpg",
+  "https://randomuser.me/api/portraits/men/22.jpg",
+  "https://randomuser.me/api/portraits/men/12.jpg",
+  "https://randomuser.me/api/portraits/men/52.jpg",
+  "https://images.unsplash.com/photo-1455354269813-737d9df115bb?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=1229aa0db2a9a42022b7669f30784123",
+  "https://images.unsplash.com/photo-1502452213786-a5bc0a67e963?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=8474b116817dfa40dc19c9349a16ee5a",
+  "https://images.pexels.com/photos/450212/pexels-photo-450212.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://randomuser.me/api/portraits/men/84.jpg",
+  "https://randomuser.me/api/portraits/men/16.jpg",
+  "https://images.unsplash.com/photo-1474533410427-a23da4fd49d0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=ee9537f6365657688885825712e3349d",
+  "https://images.unsplash.com/photo-1503593245033-a040be3f3c82?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=ca8c652b62b1f14c9c4c969289a8b33c",
+  "https://randomuser.me/api/portraits/women/44.jpg",
+  "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9",
+  "https://randomuser.me/api/portraits/women/63.jpg",
+  "https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e",
+  "https://randomuser.me/api/portraits/women/47.jpg",
+  "https://randomuser.me/api/portraits/women/95.jpg",
+  "https://randomuser.me/api/portraits/women/79.jpg",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=046c29138c1335ef8edee7daf521ba50",
+  "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
+  "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
+  "https://randomuser.me/api/portraits/women/8.jpg",
+  "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
+  "https://randomuser.me/api/portraits/women/9.jpg",
+  "https://images.unsplash.com/photo-1496081081095-d32308dd6206?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=dd302358c7e18c27c4086e97caf85781",
+  "https://images.pexels.com/photos/598745/pexels-photo-598745.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb",
+  "https://images.unsplash.com/photo-1546539782-6fc531453083?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
+  "https://api.uifaces.co/our-content/donated/AVQ0V28X.jpg",
+  "https://randomuser.me/api/portraits/women/33.jpg",
+  "https://images.pexels.com/photos/325531/pexels-photo-325531.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.unsplash.com/photo-1465406325903-9d93ee82f613?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=5eb9f23d01faf52817ff797530242521"
+]
+
+
 puts "creating users"
 200.times do
   User.create!(
@@ -101,7 +140,7 @@ puts "creating users"
     password: "123456",
     bio: Faker::Hipster.paragraph(sentence_count: 2),
     diet: ["Vegetarian", "Vegan", "Gluten Free", "Dairy Free", "Everything"].sample,
-    image_url: "https://source.unsplash.com/featured/?face"
+    image_url: twenty_set_faces.sample
   )
 end
 
@@ -176,7 +215,7 @@ Amie = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Gluten Free",
-  image_url: "https://randomuser.me/api/portraits/women/8.jpg"
+  image_url: "https://media.licdn.com/dms/image/C5603AQENw89Y7W8dZQ/profile-displayphoto-shrink_800_800/0/1661689705649?e=1684972800&v=beta&t=v-luyti_hozweHm95OKxMq3e7AVBPTzZ2epnwL08Phw"
 )
 
 puts "creating Amie's bookmarks"
@@ -217,7 +256,7 @@ Fran = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Everything",
-  image_url: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+  image_url: "https://media.licdn.com/dms/image/D4D03AQEG5QOzpRGfIg/profile-displayphoto-shrink_800_800/0/1665922973231?e=1684972800&v=beta&t=MdVoqLlh30cViX6MG5ely8p4lQE7WOwy5bmvjnaX13U"
 )
 
 puts "creating Fran's user_ingredients"
@@ -242,7 +281,7 @@ Ila = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Everything",
-  image_url: "https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+  image_url: "https://media.licdn.com/dms/image/D4E35AQEX1N3rL4YFbg/profile-framedphoto-shrink_800_800/0/1659182972444?e=1680181200&v=beta&t=w7rl7u-1clRq3128iaZkOLFHspY4-g-KgDbJCh0egZw"
 )
 
 puts "creating Ila's user_ingredients"
@@ -253,6 +292,32 @@ sherry_id = Ingredient.find_by(name: "Sherry").id
 [peanut_butter_id, onion_id, sherry_id].each do |ingredient_id|
   UserIngredient.create!(
     user_id: Ila.id,
+    ingredient_id: ingredient_id
+  )
+end
+
+
+puts "creating jon"
+puts "jon's email is jon@me.com"
+Jon = User.create!(
+  first_name: "Jon",
+  last_name: Faker::Name.unique.last_name,
+  username: Faker::Internet.unique.username,
+  email: "jon@me.com",
+  password: "123456",
+  bio: Faker::Hipster.paragraph(sentence_count: 2),
+  diet: "Everything",
+  image_url: "https://avatars.githubusercontent.com/u/110668469?v=4"
+)
+
+puts "creating Jon's user_ingredients"
+ginger_id = Ingredient.find_by(name: "Ginger").id
+chicken_breasts_id = Ingredient.find_by(name: "Chicken breasts").id
+red_wine_vinegar_id = Ingredient.find_by(name: "Red wine vinegar").id
+
+[ginger_id, chicken_breasts_id, red_wine_vinegar_id].each do |ingredient_id|
+  UserIngredient.create!(
+    user_id: Jon.id,
     ingredient_id: ingredient_id
   )
 end
@@ -268,6 +333,14 @@ puts "creating Friendship between Amie and Ila"
 Friendship.create!(
   requester_id: Amie.id,
   requested_id: Ila.id,
+  status: "accepted"
+)
+
+
+puts "creating Friendship between Amie and Jon"
+Friendship.create!(
+  requester_id: Amie.id,
+  requested_id: Jon.id,
   status: "accepted"
 )
 
