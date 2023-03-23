@@ -66,19 +66,24 @@
     </div>
   </div>
 
-  <div class="diet-serving-time">
-    <div class="diet">
-      <%= "Vegetarian" if @recipe.vegetarian? %>
-      <%= "Vegan" if @recipe.vegan? %>
-      <%= "Gluten-free" if @recipe.gluten_free? %>
-      <%= "Dairy-free" if @recipe.dairy_free? %>
-    </div>
-    <div class="serving-size">
-      <p><i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %></p>
-    </div>
-    <div class="total-time">
-      <p><i class="fa-solid fa-clock me-3"></i><%= minutes_to_hour(@recipe.total_time) %></p>
-    </div>
+  <div class="diet-serving-time col-md-6">
+
+      <div class="diet">
+          <%= image_tag "vegetarianFra.png" if @recipe.vegetarian? %>
+          <%= image_tag "veganFra.png" if @recipe.vegan? %>
+          <%= image_tag "dairyfreeFra.png" if @recipe.dairy_free? %>
+        <div class="glutenfree">
+          <%= image_tag "glutenfreeFra3.png" if @recipe.gluten_free? %>
+        </div>
+      </div>
+      <div class="serving-time">
+        <div class="serving">
+          <i class="fa-solid fa-users me-3"></i><%= @recipe.serving_size %>
+        </div>
+        <div class="time">
+          <i class="fa-solid fa-clock me-3"></i><%= minutes_to_hour(@recipe.total_time) %>
+        </div>
+      </div>
   </div>
 
   <div class="modal-body row recipe-details">
