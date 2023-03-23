@@ -59,9 +59,7 @@
         <% end %>
       </div>
       <div class="chat">
-        <% if user_signed_in? && selected_users.any? %>
-          <%= link_to "Chat", chatroom_path(@chatroom), class: "chat-button" %>
-        <% end %>
+        <%= link_to "Chat", chatroom_path(@chatroom), class: "btn btn-primary chat-to-friends" if user_signed_in?%>
       </div>
     </div>
   </div>
@@ -88,8 +86,8 @@
         <% @recipe.ingredients.each do |ingredient| %>
           <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
           <li>
-            <strong><%= truncate_zero(recipe_ingredient.quantity) %>
-            <%= ingredient.quantity_unit %></strong>
+            <div class="ingredient-format"><%= truncate_zero(recipe_ingredient.quantity) %>
+            <%= ingredient.quantity_unit %></div>
             <%= ingredient.name %>
           </li>
         <% end %>
@@ -109,51 +107,38 @@
     </div>
   </div>
 
+
   <div class="reviews">
     <div id="comment-submission">
-      <h3>Leave a comment or rating (<%= @recipe.reviews.count %>)</h3>
+      <h3>Leave a comment or rating! (<%= @recipe.reviews.count %>)</h3>
       <%= render 'recipes/form', recipe: @recipe, review: @review %>
     </div>
-    <% if @recipe.reviews.empty? %>
-      <p>There are no currently no comments... Leave one now!</p>
+      <% if @recipe.reviews.empty? %>
+        <p>There are no currently no comments... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
-      <div id="comments">
-        <% if review.rating.present? %>
-        <div id="comments-flex">
-          <div id="flex-left">
-            <%= image_tag (review.user.image_url.present? ? review.user.image_url : "https://source.unsplash.com/200x200/?user"), class: "avatar-bordered" %>
-            <p><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></p>
-            <p><%= review.user.username %></p>
-            <p><%= review.user.reviews.count %> comments</p>
-          </div>
-          <div id="flex-right">
-            <% review.rating.times do %>
-              <%= image_tag "star.png", class: "single-star"%>
-            <% end %>
-            <p><%= review.content if review.content.present? %></p>
-          </div>
-        </div>
-          <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
-            <%= form_with model: @friendship, method: :post do |f| %>
-              <%= f.hidden_field :requested, value: review.user.id %>
-              <%= f.submit "Add friend", class: "btn-purple" %>
-            <% end %>
-          <% end %>
-          <% if current_user.invites_sent.include?(review.user) %>
-          <p id="invite-sent">Invite sent</p>
+      <% if review.rating.present? %>
+        <% review.rating.times do %>
+          <%= image_tag "star.png", class: "single-star"%>
+        <% end %>
+        <p><small><%= review.user.username %></small></p>
+        <p><%= review.content if review.content.present? %></p>
+        <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
+          <%= form_with model: @friendship, method: :post do |f| %>
+            <%= f.hidden_field :requested, value: review.user.id %>
+            <%= f.submit "Add friend" %>
           <% end %>
         <% end %>
-          <% if current_user.present? %>
-            <% if review.user == current_user %>
-              <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
-                <i class="fa-solid fa-trash-can"></i>
-              <% end %>
-              <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
-              <%# <%= render 'recipes/form', recipe: @recipe, review: review %>
+    <% end %>
+        <% if current_user.present? %>
+          <% if review.user == current_user %>
+            <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
+              <i class="fa-solid fa-trash-can"></i>
             <% end %>
+            <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+            <%# <%= render 'recipes/form', recipe: @recipe, review: review %>
           <% end %>
-        </div>
+        <% end %>
         <hr>
       <% end %>
     <% end %>
