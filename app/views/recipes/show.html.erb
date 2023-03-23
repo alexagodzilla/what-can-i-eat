@@ -60,7 +60,7 @@
       </div>
       <div class="chat">
         <% if user_signed_in? && selected_users.any? %>
-          <%= link_to "Chat", chatroom_path(@chatroom), class: "btn btn-primary chat-to-friends" %>
+          <%= link_to "Chat", chatroom_path(@chatroom), class: "chat-button" %>
         <% end %>
       </div>
     </div>

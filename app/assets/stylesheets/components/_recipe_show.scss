@@ -82,6 +82,7 @@
   border: none;
   border-radius: var(--button_radius);
   background: var(--button_outline_color);
+  width: 7rem;
 }
 
 .chat-button {
@@ -96,6 +97,7 @@
   transition: transform 0.1s ease;
   text-align: center;
   text-decoration: none;
+  width: 7rem;
 }
 
 .chat:hover .chat-button {

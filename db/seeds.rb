@@ -307,7 +307,7 @@ Jon = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Everything",
-  image_url: "https://media.licdn.com/dms/image/D4E35AQEGldrM0GmLmA/profile-framedphoto-shrink_800_800/0/1675076426829?e=1680184800&v=beta&t=jdgyBxS4FA6yAj44YdCO1T-9UNfJLwO0G1eNP_LLToY"
+  image_url: "https://avatars.githubusercontent.com/u/110668469?v=4"
 )
 
 puts "creating Jon's user_ingredients"
