@@ -178,6 +178,10 @@
 
 /* Submit button here just for time reasons*/
 
+.submit-button {
+	padding: 4px;
+}
+
 .submit-button,
 .sort-buttons-container button {
 	padding-top: 0.4rem 0 0.3rem 0;
@@ -189,7 +193,7 @@
 	text-align: center;
 	font-weight: bold;
 	transition: all 0.3s ease;
-	box-shadow: #c6dfa2 2px 2px 2px 2px;
+	box-shadow: #c6dfa2 2px 4px 2px 2px;
 	// box-shadow: #c92e46 0 0.3rem 0 0;
 	color: hsl(0, 0%, 100%);
 	text-decoration: none;
