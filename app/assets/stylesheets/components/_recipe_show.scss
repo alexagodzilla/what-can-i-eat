@@ -181,6 +181,10 @@
 .serving, .time  {
   margin-top: 24px;
   text-align: right;
+
+  .fa-users, .fa-clock {
+    font-size: 1.6rem;
+  }
 }
 
 .serving-time {
@@ -189,8 +193,4 @@
 
 .serving {
   margin-right: 20px;
-}
-
-.fa-users, .fa-clock {
-  font-size: 1.6rem;
 }
