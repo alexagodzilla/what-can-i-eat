@@ -6,3 +6,5 @@ class ChatroomsController < ApplicationController
 
   # chatroom create redirect to chatroom.find?
 end
+
+#test
