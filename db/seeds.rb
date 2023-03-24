@@ -209,7 +209,7 @@ puts "creating Alex"
 puts "alex's email is alex@me.com"
 Alex = User.create!(
   first_name: "Alex",
-  last_name: Faker::Name.unique.last_name,
+  last_name: "Agozzino",
   username: Faker::Internet.unique.username,
   email: "alex@me.com",
   password: "123456",
@@ -250,7 +250,7 @@ puts "creating Fran"
 puts "Fran's email is fran@me.com"
 Fran = User.create!(
   first_name: "Fran",
-  last_name: Faker::Name.unique.last_name,
+  last_name: "Sandford",
   username: Faker::Internet.unique.username,
   email: "fran@me.com",
   password: "123456",
@@ -275,7 +275,7 @@ puts "creating Ila"
 puts "Ila's email is ila@me.com"
 Ila = User.create!(
   first_name: "Ila",
-  last_name: Faker::Name.unique.last_name,
+  last_name: "Peroni",
   username: Faker::Internet.unique.username,
   email: "ila@me.com",
   password: "123456",
@@ -301,7 +301,7 @@ puts "creating jon"
 puts "jon's email is jon@me.com"
 Jon = User.create!(
   first_name: "Jon",
-  last_name: Faker::Name.unique.last_name,
+  last_name: "Dedman",
   username: Faker::Internet.unique.username,
   email: "jon@me.com",
   password: "123456",
