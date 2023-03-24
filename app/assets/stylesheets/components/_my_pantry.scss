@@ -24,7 +24,7 @@
 
   input[type=submit]{
     padding: 10px 40px;
-    height: 4.5vh;
+    height: 2.5rem;
     border-radius: 10px;
     border: 0;
     background-color: $purple;
@@ -35,13 +35,12 @@
     color: hsl(0, 0%, 100%);
 
       &:hover {
-        box-shadow: #ef057e 0px 7px 0px 0px;
+        box-shadow: $magenta 0px 7px 0px 0px;
       }
 
       &:active {
-        background-color: rgba(36, 1, 234, 0.865);
         /*50, 168, 80*/
-        box-shadow: rgb(28, 189, 55) 0px 0px 0px 0px;
+        box-shadow: $magenta 0px 0px 0px 0px;
         transform: translateY(2px);
         transition: 200ms;
       }

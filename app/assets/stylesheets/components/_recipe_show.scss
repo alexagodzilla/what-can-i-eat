@@ -1,23 +1,23 @@
 .fa-bookmark {
-  font-size: 2.4rem;
-  color: $magenta;
+	font-size: 2.4rem;
+	color: $magenta;
 }
 
 .btn-bookmark {
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  border: none;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	border: none;
 }
 
 #friends-ingredients {
-  background-color: $almond;
-  padding: 0.2rem;
-  border-radius: 4px;
+	background-color: $almond;
+	padding: 0.2rem;
+	border-radius: 4px;
 }
 
 #recipe-image {
-  position: relative;
+	position: relative;
 }
 
 // For show page's ingredients and method
@@ -35,17 +35,17 @@
 	border-right: solid 1px $gray-200;
 	padding-left: 32px;
 
-  ul {
-    padding-left: 0;
-    margin-left: 0;
-  }
+	ul {
+		padding-left: 0;
+		margin-left: 0;
+	}
 
-  li {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
-    padding-bottom: 12px;
-  }
+	li {
+		list-style: none;
+		padding-left: 0;
+		margin-left: 0;
+		padding-bottom: 12px;
+	}
 }
 
 .method {
@@ -56,69 +56,112 @@
 
 // For star ratings
 .single-star {
-  height: 20px;
-  margin: 0 -0.11em;
+	height: 20px;
+	margin: 0 -0.11em;
 }
 
 .button {
-  /* Variables */
-  --button_radius: 0.75em;
-  --button_color: #e8e8e8;
-  --button_outline_color: #000000;
-  font-size: 17px;
-  font-weight: bold;
-  border: none;
-  border-radius: var(--button_radius);
-  background: var(--button_outline_color);
+	/* Variables */
+	--button_radius: 0.75em;
+	--button_color: #e8e8e8;
+	--button_outline_color: #000000;
+	font-size: 17px;
+	font-weight: bold;
+	border: none;
+	border-radius: var(--button_radius);
+	background: var(--button_outline_color);
 }
 
 .chat {
-  /* Variables */
-  --button_radius: 0.75em;
-  --button_color: #e8e8e8;
-  --button_outline_color: #000000;
-  font-size: 17px;
-  font-weight: bold;
-  border: none;
-  border-radius: var(--button_radius);
-  background: var(--button_outline_color);
+	/* Variables */
+	--button_radius: 0.75em;
+	--button_color: #e8e8e8;
+	--button_outline_color: #000000;
+	font-size: 17px;
+	font-weight: bold;
+	border: none;
+	border-radius: var(--button_radius);
+	background: var(--button_outline_color);
+	width: 7rem;
 }
 
 .chat-button {
-  display: block;
-  box-sizing: border-box;
-  border: 2px solid var(--button_outline_color);
-  border-radius: var(--button_radius);
-  padding: 0.75em 1.5em;
-  background: var(--button_color);
-  color: var(--button_outline_color);
-  transform: translateY(-0.2em);
-  transition: transform 0.1s ease;
-  text-align: center;
-  text-decoration: none;
+	display: block;
+	box-sizing: border-box;
+	border: 2px solid var(--button_outline_color);
+	border-radius: var(--button_radius);
+	padding: 0.75em 1.5em;
+	background: var(--button_color);
+	color: var(--button_outline_color);
+	transform: translateY(-0.2em);
+	transition: transform 0.1s ease;
+	text-align: center;
+	text-decoration: none;
+	width: 7rem;
 }
 
 .chat:hover .chat-button {
-  /* Pull the button upwards when hovered */
-  transform: translateY(-0.33em);
+	/* Pull the button upwards when hovered */
+	transform: translateY(-0.33em);
 }
 
 .chat:active .chat-button {
-  /* Push the button downwards when pressed */
-  transform: translateY(0);
+	/* Push the button downwards when pressed */
+	transform: translateY(0);
 }
 
 .bookmarks {
-  position: absolute;
-  top: 0px;
-  left: 520px;
+	position: absolute;
+	top: 0px;
+	left: 520px;
 }
 
 .chat-to-friends {
-  margin-top: 28px;
-  margin-left: 18px;
+	margin-top: 28px;
+	margin-left: 18px;
 }
 
 .friends {
-  margin-top: 42px;
+	margin-top: 42px;
+}
+
+.ingredient-format {
+	font-weight: bold;
+	margin-right: 4px;
+}
+
+.diet {
+  display: flex;
+  margin-right: 0;
+
+  img {
+    margin-right: 18px;
+    margin-top: 16px;
+    margin-left: 8px;
+  }
+}
+
+.diet-serving-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  width: 34rem;
+}
+
+.serving, .time  {
+  margin-top: 24px;
+  text-align: right;
+}
+
+.serving-time {
+  display: flex;
+}
+
+.serving {
+  margin-right: 20px;
+}
+
+.fa-users, .fa-clock {
+  font-size: 1.6rem;
 }
