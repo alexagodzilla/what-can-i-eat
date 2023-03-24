@@ -8,6 +8,16 @@
 	margin-bottom: 10px;
 	background-size: cover;
 	background-position: center;
+
+  h1 {
+    position: absolute;
+    text-align: center;
+  }
+
+  #h1-first-line::after {
+    content: "\a";
+    white-space: pre;
+  }
 }
 
 .pages-container h1 {
