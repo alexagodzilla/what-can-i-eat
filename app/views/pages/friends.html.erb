@@ -5,7 +5,9 @@
       <h2><%= link_to "Friends", profile_friends_path, id: "header-pink" %></h2>
   </div>
 
-  <h3>Friends</h3>
+  <% if current_user.friends.count > 1 %>
+    <h3>Friends</h3>
+  <% end %>
   <% if current_user.friends.count < 0 %>
     <p>No friends</p>
   <% else %>
@@ -14,7 +16,9 @@
     <% end %>
   <% end %>
 
-  <h3>Friend requests</h3>
+  <% if current_user.pending_friends.count > 0 %>
+    <h3>Friend requests</h3>
+  <% end %>
   <% @pending_friends.each do |person| %>
     <p><%= person.first_name %> <%= person.last_name if person.last_name.present? %> (<%= person.username %>)</p>
   <% end %>

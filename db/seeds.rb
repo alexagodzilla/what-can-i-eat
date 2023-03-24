@@ -235,10 +235,10 @@ end
 puts "creating Alex's user_ingredients"
 
 garlic_id = Ingredient.find_by(name: "Garlic").id
-beef_id = Ingredient.find_by(name: "Beef").id
+thyme_id = Ingredient.find_by(name: "Thyme").id
 cumin_id = Ingredient.find_by(name: "Cumin").id
 
-[garlic_id, beef_id, cumin_id].each do |ingredient_id|
+[garlic_id, thyme_id, cumin_id].each do |ingredient_id|
   UserIngredient.create!(
     user_id: Alex.id,
     ingredient_id: ingredient_id
@@ -280,8 +280,8 @@ Ila = User.create!(
   email: "ila@me.com",
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
-  diet: "Everything",
-  image_url: "https://media.licdn.com/dms/image/D4E35AQEX1N3rL4YFbg/profile-framedphoto-shrink_800_800/0/1659182972444?e=1680181200&v=beta&t=w7rl7u-1clRq3128iaZkOLFHspY4-g-KgDbJCh0egZw"
+  diet: "Gluten Free",
+  image_url: "https://avatars.githubusercontent.com/u/114817089?v=4"
 )
 
 puts "creating Ila's user_ingredients"
@@ -312,10 +312,9 @@ Jon = User.create!(
 
 puts "creating Jon's user_ingredients"
 ginger_id = Ingredient.find_by(name: "Ginger").id
-chicken_breasts_id = Ingredient.find_by(name: "Chicken breasts").id
 red_wine_vinegar_id = Ingredient.find_by(name: "Red wine vinegar").id
 
-[ginger_id, chicken_breasts_id, red_wine_vinegar_id].each do |ingredient_id|
+[ginger_id, red_wine_vinegar_id].each do |ingredient_id|
   UserIngredient.create!(
     user_id: Jon.id,
     ingredient_id: ingredient_id

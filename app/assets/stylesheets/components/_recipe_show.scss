@@ -60,54 +60,83 @@
 	margin: 0 -0.11em;
 }
 
-.button {
-	/* Variables */
-	--button_radius: 0.75em;
-	--button_color: #e8e8e8;
-	--button_outline_color: #000000;
-	font-size: 17px;
-	font-weight: bold;
-	border: none;
-	border-radius: var(--button_radius);
-	background: var(--button_outline_color);
-}
+// .button {
+// 	/* Variables */
+// 	--button_radius: 0.75em;
+// 	--button_color: #e8e8e8;
+// 	--button_outline_color: #000000;
+// 	font-size: 17px;
+// 	font-weight: bold;
+// 	border: none;
+// 	border-radius: var(--button_radius);
+// 	background: var(--button_outline_color);
+// }
 
-.chat {
-	/* Variables */
-	--button_radius: 0.75em;
-	--button_color: #e8e8e8;
-	--button_outline_color: #000000;
-	font-size: 17px;
-	font-weight: bold;
-	border: none;
-	border-radius: var(--button_radius);
-	background: var(--button_outline_color);
-	width: 7rem;
-}
+// .chat {
+// 	/* Variables */
+// 	--button_radius: 0.75em;
+// 	--button_color: #e8e8e8;
+// 	--button_outline_color: #000000;
+// 	font-size: 17px;
+// 	font-weight: bold;
+// 	border: none;
+// 	border-radius: var(--button_radius);
+// 	background: var(--button_outline_color);
+// 	width: 7rem;
+// }
+
+// .chat-button {
+// 	display: block;
+// 	box-sizing: border-box;
+// 	border: 2px solid var(--button_outline_color);
+// 	border-radius: var(--button_radius);
+// 	padding: 0.75em 1.5em;
+// 	background: var(--button_color);
+// 	color: var(--button_outline_color);
+// 	transform: translateY(-0.2em);
+// 	transition: transform 0.1s ease;
+// 	text-align: center;
+// 	text-decoration: none;
+// 	width: 7rem;
+// }
+
+// .chat:hover .chat-button {
+// 	/* Pull the button upwards when hovered */
+// 	transform: translateY(-0.33em);
+// }
+
+// .chat:active .chat-button {
+// 	/* Push the button downwards when pressed */
+// 	transform: translateY(0);
+// }
 
 .chat-button {
-	display: block;
-	box-sizing: border-box;
-	border: 2px solid var(--button_outline_color);
-	border-radius: var(--button_radius);
-	padding: 0.75em 1.5em;
-	background: var(--button_color);
-	color: var(--button_outline_color);
-	transform: translateY(-0.2em);
-	transition: transform 0.1s ease;
-	text-align: center;
-	text-decoration: none;
-	width: 7rem;
-}
+  padding: 8px 18px;
+  height: 2.5rem;
+  border-radius: 10px;
+  border: 0;
+  background-color: $purple;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all .3s ease;
+  box-shadow: #2f152b 0px 5px 0px 0px;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  margin-left: 3.5rem;
 
-.chat:hover .chat-button {
-	/* Pull the button upwards when hovered */
-	transform: translateY(-0.33em);
-}
+  &:hover {
+    box-shadow: #2f152b 0px 7px 0px 0px;
+    text-decoration: none;
+    color: white;
+  }
 
-.chat:active .chat-button {
-	/* Push the button downwards when pressed */
-	transform: translateY(0);
+  &:active {
+    /*50, 168, 80*/
+    box-shadow: #2f152b 0px 0px 0px 0px;
+    transform: translateY(2px);
+    transition: 200ms;
+  }
+
 }
 
 .bookmarks {

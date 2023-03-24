@@ -15,17 +15,29 @@
 
   [type="submit"] {
     display: flex;
-    padding: 4px 14px;
     margin-top: 1rem;
     margin-left: 1rem;
+    padding: 4px 12px;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 0;
     background-color: $magenta;
-    color: white;
-    border-radius: 8px;
-    border: none;
+    letter-spacing: 1.5px;
+    font-size: 15px;
+    transition: all .3s ease;
+    box-shadow: #8f446b 0px 5px 0px 0px;
+    color: hsl(0, 0%, 100%);
 
-    &:hover {
-      background-color: rgba($magenta, 0.9);
-    }
+      &:hover {
+        box-shadow: #8f446b 0px 7px 0px 0px;
+      }
+
+      &:active {
+        /*50, 168, 80*/
+        box-shadow: #8f446b 0px 0px 0px 0px;
+        transform: translateY(2px);
+        transition: 200ms;
+      }
   }
 
   textarea {
