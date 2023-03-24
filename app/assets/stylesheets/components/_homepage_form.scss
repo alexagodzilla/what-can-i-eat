@@ -190,18 +190,11 @@
 	font-weight: bold;
 	transition: all 0.3s ease;
 	box-shadow: #c6dfa2 2px 2px 2px 2px;
-	// box-shadow: #c92e46 0 0.3rem 0 0;
 	color: hsl(0, 0%, 100%);
 	text-decoration: none;
 
-	&:hover {
-		box-shadow: #ffbd00;
-	}
-
 	&:active {
-		background-color: #ffbd00;
 		/*50, 168, 80*/
-		box-shadow: #ffbd00;
 		transform: translateY(5px);
 		transition: 200ms;
 	}
@@ -217,8 +210,6 @@
 	text-align: center;
 	font-weight: bold;
 	transition: all 0.3s ease;
-	box-shadow: $purple 2px 2px 2px 2px;
-	// box-shadow: #c92e46 0 0.3rem 0 0;
 	color: hsl(0, 0%, 100%);
 	text-decoration: none;
 
@@ -227,9 +218,7 @@
 	}
 
 	&:active {
-		background-color: #ffbd00;
 		/*50, 168, 80*/
-		box-shadow: #ffbd00;
 		transform: translateY(5px);
 		transition: 200ms;
 	}
