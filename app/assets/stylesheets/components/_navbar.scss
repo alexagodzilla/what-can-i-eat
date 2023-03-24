@@ -15,9 +15,14 @@
 
 .nav-link {
 	color: white;
+  margin-top: 8px;
 
   &:hover {
     color: $magenta;
+  }
+
+  .avatar-bordered {
+    margin-top: 8px;
   }
 }
 
@@ -27,11 +32,13 @@
 }
 
 #front-logo {
-  width: 255px;
-  // margin-top: 5px;
+  width: 400px;
+  height: auto;
+  margin-top: 13px;
   // margin-bottom: 5px;
 }
 
 #round-logo {
-  width: 90px;
+  width: 110px;
+  margin-top: 0px;
 }
