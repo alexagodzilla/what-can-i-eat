@@ -205,34 +205,34 @@ end
 puts "creating chatroom"
 Chatroom.create!(name: "Main Room")
 
-puts "creating Amie"
-puts "amie's email is amie@me.com"
-Amie = User.create!(
-  first_name: "Amie",
+puts "creating Alex"
+puts "alex's email is alex@me.com"
+Alex = User.create!(
+  first_name: "Alex",
   last_name: Faker::Name.unique.last_name,
   username: Faker::Internet.unique.username,
-  email: "amie@me.com",
+  email: "alex@me.com",
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Gluten Free",
   image_url: "https://media.licdn.com/dms/image/C5603AQENw89Y7W8dZQ/profile-displayphoto-shrink_800_800/0/1661689705649?e=1684972800&v=beta&t=v-luyti_hozweHm95OKxMq3e7AVBPTzZ2epnwL08Phw"
 )
 
-puts "creating Amie's bookmarks"
-puts "amie's bookmarks are gluten free recipes"
+puts "creating Alex's bookmarks"
+puts "Alex's bookmarks are gluten free recipes"
 gluten_free_recipes = Recipe.where(gluten_free: true)
 
 3.times do
   recipe_id = gluten_free_recipes.sample.id
   if Bookmark.where(recipe_id:).empty?
     Bookmark.create!(
-      user_id: Amie.id,
+      user_id: Alex.id,
       recipe_id:
     )
   end
 end
 
-puts "creating Amie's user_ingredients"
+puts "creating Alex's user_ingredients"
 
 garlic_id = Ingredient.find_by(name: "Garlic").id
 beef_id = Ingredient.find_by(name: "Beef").id
@@ -240,7 +240,7 @@ cumin_id = Ingredient.find_by(name: "Cumin").id
 
 [garlic_id, beef_id, cumin_id].each do |ingredient_id|
   UserIngredient.create!(
-    user_id: Amie.id,
+    user_id: Alex.id,
     ingredient_id: ingredient_id
   )
 end
@@ -322,24 +322,24 @@ red_wine_vinegar_id = Ingredient.find_by(name: "Red wine vinegar").id
   )
 end
 
-puts "creating Friendship between Amie and Fran"
+puts "creating Friendship between Alex and Fran"
 Friendship.create!(
-  requester_id: Amie.id,
+  requester_id: Alex.id,
   requested_id: Fran.id,
   status: "accepted"
 )
 
-puts "creating Friendship between Amie and Ila"
+puts "creating Friendship between Alex and Ila"
 Friendship.create!(
-  requester_id: Amie.id,
+  requester_id: Alex.id,
   requested_id: Ila.id,
   status: "accepted"
 )
 
 
-puts "creating Friendship between Amie and Jon"
+puts "creating Friendship between Alex and Jon"
 Friendship.create!(
-  requester_id: Amie.id,
+  requester_id: Alex.id,
   requested_id: Jon.id,
   status: "accepted"
 )
