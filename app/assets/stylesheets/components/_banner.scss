@@ -14,7 +14,7 @@
     text-align: center;
   }
 
-  #h1-first-line::after{
+  #h1-first-line::after {
     content: "\a";
     white-space: pre;
   }
