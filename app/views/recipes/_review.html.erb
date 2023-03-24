@@ -1,0 +1,37 @@
+<div id="comments" data-insert-comment-target="comments">
+  <% if review.rating.present? %>
+    <div id="comments-flex">
+      <div id="flex-left">
+        <%= image_tag (review.user.image_url.present? ? review.user.image_url : "https://source.unsplash.com/200x200/?user"), class: "avatar-bordered" %>
+        <p><%= review.user.first_name.capitalize %> <%= review.user.last_name.capitalize %></p>
+        <p><%= pluralize review.user.reviews.size, "comment" %></p>
+        <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
+          <%= form_with model: @friendship, method: :post do |f| %>
+            <%= f.hidden_field :requested, value: review.user.id %>
+            <%= f.submit "Add friend", class: "btn-purple" %>
+          <% end %>
+        <% end %>
+        <% if user_signed_in? && current_user.invites_sent.include?(review.user) %>
+          <p id="invite-sent">Invite sent</p>
+        <% end %>
+      </div>
+      <div id="flex-middle">
+        <% review.rating.times do %>
+          <%= image_tag "star.png", class: "single-star"%>
+        <% end %>
+        <p><%= review.content if review.content.present? %></p>
+        <div id="comments-icons">
+          <% if user_signed_in? && review.user == current_user %>
+            <%= link_to review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your comment?" } do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+            <i class="fa-solid fa-pen-to-square"></i> <%# not linked to edit form yet %>
+          <% end %>
+        </div>
+      </div>
+      <div id="flex-right">
+      </div>
+    </div>
+  <% end %>
+</div>
+<hr>

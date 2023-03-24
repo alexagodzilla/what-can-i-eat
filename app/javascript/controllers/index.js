@@ -10,5 +10,8 @@ application.register("cards", CardsController)
 import ChatroomSubscriptionController from "./chatroom_subscription_controller"
 application.register("chatroom-subscription", ChatroomSubscriptionController)
 
+import InsertCommentController from "./insert_comment_controller"
+application.register("insert-comment", InsertCommentController)
+
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)

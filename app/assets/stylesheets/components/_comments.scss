@@ -3,7 +3,7 @@
 #comment-submission {
   background-color: white;
   padding: 1.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   width: 40vw;
   box-shadow: 3px 3px 10px rgba(209, 190, 160, 0.5);
   border-radius: 8px;
@@ -60,17 +60,31 @@
     margin-bottom: 4px;
   }
 
-  p:nth-child(3), p:nth-child(4) {
+  p:nth-child(3) {
     font-size: 0.9em;
     margin-bottom: 0;
   }
 }
 
-#flex-right {
+#flex-middle {
   flex: 5;
 
   p {
     margin-top: 20px;
+  }
+}
+
+#comments-icons {
+  text-align: right;
+  margin-right: 5rem;
+  margin-bottom: 0.5rem;
+
+  a {
+    text-decoration: none;
+  }
+
+  i {
+    color: black;
   }
 }
 
@@ -81,7 +95,7 @@
   border-radius: 15px;
   background-color: rgba($magenta, 0.2);
   display: inline-block;
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
   margin-bottom: 0;
 }
 

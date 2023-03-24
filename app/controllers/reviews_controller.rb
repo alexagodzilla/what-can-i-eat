@@ -6,10 +6,15 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user = current_user
     @review.recipe = @recipe
-    if @review.save!
-      redirect_to recipe_path(@recipe), notice: "Comment added"
-    else
-      render "recipes/show", status: :unprocessable_entity
+
+    respond_to do |format|
+      if @review.save
+        format.html { redirect_to recipe_path(@recipe), notice: "Comment added" }
+        format.json
+      else
+        format.html { render "recipes/show", status: :unprocessable_entity }
+        format.json
+      end
     end
   end
 
