@@ -1,6 +1,6 @@
 <div class="container my-3">
   <h2 style= "margin-bottom: 22px;"><%= @recipe.title %></h2>
-  <div class="modal-body row pic-friends">
+  <div class="modal-body row">
     <div class="col-md-6">
       <div class="recipe-image">
         <%= image_tag @recipe.image_url, alt: "Image of recipe" %>
@@ -31,22 +31,20 @@
       </div>
     </div>
 
-    <div class="col-md-6" class="friends-chat">
-      <div class="friends ">
+    <div class="col-md-6">
+      <div class="friends">
         <% if user_signed_in? %>
-          <% selected_users = [] %>
-          <% current_user.friends.each do |user| %>
-            <% @recipe_ingredients = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
-            <% selected_users << user if @recipe_ingredients.any? { |id| user.ingredients.pluck(:id).include?(id) } %>
-        <% end %>
+          <% recipe_ingredients_minus_users = @recipe.ingredients.pluck(:id) - current_user.ingredients.pluck(:id) %>
+          <% selected_users = current_user.friends.select { |user| recipe_ingredients_minus_users.any? { |id| user.ingredients.pluck(:id).include?(id) } } %>
           <% selected_users.each do |user| %>
+            <p>
               <%= image_tag (user.image_url.present? ? user.image_url : "https://source.unsplash.com/200x200/?user"), class:"avatar-friends" %>
               <%= user.first_name.capitalize %> might have<% user.ingredients.each do |ingredient| %>
-                <% if @recipe_ingredients.include?(ingredient.id) %>
+                <% if recipe_ingredients_minus_users.include?(ingredient.id) %>
                   <span id="friends-ingredients"><%= ingredient.name.downcase %></span>
                 <% end %>
               <% end %>in their pantry
-              <br>
+            </p>
           <% end %>
         <% end %>
       </div>
