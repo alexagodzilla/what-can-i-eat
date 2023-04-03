@@ -1,5 +1,5 @@
 .pantry-form {
-  select{
+  select {
     width: 26vw;
     height: 3rem;
     border-radius: 10px;
@@ -14,7 +14,7 @@
     background-position: right .7em top 50%, 0 0;
     background-size: .65em auto, 100%;
   }
-  select option{
+  select option {
     margin: 100px;
   }
 
@@ -57,19 +57,18 @@
     padding: 0;
     margin-top: 10px;
   }
-}
 
-.fa-xmark{
-  margin-right: 5px;
-}
+  li {
+    display: flex;
+    margin-bottom: 10px;
+  }
 
-li {
-  display: flex;
-  margin-bottom: 10px;
-
-  span{
+  span {
     margin-bottom: auto;
     margin-top: auto;
-    // font-size: 1.5em;
   }
+}
+
+.fa-xmark {
+  margin-right: 5px;
 }
