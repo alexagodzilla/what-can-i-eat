@@ -7,7 +7,7 @@
   justify-content: space-between;
   flex-grow: 1;
 
-  h1 {
+  h2 {
     border-bottom: 1px solid $gray-200;
     margin-bottom: 0;
     padding: 1rem;
@@ -17,5 +17,18 @@
     height: 100%;
     overflow: scroll;
     padding: 1rem;
+  }
+}
+
+.chatroom-form {
+  display: flex;
+
+  input[type="text"] {
+    flex-grow: 1;
+    margin: 0.8rem;
+  }
+
+  input[type="submit"] {
+    margin: 0.8rem;
   }
 }
