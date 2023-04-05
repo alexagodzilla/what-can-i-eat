@@ -1,19 +1,19 @@
 // Import your components CSS files here.
 @import "alert";
 @import "avatar";
-@import "chatroom";
-@import "form_legend_clear";
-@import "navbar";
-@import "footer";
+@import "banner";
+@import "button";
 @import "card";
-@import "profile_pages";
+@import "chatroom";
+@import "comments";
+@import "container";
+@import "footer";
+@import "form_legend_clear";
 @import "friend_form";
 @import "homepage_form";
-@import "button";
+@import "navbar";
+@import "profile_bookmark_page";
 @import "recipe_show";
-@import "banner";
-@import "my_pantry";
-@import "comments";
 
 
 html {
@@ -25,19 +25,6 @@ body {
   min-height: 120vh;
 	display: flex;
 	flex-direction: column;
-}
-
-.pages-container {
-  margin: 0 auto;
-  position: relative;
-  min-height: 100vh;
-}
-
-.profile-container {
-  margin: 0 auto;
-  position: relative;
-  min-height: 100vh;
-  width: 1100px;
 }
 
 h1, h2, h3, h4, h5, h6 {

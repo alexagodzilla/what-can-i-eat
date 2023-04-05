@@ -60,6 +60,66 @@
 	margin: 0 -0.11em;
 }
 
+.bookmarks {
+  position: absolute;
+	top: 0px;
+	left: 520px;
+}
+
+.chat-to-friends {
+  margin-top: 28px;
+	margin-left: 18px;
+}
+
+.friends {
+  margin-top: 42px;
+}
+
+.ingredient-format {
+  font-weight: bold;
+	margin-right: 4px;
+}
+
+.diet {
+  display: flex;
+  margin-right: 0;
+
+  img {
+    margin-right: 18px;
+    margin-top: 16px;
+    margin-left: 8px;
+  }
+}
+
+.diet-serving-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  width: 34rem;
+}
+
+.serving, .time  {
+  margin-top: 24px;
+  text-align: right;
+
+  .fa-users, .fa-clock {
+    font-size: 1.6rem;
+  }
+}
+
+.serving-time {
+  display: flex;
+}
+
+.serving {
+  margin-right: 20px;
+}
+
+
+
+
+
 // .button {
 // 	/* Variables */
 // 	--button_radius: 0.75em;
@@ -109,88 +169,3 @@
 // 	/* Push the button downwards when pressed */
 // 	transform: translateY(0);
 // }
-
-.chat-button {
-  padding: 8px 18px;
-  height: 2.5rem;
-  border-radius: 10px;
-  border: 0;
-  background-color: $purple;
-  letter-spacing: 1.5px;
-  font-size: 15px;
-  transition: all .3s ease;
-  box-shadow: #2f152b 0px 5px 0px 0px;
-  color: hsl(0, 0%, 100%);
-  text-decoration: none;
-  margin-left: 3.5rem;
-
-  &:hover {
-    box-shadow: #2f152b 0px 7px 0px 0px;
-    text-decoration: none;
-    color: white;
-  }
-
-  &:active {
-    /*50, 168, 80*/
-    box-shadow: #2f152b 0px 0px 0px 0px;
-    transform: translateY(2px);
-    transition: 200ms;
-  }
-
-}
-
-.bookmarks {
-	position: absolute;
-	top: 0px;
-	left: 520px;
-}
-
-.chat-to-friends {
-	margin-top: 28px;
-	margin-left: 18px;
-}
-
-.friends {
-	margin-top: 42px;
-}
-
-.ingredient-format {
-	font-weight: bold;
-	margin-right: 4px;
-}
-
-.diet {
-  display: flex;
-  margin-right: 0;
-
-  img {
-    margin-right: 18px;
-    margin-top: 16px;
-    margin-left: 8px;
-  }
-}
-
-.diet-serving-time {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  width: 34rem;
-}
-
-.serving, .time  {
-  margin-top: 24px;
-  text-align: right;
-
-  .fa-users, .fa-clock {
-    font-size: 1.6rem;
-  }
-}
-
-.serving-time {
-  display: flex;
-}
-
-.serving {
-  margin-right: 20px;
-}
