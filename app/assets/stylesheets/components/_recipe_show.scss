@@ -1,6 +1,8 @@
-.fa-bookmark {
-	font-size: 2.4rem;
-	color: $magenta;
+// bookmarks styling
+.bookmarks {
+  position: absolute;
+	top: 0px;
+	left: 520px;
 }
 
 .btn-bookmark {
@@ -8,6 +10,16 @@
 	padding: 0;
 	background-color: transparent;
 	border: none;
+}
+
+.fa-bookmark {
+	font-size: 2.4rem;
+	color: $magenta;
+}
+
+// miscellaneous
+.friends {
+  margin-top: 42px;
 }
 
 #friends-ingredients {
@@ -20,7 +32,7 @@
 	position: relative;
 }
 
-// For show page's ingredients and method
+// for recipe's ingredients and method
 .recipe-details {
 	background-color: rgba(255, 255, 255, 0.6);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -48,36 +60,24 @@
 	}
 }
 
+.ingredient-format {
+  font-weight: bold;
+	margin-right: 4px;
+}
+
 .method {
 	margin-top: 16px;
 	padding-left: 32px;
 	padding-right: 32px;
 }
 
-// For star ratings
-.single-star {
-	height: 20px;
-	margin: 0 -0.11em;
-}
-
-.bookmarks {
-  position: absolute;
-	top: 0px;
-	left: 520px;
-}
-
-.chat-to-friends {
-  margin-top: 28px;
-	margin-left: 18px;
-}
-
-.friends {
-  margin-top: 42px;
-}
-
-.ingredient-format {
-  font-weight: bold;
-	margin-right: 4px;
+// diettary requirement icons, prep time and serving size
+.diet-serving-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  width: 34rem;
 }
 
 .diet {
@@ -91,12 +91,8 @@
   }
 }
 
-.diet-serving-time {
+.serving-time {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  width: 34rem;
 }
 
 .serving, .time  {
@@ -106,10 +102,6 @@
   .fa-users, .fa-clock {
     font-size: 1.6rem;
   }
-}
-
-.serving-time {
-  display: flex;
 }
 
 .serving {
