@@ -1,7 +1,17 @@
-<div class="profile-container">
-  <div class="profile-banner">
+<div class="container">
+  <div class="profile-page">
+    <div class="profile-banner">
       <h2><%= link_to "Bookmarks", profile_bookmarks_path %></h2>
       <h2><%= link_to "My Pantry", profile_ingredients_path %></h2>
       <h2><%= link_to "Friends", profile_friends_path %></h2>
+    </div>
+    <div class="profile-details">
+      <%= image_tag current_user.image_url, class: "profile-image" %>
+      <h5><%= current_user.first_name %></h5>
+      <hr>
+      <p><strong>Diet</strong> <%= current_user.diet %></p>
+      <p><strong>Bio</strong> <%= current_user.bio %></p>
+      <%= link_to "Edit profile", edit_user_registration_path %>
+    </div>
   </div>
 </div>
