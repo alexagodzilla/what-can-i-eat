@@ -1,8 +1,8 @@
-<div class="profile-container">
+<div class="container">
   <div class="profile-banner">
-      <h2><%= link_to "Bookmarks", profile_bookmarks_path, id: "header-pink" %></h2>
-      <h2><%= link_to "My Pantry", profile_ingredients_path %></h2>
-      <h2><%= link_to "Friends", profile_friends_path %></h2>
+    <h2><%= link_to "Bookmarks", profile_bookmarks_path, id: "header-pink" %></h2>
+    <h2><%= link_to "My Pantry", profile_ingredients_path %></h2>
+    <h2><%= link_to "Friends", profile_friends_path %></h2>
   </div>
   <div class="cards">
     <% if @user_bookmarks.empty? %>
