@@ -1,0 +1,42 @@
+.profile-image {
+  height: 200px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  margin-top: 3rem;
+}
+
+.profile-page {
+  display: flex;
+  flex-wrap: wrap;
+
+  .profile-banner {
+    flex: 100px;
+  }
+
+  .profile-details {
+    flex: 300px;
+
+    p {
+      margin-bottom: 2px;
+      font-size: 0.9em;
+    }
+
+    h5 {
+      margin-top: 12px;
+    }
+
+    hr {
+      color: $magenta;
+    }
+
+    a {
+      color: $magenta;
+      text-decoration: none;
+      font-size: 0.9em;
+
+      &:hover {
+        color: $purple;
+      }
+    }
+  }
+}
