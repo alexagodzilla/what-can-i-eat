@@ -1,8 +1,6 @@
-// might need editing on other screens
 .homepage-banner {
 	padding: 0;
 	height: 420px;
-	width: 100vw;
 	position: relative;
 	background-image: url("homepage-banner.jpg");
 	margin-bottom: 10px;
@@ -16,8 +14,9 @@
     font-size: 32px;
     font-weight: bold;
     position: absolute;
-    top: 40px;
-    left: 334px;
+    top: 2rem;
+    left: 18rem;
+    right: 18rem;
     text-align: center;
   }
 

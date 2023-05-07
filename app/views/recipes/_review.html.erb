@@ -8,7 +8,7 @@
         <% if !Friendship.exist?(current_user, review.user) && user_signed_in? && current_user != review.user %>
           <%= form_with model: @friendship, method: :post do |f| %>
             <%= f.hidden_field :requested, value: review.user.id %>
-            <%= f.submit "Add friend", class: "btn-purple" %>
+            <%= f.submit "Add friend", class: "flat-purple-btn" %>
           <% end %>
         <% end %>
         <% if user_signed_in? && current_user.invites_sent.include?(review.user) %>
