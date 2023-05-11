@@ -14,13 +14,14 @@
 	}
 
 	+ label:hover {
-		background-color: rgba($magenta, 0.8);
+		background-color: rgba($magenta, 0.7);
 	}
 
 	&:checked + label {
 		cursor: pointer;
 		background-color: $magenta;
-		border: 2px solid rgba(59, 27, 54, 0.8);
+		border: 2px solid rgba($purple, 0.6);
+    padding: 0.1rem 0.4rem;
 		color: $white;
 		box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
 	}
@@ -30,6 +31,11 @@
 	padding: 0.5rem;
 	border: 0;
 	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+
+  &:focus {
+    outline: solid rgba($magenta, 0.8) 0.2rem;
+    box-shadow: 0px 0px 5px 5px rgba($magenta, 0.5);
+  }
 }
 
 #btn-ingredients {
