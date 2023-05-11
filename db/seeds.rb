@@ -27,8 +27,10 @@ Chatroom.destroy_all
 puts "destroying all users"
 User.destroy_all
 
+# %w[vegetarian_recipes vegan_recipes gluten_free_recipes dairy_free_recipes recipe_api_data chicken_recipes extra_dairy_free_recipes extra_vegetarian_recipes extra_vegan_recipes extra_gluten_free_recipes]
+
 puts "reading json files"
-json_names = %w[vegetarian_recipes vegan_recipes gluten_free_recipes dairy_free_recipes recipe_api_data chicken_recipes extra_dairy_free_recipes extra_vegetarian_recipes extra_vegan_recipes extra_gluten_free_recipes]
+json_names = %w[vegetarian_recipes recipe_api_data]
 json_names.each do |file_name|
   recipes = JSON.parse(File.read("#{Rails.root}/public/#{file_name}.json"), symbolize_names: true)[:recipes]
 
@@ -129,9 +131,9 @@ twenty_set_faces = [
   "https://images.unsplash.com/photo-1465406325903-9d93ee82f613?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=5eb9f23d01faf52817ff797530242521"
 ]
 
-
+# was 200 times
 puts "creating users"
-200.times do
+20.times do
   User.create!(
     first_name: Faker::Name.unique.first_name,
     last_name: Faker::Name.unique.last_name,
@@ -144,8 +146,9 @@ puts "creating users"
   )
 end
 
+# was 100 times
 puts "creating user_ingredients"
-100.times do
+10.times do
   user = User.all.sample
   ingredient_ids = Ingredient.all.pluck(:id).sample(5)
   ingredient_ids.each do |ingredient_id|
@@ -259,17 +262,17 @@ Fran = User.create!(
   image_url: "https://media.licdn.com/dms/image/D4D03AQEG5QOzpRGfIg/profile-displayphoto-shrink_800_800/0/1665922973231?e=1684972800&v=beta&t=MdVoqLlh30cViX6MG5ely8p4lQE7WOwy5bmvjnaX13U"
 )
 
-puts "creating Fran's user_ingredients"
-onion_id = Ingredient.find_by(name: "Onion").id
-tomato_id = Ingredient.find_by(name: "Tomato").id
-ketchup_id = Ingredient.find_by(name: "Ketchup").id
+# puts "creating Fran's user_ingredients"
+# onion_id = Ingredient.find_by(name: "Onion").id
+# tomato_id = Ingredient.find_by(name: "Tomato").id
+# ketchup_id = Ingredient.find_by(name: "Ketchup").id
 
-[onion_id, tomato_id, ketchup_id].each do |ingredient_id|
-  UserIngredient.create!(
-    user_id: Fran.id,
-    ingredient_id: ingredient_id
-  )
-end
+# [onion_id, tomato_id, ketchup_id].each do |ingredient_id|
+#   UserIngredient.create!(
+#     user_id: Fran.id,
+#     ingredient_id: ingredient_id
+#   )
+# end
 
 puts "creating Ila"
 puts "Ila's email is ila@me.com"
@@ -284,17 +287,17 @@ Ila = User.create!(
   image_url: "https://avatars.githubusercontent.com/u/114817089?v=4"
 )
 
-puts "creating Ila's user_ingredients"
-peanut_butter_id = Ingredient.find_by(name: "Smooth peanut butter").id
-onion_id = Ingredient.find_by(name: "Onion").id
-sherry_id = Ingredient.find_by(name: "Sherry").id
+# puts "creating Ila's user_ingredients"
+# peanut_butter_id = Ingredient.find_by(name: "Smooth peanut butter").id
+# onion_id = Ingredient.find_by(name: "Onion").id
+# sherry_id = Ingredient.find_by(name: "Sherry").id
 
-[peanut_butter_id, onion_id, sherry_id].each do |ingredient_id|
-  UserIngredient.create!(
-    user_id: Ila.id,
-    ingredient_id: ingredient_id
-  )
-end
+# [peanut_butter_id, onion_id, sherry_id].each do |ingredient_id|
+#   UserIngredient.create!(
+#     user_id: Ila.id,
+#     ingredient_id: ingredient_id
+#   )
+# end
 
 
 puts "creating jon"
@@ -310,16 +313,16 @@ Jon = User.create!(
   image_url: "https://avatars.githubusercontent.com/u/110668469?v=4"
 )
 
-puts "creating Jon's user_ingredients"
-ginger_id = Ingredient.find_by(name: "Ginger").id
-red_wine_vinegar_id = Ingredient.find_by(name: "Red wine vinegar").id
+# puts "creating Jon's user_ingredients"
+# ginger_id = Ingredient.find_by(name: "Ginger").id
+# red_wine_vinegar_id = Ingredient.find_by(name: "Red wine vinegar").id
 
-[ginger_id, red_wine_vinegar_id].each do |ingredient_id|
-  UserIngredient.create!(
-    user_id: Jon.id,
-    ingredient_id: ingredient_id
-  )
-end
+# [ginger_id, red_wine_vinegar_id].each do |ingredient_id|
+#   UserIngredient.create!(
+#     user_id: Jon.id,
+#     ingredient_id: ingredient_id
+#   )
+# end
 
 puts "creating Friendship between Alex and Fran"
 Friendship.create!(
