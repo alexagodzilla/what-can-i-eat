@@ -17,10 +17,6 @@
 @import "recipe_show";
 
 
-html {
-  overflow-x: hidden
-}
-
 body {
   background-color: $seashell;
   min-height: 100vh;
@@ -28,6 +24,7 @@ body {
 	flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: $headers-font;
+.headers-center {
+	text-align: center;
+  margin: 0
 }

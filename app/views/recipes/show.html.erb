@@ -50,7 +50,7 @@
       </div>
       <div class="chat", style="margin-top: 2rem;">
         <% if user_signed_in? && selected_users.any? %>
-          <%= link_to "Chat", chatroom_path(@chatroom), class: "chat-button" %>
+          <%= link_to "Chat", chatroom_path(@chatroom), class: "purple-btn" %>
         <% end %>
       </div>
     </div>
@@ -76,9 +76,7 @@
         <% @recipe.ingredients.each do |ingredient| %>
           <% recipe_ingredient = RecipeIngredient.find_by(recipe: @recipe, ingredient: ingredient) %>
           <li>
-            <div class="ingredient-format"><%= truncate_zero(recipe_ingredient.quantity) %>
-            <%= ingredient.quantity_unit %></div>
-            <%= ingredient.name %>
+            <div><strong><%= truncate_zero(recipe_ingredient.quantity) %> <%= ingredient.quantity_unit %></strong> <%= ingredient.name %>
           </li>
         <% end %>
       </ul>

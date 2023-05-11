@@ -1,6 +1,6 @@
 // styling for dropdown option buttons/tags
 
-#homepage-form input[type="checkbox"] {
+.homepage-form-container input[type="checkbox"] {
 	position: absolute;
 	transform: scale(0);
 
@@ -14,22 +14,28 @@
 	}
 
 	+ label:hover {
-		background-color: rgba($magenta, 0.8);
+		background-color: rgba($magenta, 0.7);
 	}
 
 	&:checked + label {
 		cursor: pointer;
 		background-color: $magenta;
-		border: 2px solid rgba(59, 27, 54, 0.8);
+		border: 2px solid rgba($purple, 0.6);
+    padding: 0.1rem 0.4rem;
 		color: $white;
 		box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
 	}
 }
 
-#homepage-form input[type="text"] {
+.homepage-form-container input[type="text"] {
 	padding: 0.5rem;
 	border: 0;
 	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+
+  &:focus {
+    outline: solid rgba($purple, 0.5) 0.1rem;
+    box-shadow: 0px 0px 5px 5px rgba($purple, 0.3);
+  }
 }
 
 #btn-ingredients {
@@ -59,47 +65,31 @@
 }
 
 .collapsible {
-	cursor: pointer;
-	width: 22.3rem;
-	height: 2.5rem;
-	border: none;
-	text-align: left;
-	outline: none;
-	padding: 0px 50px;
-	height: 6.5vh;
+	padding: 8px 60px;
+  border: none;
 	border-radius: 10px;
-	border: 0;
 	background-color: $purple;
-	letter-spacing: 1.5px;
-	font-size: 15px;
-	transition: all 0.3s ease;
-	box-shadow: #2f152b 0px 5px 0px 0px;
-	color: hsl(0, 0%, 100%);
-	margin-bottom: 15px;
+	letter-spacing: 1px;
+	transition: .3s;
+	box-shadow: #2f152b 0px 6px 0px 0px;
+	color: white;
 
 	&:hover {
-		box-shadow: #2f152b 0px 7px 0px 0px;
+		box-shadow: #2f152b 0px 8px 0px 0px;
 	}
 
 	&:active {
-		background-color: $magenta;
-		/*50, 168, 80*/
 		box-shadow: #2f152b 0px 0px 0px 0px;
 		transform: translateY(2px);
-		transition: 200ms;
+		transition: .2s;
 	}
 }
 
-.active,
-.collapsible:hover {
-	background-color: rgba($purple, 0.9);
-}
-
 .content {
-	width: 25vw; // edit
+	width: 15rem;
 	display: none;
 	overflow: hidden;
-	background-color: transparent;
+  margin-top: 10px;
 
 	label {
 		margin: 5px;
@@ -121,20 +111,22 @@
 .dropdowns {
 	display: flex;
 	justify-content: center;
-}
 
-.drop-menu {
-	margin: 8px;
-	margin-bottom: 0;
+  .drop-menu:nth-of-type(1) {
+    margin: 0.7rem 0.6rem 0 0;
+  }
+
+  .drop-menu:nth-of-type(2) {
+    margin: 0.7rem 0 0 0;
+  }
 }
 
 .text-box {
-	width: 100%;
-	text-align: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
 
-	input {
+  input {
 		width: 100%;
-		height: 3rem;
+		height: 2.6rem;
 		background-color: white;
 		border-radius: 8px;
 	}
@@ -142,51 +134,12 @@
 
 .submit {
 	display: flex;
-	width: 100%;
 	justify-content: center;
-
-	input {
-		margin-top: 2px;
-	}
-
-	input[type="submit"] {
-		position: relative;
-		top: 0;
-		width: 70%;
-		border-radius: 8px;
-	}
+  margin: 0.7rem 0;
 }
 
 .pantry-btn {
 	margin-top: 4px;
 	font-weight: 600;
-	font-size: 16px;
-	font-size: 16;
 	color: rgba(59, 27, 54, 0.8);
-}
-
-/* Submit button here just for time reasons*/
-
-.submit-button {
-  padding: 8px 30px;
-  height: 6.5vh;
-  border-radius: 10px;
-  border: 0;
-  background-color: $green;
-  letter-spacing: 1.5px;
-  font-size: 16px;
-  transition: all .3s ease;
-  box-shadow: #156738 0px 5px 0px 0px;
-  color: hsl(0, 0%, 100%);
-
-    &:hover {
-      box-shadow: #156738 0px 7px 0px 0px;
-    }
-
-    &:active {
-      /*50, 168, 80*/
-      box-shadow: #156738 0px 0px 0px 0px;
-      transform: translateY(2px);
-      transition: 200ms;
-    }
 }

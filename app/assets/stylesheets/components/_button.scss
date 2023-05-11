@@ -1,5 +1,5 @@
 // add friend button
-.btn-purple {
+.flat-purple-btn {
   background-color: $purple;
   border-radius: 15px;
   padding: 0.2rem 0.5rem;
@@ -13,18 +13,11 @@
 	}
 }
 
-.sort-buttons-container {
-	padding: 2vh;
-	position: relative;
-	margin: 0 auto 20px auto;
-	width: fit-content;
-}
-
-.sort-buttons-container button {
+.homepage-ratings-container button {
   padding: 8px 18px;
-  height: 2.5rem;
   border-radius: 10px;
   border: 0;
+  margin: 2rem 0;
   background-color: $magenta;
   letter-spacing: 1.5px;
   font-size: 15px;
@@ -44,9 +37,8 @@
     }
 }
 
-.chat-button {
+.purple-btn {
   padding: 8px 18px;
-  height: 2.5rem;
   border-radius: 10px;
   border: 0;
   background-color: $purple;
@@ -71,4 +63,25 @@
     transition: 200ms;
   }
 
+}
+
+.green-btn {
+  padding: 8px 175px;
+  border-radius: 10px;
+  border: none;
+  background-color: $green;
+  letter-spacing: 1px;
+  transition: .3s;
+  box-shadow: #17723e 0px 6px 0px 0px;
+  color: white;
+
+    &:hover {
+      box-shadow: #17723e 0px 8px 0px 0px;
+    }
+
+    &:active {
+      box-shadow: #17723e 0px 0px 0px 0px;
+      transform: translateY(2px); // necessary?
+      transition: .2s;
+    }
 }
