@@ -6,9 +6,9 @@
         <div class="text-box">
           <%= f.text_field :query, placeholder: "Search by ingredient(s), e.g. garlic, tomato" %>
         </div>
-        <div class="dropdowns">
+        <div class="dropdowns" data-controller="collapsible">
           <div class="drop-menu">
-            <button type="button" class="collapsible">Dietary requirements</button>
+            <button type="button" class="collapsible" data-action="click->collapsible#dropdown">Dietary requirements</button>
             <div class="content">
               <%= f.check_box :vegetarian, include_hidden: false %>
               <%= f.label :vegetarian, "Vegetarian" %>
@@ -28,7 +28,7 @@
           <% end %>
           <% if user_signed_in? %>
             <div class="drop-menu">
-              <button type="button" class="collapsible">Your pantry ingredients</button>
+              <button type="button" class="collapsible" data-action="click->collapsible#dropdown">Your pantry ingredients</button>
               <div class="content">
                 <%= "You can add your kitchen staples to the pantry to use here any time" if current_user.ingredients.empty? %>
                 <%= f.collection_check_boxes :ingredient_id, current_user.ingredients.order(:name), :id, :name, include_hidden: false if current_user.ingredients.present? %>
@@ -67,19 +67,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const coll = document.getElementsByClassName("collapsible");
-
-  for (let i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", (event) => {
-      event.target.classList.toggle("active");
-      let content = event.target.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
-  }
-</script>

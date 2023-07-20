@@ -10,6 +10,9 @@ application.register("cards", CardsController)
 import ChatroomSubscriptionController from "./chatroom_subscription_controller"
 application.register("chatroom-subscription", ChatroomSubscriptionController)
 
+import CollapsibleController from "./collapsible_controller"
+application.register("collapsible", CollapsibleController)
+
 import InsertCommentController from "./insert_comment_controller"
 application.register("insert-comment", InsertCommentController)
 
