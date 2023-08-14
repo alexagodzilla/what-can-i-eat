@@ -3,11 +3,11 @@
     <div class="d-flex justify-content-around">
       <div class="align-self-center">
         <%= link_to root_path, class: "navbar-brand" do %>
-          <%= image_tag "Round_logo.png", id: 'round-logo' %>
+          <%= image_tag "Round_logo.png", id: "round-logo" %>
         <% end %>
       </div>
       <%= link_to root_path do %>
-        <%= image_tag "bigger_logo.png", id: 'front-logo' %>
+        <%= image_tag "bigger_logo.png", id: "front-logo" %>
       <% end %>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
               <% if current_user.image_url.present?%>
                 <%= image_tag current_user.image_url, class: "avatar-bordered" %>
               <% else %>
-                <%=image_tag "https://randomuser.me/api/portraits/women/8.jpg", class: "avatar-bordered" %>
+                <%= image_tag "https://randomuser.me/api/portraits/women/8.jpg", class: "avatar-bordered" %>
               <% end %>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

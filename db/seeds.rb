@@ -218,7 +218,7 @@ Alex = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Gluten Free",
-  image_url: "https://media.licdn.com/dms/image/C5603AQENw89Y7W8dZQ/profile-displayphoto-shrink_800_800/0/1661689705649?e=1684972800&v=beta&t=v-luyti_hozweHm95OKxMq3e7AVBPTzZ2epnwL08Phw"
+  image_url: "https://avatars.githubusercontent.com/u/59085737?v=4"
 )
 
 puts "creating Alex's bookmarks"
@@ -244,10 +244,9 @@ cumin_id = Ingredient.find_by(name: "Cumin").id
 [garlic_id, thyme_id, cumin_id].each do |ingredient_id|
   UserIngredient.create!(
     user_id: Alex.id,
-    ingredient_id: ingredient_id
+    ingredient_id:
   )
 end
-
 
 puts "creating Fran"
 puts "Fran's email is fran@me.com"
@@ -259,7 +258,7 @@ Fran = User.create!(
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
   diet: "Everything",
-  image_url: "https://media.licdn.com/dms/image/D4D03AQEG5QOzpRGfIg/profile-displayphoto-shrink_800_800/0/1665922973231?e=1684972800&v=beta&t=MdVoqLlh30cViX6MG5ely8p4lQE7WOwy5bmvjnaX13U"
+  image_url: "https://avatars.githubusercontent.com/u/114738789?v=4"
 )
 
 # puts "creating Fran's user_ingredients"
@@ -299,7 +298,6 @@ Ila = User.create!(
 #   )
 # end
 
-
 puts "creating jon"
 puts "jon's email is jon@me.com"
 Jon = User.create!(
@@ -337,7 +335,6 @@ Friendship.create!(
   requested_id: Ila.id,
   status: "accepted"
 )
-
 
 puts "creating Friendship between Alex and Jon"
 Friendship.create!(
