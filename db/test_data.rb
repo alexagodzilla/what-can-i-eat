@@ -22,6 +22,6 @@ puts data
 #   file.write(JSON.pretty_generate(data))
 # end
 
-File.open("#{Rails.root}/public/chicken_recipes.json", "w") do |file|
+File.open("#{Rails.root}/public/recipes_data/chicken_recipes.json", "w") do |file|
   file.write(JSON.pretty_generate(data))
 end
