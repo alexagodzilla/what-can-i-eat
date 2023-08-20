@@ -117,7 +117,6 @@ puts "reading json files"
         else
           unit = api_ingredient[:measures][:metric][:unitShort].downcase
         end
-
         db_ingredient = Ingredient.create!(
           name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip,
           quantity_unit: unit
@@ -203,7 +202,6 @@ puts "creating Alex's user_ingredients"
 garlic_id = Ingredient.find_by(name: "Garlic").id
 thyme_id = Ingredient.find_by(name: "Thyme").id
 cumin_id = Ingredient.find_by(name: "Cumin").id
-
 [garlic_id, thyme_id, cumin_id].each do |ingredient_id|
   UserIngredient.create!(
     user_id: Alex.id,
@@ -219,7 +217,7 @@ Fran = User.create!(
   email: "fran@me.com",
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
-  diet: "Everything",
+  diet: "Vegetarian",
   image_url: "https://avatars.githubusercontent.com/u/114738789?v=4"
 )
 
