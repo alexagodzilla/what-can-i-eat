@@ -3,98 +3,8 @@ require "faker"
 require 'action_view'
 include ActionView::Helpers::SanitizeHelper
 
-puts "cleaning database..."
-puts "destroying all friendships"
-Friendship.destroy_all
-puts "destroying all user ingredients"
-UserIngredient.destroy_all
-puts "destroying all steps"
-Step.destroy_all
-puts "destroying all recipe ingredients"
-RecipeIngredient.destroy_all
-puts "destroying all ingredients"
-Ingredient.destroy_all
-puts "destroying all bookmarks"
-Bookmark.destroy_all
-puts "destroying all reviews"
-Review.destroy_all
-puts "destroying all recipes"
-Recipe.destroy_all
-puts "destroying all messages"
-Message.destroy_all
-puts "destroying all chatrooms"
-Chatroom.destroy_all
-puts "destroying all users"
-User.destroy_all
-
-# %w[vegetarian_recipes vegan_recipes gluten_free_recipes dairy_free_recipes recipe_api_data chicken_recipes extra_dairy_free_recipes extra_vegetarian_recipes extra_vegan_recipes extra_gluten_free_recipes]
-
-puts "reading json files"
-json_names = %w[vegetarian_recipes recipe_api_data]
-json_names.each do |file_name|
-  recipes = JSON.parse(File.read("#{Rails.root}/public/#{file_name}.json"), symbolize_names: true)[:recipes]
-
-  puts "creating recipes"
-  recipes.each do |recipe|
-    db_recipe = Recipe.find_by(title: recipe[:title])
-    if db_recipe.nil?
-
-    puts "creating recipe #{recipe[:title]}"
-    recipe[:image].nil? ? img = "https://unsplash.com/photos/ZrhtQyGFG6s" : img = recipe[:image]
-    recipe[:instructions].empty? ? instructions = recipe[:summary] : instructions = strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2')
-    db_recipe = Recipe.create!(
-      title: recipe[:title],
-      instructions: instructions,
-      # prep_time: recipe[:preparationMinutes],
-      # cooking_time: recipe[:cookingMinutes],
-      total_time: recipe[:readyInMinutes],
-      serving_size: recipe[:servings],
-      image_url: img,
-      vegetarian: recipe[:vegetarian],
-      vegan: recipe[:vegan],
-      dairy_free: recipe[:dairyFree],
-      gluten_free: recipe[:glutenFree],
-      average_rating: 0.0
-    )
-    puts "creating steps"
-    unless recipe[:analyzedInstructions].empty?
-      recipe[:analyzedInstructions][0][:steps].each do |step|
-        Step.create!(
-          number: step[:number],
-          content: step[:step],
-          recipe_id: db_recipe.id
-        )
-      end
-    end
-
-    puts "creating ingredients"
-    recipe[:extendedIngredients].each do |api_ingredient|
-      db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
-      if db_ingredient.nil?
-        if api_ingredient[:unit] == "cup" || api_ingredient[:unit] == "cups"
-          unit = api_ingredient[:unit].downcase
-        else
-          unit = api_ingredient[:measures][:metric][:unitShort].downcase
-        end
-        db_ingredient = Ingredient.create!(
-          name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip,
-          quantity_unit: unit
-        )
-      end
-      unless db_recipe.ingredients.include?(db_ingredient) && db_ingredient.recipes.include?(db_recipe)
-        RecipeIngredient.create!(
-          quantity: api_ingredient[:amount],
-          recipe_id: db_recipe.id,
-          ingredient_id: db_ingredient.id
-        )
-      end
-    end
-    end
-  end
-end
-
-# Only for demo purposes
-twenty_set_faces = [
+# for demo purposes
+twenty_avatar_imgs = [
   "https://randomuser.me/api/portraits/men/32.jpg",
   "https://randomuser.me/api/portraits/men/29.jpg",
   "https://randomuser.me/api/portraits/men/35.jpg",
@@ -131,7 +41,99 @@ twenty_set_faces = [
   "https://images.unsplash.com/photo-1465406325903-9d93ee82f613?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=5eb9f23d01faf52817ff797530242521"
 ]
 
-# was 200 times
+puts "cleaning database..."
+puts "destroying all friendships"
+Friendship.destroy_all
+puts "destroying all user ingredients"
+UserIngredient.destroy_all
+puts "destroying all steps"
+Step.destroy_all
+puts "destroying all recipe ingredients"
+RecipeIngredient.destroy_all
+puts "destroying all ingredients"
+Ingredient.destroy_all
+puts "destroying all bookmarks"
+Bookmark.destroy_all
+puts "destroying all reviews"
+Review.destroy_all
+puts "destroying all recipes"
+Recipe.destroy_all
+puts "destroying all messages"
+Message.destroy_all
+puts "destroying chatroom"
+Chatroom.destroy_all
+puts "destroying all users"
+User.destroy_all
+
+puts "reading json files"
+["vegetarian_recipes", "recipe_api_data"].each do |file_name|
+  root_path = "#{Rails.root}/public/recipes_data/#{file_name}.json"
+  recipes = JSON.parse(File.read(root_path), symbolize_names: true)[:recipes]
+
+  puts "creating recipes from #{file_name}"
+  recipes.each do |recipe|
+    next unless Recipe.find_by(title: recipe[:title]).nil?
+
+    if recipe[:image].nil?
+      img = "https://unsplash.com/photos/ZrhtQyGFG6s"
+    else
+      img = recipe[:image]
+    end
+
+    if recipe[:instructions].nil?
+      instructions = recipe[:summary]
+    else
+      instructions = strip_tags(recipe[:instructions]).gsub(/(\w+)\.(\w+)/, '\1. \2')
+    end
+
+    new_db_recipe = Recipe.create!(
+      title: recipe[:title],
+      instructions:,
+      total_time: recipe[:readyInMinutes],
+      serving_size: recipe[:servings],
+      image_url: img,
+      vegetarian: recipe[:vegetarian],
+      vegan: recipe[:vegan],
+      dairy_free: recipe[:dairyFree],
+      gluten_free: recipe[:glutenFree],
+      average_rating: 0.0
+    )
+
+    unless recipe[:analyzedInstructions].empty?
+      recipe[:analyzedInstructions][0][:steps].each do |step|
+        Step.create!(
+          number: step[:number],
+          content: step[:step],
+          recipe_id: new_db_recipe.id
+        )
+      end
+    end
+
+    recipe[:extendedIngredients].each do |api_ingredient|
+      db_ingredient = Ingredient.find_by(name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip)
+      if db_ingredient.nil?
+        if api_ingredient[:unit].include?("cup")
+          unit = api_ingredient[:unit].downcase
+        else
+          unit = api_ingredient[:measures][:metric][:unitShort].downcase
+        end
+        db_ingredient = Ingredient.create!(
+          name: api_ingredient[:name].capitalize.gsub(/\d+/, '').strip,
+          quantity_unit: unit
+        )
+      end
+
+      unless new_db_recipe.ingredients.include?(db_ingredient) && db_ingredient.recipes.include?(new_db_recipe)
+        RecipeIngredient.create!(
+          quantity: api_ingredient[:amount],
+          recipe_id: new_db_recipe.id,
+          ingredient_id: db_ingredient.id
+        )
+      end
+    end
+  end
+end
+
 puts "creating users"
 20.times do
   User.create!(
@@ -142,11 +144,10 @@ puts "creating users"
     password: "123456",
     bio: Faker::Hipster.paragraph(sentence_count: 2),
     diet: ["Vegetarian", "Vegan", "Gluten Free", "Dairy Free", "Everything"].sample,
-    image_url: twenty_set_faces.sample
+    image_url: twenty_avatar_imgs.sample
   )
 end
 
-# was 100 times
 puts "creating user_ingredients"
 10.times do
   user = User.all.sample
@@ -158,17 +159,6 @@ puts "creating user_ingredients"
     )
   end
 end
-
-# puts "creating bookmarks"
-# 150.times do
-#   recipe_id = Recipe.all.sample.id
-#   if Bookmark.where(recipe_id:).empty?
-#     Bookmark.create!(
-#       user_id: User.all.sample.id,
-#       recipe_id:
-#     )
-#   end
-# end
 
 puts "creating reviews"
 Recipe.all.each do |recipe|
@@ -182,34 +172,10 @@ Recipe.all.each do |recipe|
   end
 end
 
-# 200.times do
-#   Review.create!(
-#     user_id: User.all.sample.id,
-#     recipe_id: Recipe.all.sample.id,
-#     content: Faker::TvShows::GameOfThrones.quote,
-#     rating: rand(3..5)
-#   )
-# end
-
-# puts "creating friendships"
-# User.all.each do |user|
-#   rand(3..5).times do
-#     friend = User.all.sample
-#     unless user == friend || user.friends.include?(friend)
-#       Friendship.create!(
-#         requester_id: user.id,
-#         requested_id: friend.id,
-#         status: "accepted"
-#       )
-#     end
-#   end
-# end
-
 puts "creating chatroom"
 Chatroom.create!(name: "Main Room")
 
-puts "creating Alex"
-puts "alex's email is alex@me.com"
+puts "creating Alex (alex@me.com)"
 Alex = User.create!(
   first_name: "Alex",
   last_name: "Agozzino",
@@ -221,26 +187,21 @@ Alex = User.create!(
   image_url: "https://avatars.githubusercontent.com/u/59085737?v=4"
 )
 
-puts "creating Alex's bookmarks"
-puts "Alex's bookmarks are gluten free recipes"
-gluten_free_recipes = Recipe.where(gluten_free: true)
-
+puts "creating Alex's gluten-free bookmarks"
 3.times do
-  recipe_id = gluten_free_recipes.sample.id
-  if Bookmark.where(recipe_id:).empty?
-    Bookmark.create!(
-      user_id: Alex.id,
-      recipe_id:
-    )
-  end
+  recipe_id = Recipe.where(gluten_free: true).sample.id
+  next if Bookmark.where(recipe_id:).exists?
+
+  Bookmark.create!(
+    user_id: Alex.id,
+    recipe_id:
+  )
 end
 
 puts "creating Alex's user_ingredients"
-
 garlic_id = Ingredient.find_by(name: "Garlic").id
 thyme_id = Ingredient.find_by(name: "Thyme").id
 cumin_id = Ingredient.find_by(name: "Cumin").id
-
 [garlic_id, thyme_id, cumin_id].each do |ingredient_id|
   UserIngredient.create!(
     user_id: Alex.id,
@@ -248,8 +209,7 @@ cumin_id = Ingredient.find_by(name: "Cumin").id
   )
 end
 
-puts "creating Fran"
-puts "Fran's email is fran@me.com"
+puts "creating Fran (fran@me.com)"
 Fran = User.create!(
   first_name: "Fran",
   last_name: "Sandford",
@@ -257,24 +217,11 @@ Fran = User.create!(
   email: "fran@me.com",
   password: "123456",
   bio: Faker::Hipster.paragraph(sentence_count: 2),
-  diet: "Everything",
+  diet: "Vegetarian",
   image_url: "https://avatars.githubusercontent.com/u/114738789?v=4"
 )
 
-# puts "creating Fran's user_ingredients"
-# onion_id = Ingredient.find_by(name: "Onion").id
-# tomato_id = Ingredient.find_by(name: "Tomato").id
-# ketchup_id = Ingredient.find_by(name: "Ketchup").id
-
-# [onion_id, tomato_id, ketchup_id].each do |ingredient_id|
-#   UserIngredient.create!(
-#     user_id: Fran.id,
-#     ingredient_id: ingredient_id
-#   )
-# end
-
-puts "creating Ila"
-puts "Ila's email is ila@me.com"
+puts "creating Ila (ila@me.com)"
 Ila = User.create!(
   first_name: "Ila",
   last_name: "Peroni",
@@ -286,20 +233,7 @@ Ila = User.create!(
   image_url: "https://avatars.githubusercontent.com/u/114817089?v=4"
 )
 
-# puts "creating Ila's user_ingredients"
-# peanut_butter_id = Ingredient.find_by(name: "Smooth peanut butter").id
-# onion_id = Ingredient.find_by(name: "Onion").id
-# sherry_id = Ingredient.find_by(name: "Sherry").id
-
-# [peanut_butter_id, onion_id, sherry_id].each do |ingredient_id|
-#   UserIngredient.create!(
-#     user_id: Ila.id,
-#     ingredient_id: ingredient_id
-#   )
-# end
-
-puts "creating jon"
-puts "jon's email is jon@me.com"
+puts "creating Jon (jon@me.com)"
 Jon = User.create!(
   first_name: "Jon",
   last_name: "Dedman",
@@ -311,32 +245,21 @@ Jon = User.create!(
   image_url: "https://avatars.githubusercontent.com/u/110668469?v=4"
 )
 
-# puts "creating Jon's user_ingredients"
-# ginger_id = Ingredient.find_by(name: "Ginger").id
-# red_wine_vinegar_id = Ingredient.find_by(name: "Red wine vinegar").id
-
-# [ginger_id, red_wine_vinegar_id].each do |ingredient_id|
-#   UserIngredient.create!(
-#     user_id: Jon.id,
-#     ingredient_id: ingredient_id
-#   )
-# end
-
-puts "creating Friendship between Alex and Fran"
+puts "creating friendship between Alex and Fran"
 Friendship.create!(
   requester_id: Alex.id,
   requested_id: Fran.id,
   status: "accepted"
 )
 
-puts "creating Friendship between Alex and Ila"
+puts "creating friendship between Alex and Ila"
 Friendship.create!(
   requester_id: Alex.id,
   requested_id: Ila.id,
   status: "accepted"
 )
 
-puts "creating Friendship between Alex and Jon"
+puts "creating friendship between Alex and Jon"
 Friendship.create!(
   requester_id: Alex.id,
   requested_id: Jon.id,
