@@ -1,4 +1,6 @@
-puts "creating Alex's gluten-free bookmarks"
+require_relative "02_users"
+
+puts "Creating Alex's gluten-free bookmarks"
 3.times do
   recipe_id = Recipe.where(gluten_free: true).sample.id
   next if Bookmark.where(recipe_id:).exists?

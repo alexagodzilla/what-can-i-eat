@@ -1,20 +1,14 @@
-puts "creating friendship between Alex and Fran"
-Friendship.create!(
-  requester_id: ALEX.id,
-  requested_id: FRAN.id,
-  status: "accepted"
-)
+require_relative "02_users"
 
-puts "creating friendship between Alex and Ila"
-Friendship.create!(
-  requester_id: ALEX.id,
-  requested_id: ILA.id,
-  status: "accepted"
-)
+def create_friendships(array)
+  array.each do |second_person|
+    Friendship.create!(
+      requester_id: ALEX.id,
+      requested_id: second_person.id,
+      status: "accepted"
+    )
+    puts "Creating friendship between Alex and #{second_person.first_name}"
+  end
+end
 
-puts "creating friendship between Alex and Jon"
-Friendship.create!(
-  requester_id: ALEX.id,
-  requested_id: JON.id,
-  status: "accepted"
-)
+create_friendships([FRAN, ILA, JON])
