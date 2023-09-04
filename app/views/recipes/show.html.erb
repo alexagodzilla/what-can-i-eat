@@ -23,7 +23,7 @@
             <% end %>
           <% end %>
         <% end %>
-        <% if user_signed_in? == false %>
+        <% if !user_signed_in? %>
           <%= link_to new_user_registration_path do %>
             <i class="fa-regular fa-bookmark" ></i>
           <% end %>

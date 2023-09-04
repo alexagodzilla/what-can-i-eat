@@ -1,5 +1,13 @@
 <%= form_with model: [recipe, review], data: { insert_comment_target: "form", action: "submit->insert-comment#send" } do |f| %>
   <%= f.select :rating, options_for_select(0..5), {}, { data: { controller: "star-rating", star_rating_target: "select" } } %>
   <%= f.text_area :content, placeholder: "Enjoy this recipe? Any questions or tips? Leave some feedback here!" %>
-  <%= f.submit "Post" %>
+  <% if user_signed_in? %>
+    <%= f.submit "Post", class: "pink-btn" %>
+  <% else %>
+    <button class="pink-btn">
+      <%= link_to new_user_registration_path do %>
+        Sign up to leave a comment!
+      <% end %>
+    </button>
+  <% end %>
 <% end %>
