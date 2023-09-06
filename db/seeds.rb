@@ -1,10 +1,10 @@
-puts "cleaning database..."
+puts "Cleaning database..."
 
 models = [Friendship, UserIngredient, Step, RecipeIngredient, Bookmark,
           Review, Recipe, Message, Chatroom, User]
 models.each do |model|
   model.destroy_all
-  puts "destroying all #{model}s"
+  puts "Destroying all #{model}s"
 end
 
 Dir[Rails.root.join("db/seeds/*.rb")].each do |file|
@@ -12,7 +12,7 @@ Dir[Rails.root.join("db/seeds/*.rb")].each do |file|
   require file
 end
 
-puts "creating chatroom"
+puts "Creating chatroom"
 Chatroom.create!(name: "Main Room")
 
-puts "seeding done"
+puts "Seeding done"

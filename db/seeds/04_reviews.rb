@@ -1,4 +1,4 @@
-puts "creating reviews"
+puts "Creating reviews"
 Recipe.all.each do |recipe|
   rand(3..5).times do
     Review.create!(

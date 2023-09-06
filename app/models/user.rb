@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :requester_friendships, class_name: 'Friendship', foreign_key: 'requester_id'
   has_many :requested_friendships, class_name: 'Friendship', foreign_key: 'requested_id'
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 2 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :first_name, presence: true
 
   def friends
