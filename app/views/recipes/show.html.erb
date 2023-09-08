@@ -96,11 +96,11 @@
 
   <div class="reviews" data-controller="insert-comment" data-insert-comment-position-value="afterbegin">
     <div id="comment-submission">
-      <h3>Leave a comment or rating (<%= @recipe.reviews.count %>)</h3>
+      <h3>Leave a review (<%= @recipe.reviews.count %>)</h3>
       <%= render 'recipes/form', recipe: @recipe, review: @review %>
     </div>
     <% if @recipe.reviews.empty? %>
-      <p>There are no currently no comments... Leave one now!</p>
+      <p>There are no currently no reviews... Leave one now!</p>
     <% else %>
       <% @recipe.reviews.each do |review| %>
         <%= render "recipes/review", recipe: @recipe, review: review %>
