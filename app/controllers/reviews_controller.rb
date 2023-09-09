@@ -9,9 +9,10 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to recipe_path(@recipe), notice: "Comment added" }
+        format.html { redirect_to recipe_path(@recipe), notice: "Review added" }
         format.json
       else
+        flash.notice = @review.errors.messages[:user_id].join
         format.html { render "recipes/show", status: :unprocessable_entity }
         format.json
       end
