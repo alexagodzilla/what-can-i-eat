@@ -1,10 +1,7 @@
 puts "Creating reviews"
 
 def unique_id(id, array)
-  if array.include?(id)
-    unique_id(User.all.sample.id, array)
-  end
-  id
+  array.include?(id) ? unique_id(User.all.sample.id, array) : id
 end
 
 Recipe.all.each do |recipe|
